@@ -1,0 +1,43 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    padding: 2.75rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+
+.nav-logo-header {
+    color: #fff;
+    font-weight: 500;
+    font-size: 2rem;
+    transition: .15s ease-out;
+    letter-spacing: 0.75rem;
+}
+
+.nav-logo-header:hover {
+    color: yellow;
+    cursor: pointer;
+    transition: .15s ease-in;
+    transform: translateY(-0.25rem);
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    font-size: 1.8rem;
+}
+
+.nav-menu-item {
+    color: #fff;
+    transition: .15s ease-out;
+}
+
+.nav-menu-item:hover {
+    color: yellow;
+    transition: .15s ease-in;
+    cursor: pointer;
+    transform: translateY(-0.15rem);
+}
