@@ -1,4 +1,7 @@
 .nav {
+    position: fixed;
+    width: 100vw;
+    top: 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,6 +9,7 @@
     padding: 2.75rem;
     padding-left: 5rem;
     padding-right: 5rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
 .nav-logo-header {
@@ -17,7 +21,7 @@
 }
 
 .nav-logo-header:hover {
-    color: yellow;
+    color: #f7df1e;
     cursor: pointer;
     transition: .15s ease-in;
     transform: translateY(-0.25rem);
@@ -36,7 +40,7 @@
 }
 
 .nav-menu-item:hover {
-    color: yellow;
+    color: #f7df1e;
     transition: .15s ease-in;
     cursor: pointer;
     transform: translateY(-0.15rem);

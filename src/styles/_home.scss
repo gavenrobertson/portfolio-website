@@ -1,0 +1,107 @@
+.home {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-container {
+    margin: 0 auto;
+    max-width: 107rem;
+    padding: 0 4rem;
+}
+
+.dev-picture {
+    border-radius: 2.5rem;
+    height: auto;
+    width: 350px;
+}
+
+.h1-hero-heading {
+    color: rgb(22, 22, 22);
+    font-size: 8rem;
+    font-weight: 700;
+    padding-bottom: 1.7rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero-content {
+    margin-top: 20rem;
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    max-width: 50rem;
+}
+
+.p-hero-text {
+    font-size: 1.3em;
+
+}
+
+.contacts {
+    margin-top: 2rem;
+}
+
+.linkedin {
+    fill: #0077b5;
+    font-size: 3rem;
+    transition: ease-out 0.1s;
+}
+
+.linkedin:hover {
+    cursor: pointer;
+    transform: translateY(-0.35rem);
+    transition: ease-in 0.1s;
+}
+
+.github {
+    fill: #333;
+    font-size: 3rem;
+    transition: ease-out 0.1s;
+}
+
+.github:hover {
+    cursor: pointer;
+    transform: translateY(-0.35rem);
+    transition: ease-in 0.1s;
+}
+
+.contact-svg {
+    padding-right: 1.5rem;
+}
+
+.tech-stack {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 10rem;
+}
+
+.tech-stack-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    border-right: #333 0.3rem solid;
+    padding-right: 1.5rem;
+}
+
+.tech-stack-list {
+    display: flex;
+    gap: 2rem;
+}
+
+.tech-stack-item {
+    height: auto;
+    width: 40px;
+    transition: ease-out 0.3s;
+}
+
+.tech-stack-item:hover {
+    cursor: pointer;
+    transition: ease-in 0.3s;
+}

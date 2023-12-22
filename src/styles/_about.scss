@@ -1,0 +1,42 @@
+.about-section {
+    height: 40vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+}
+
+.about-container {
+    margin: 0 auto;
+    max-width: 107rem;
+    padding: 0 4rem;
+}
+
+.about-content {
+    display: flex;
+    gap: 10rem;
+    margin-top: 15vh;
+}
+
+.about-heading {
+    font-family: "Poppins", sans-serif;
+    color: black;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 4.5rem;
+    border-bottom:  #333 0.2rem solid;
+    width: fit-content;
+    margin: 0rem auto 2.5rem;
+}
+
+.education-entry {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.osu_img {
+    height: auto;
+    width: 60px;
+    border-radius: 2rem;
+}

@@ -1,0 +1,106 @@
+.projects-section {
+    display: flex;
+}
+
+.project-container {
+    display: flex;
+    margin: 16rem auto;
+    padding: 4rem;
+    gap: 10rem;
+    background-color: #f7f7f7;
+    border-radius: 2rem;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.project-image {
+    height: auto;
+    width: 53rem;
+    border-radius: 2rem;
+}
+
+.project-links {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
+
+.projlinks {
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 2rem;
+    transition: ease-out 0.1s;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 2rem;
+}
+
+.projlinks:hover {
+    color: #007acc;
+    transition: ease-in 0.1s;
+
+    .livedemo-link-svg {
+        fill: #007acc;
+        transition: ease-in 0.1s;
+    }
+
+    .github-projects-contact-svg {
+        fill: #007acc;
+        transition: ease-in 0.1s;
+    }
+}
+
+.github-projects-contact-svg {
+    fill: #333;
+    font-size: 2.45rem;
+    transition: ease-out 0.1s;
+}
+
+.livedemo-link-svg {
+    fill: #333;
+    height: auto;
+    width: 2.2rem;
+    transition: ease-out 0.1s;
+}
+
+.project-description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 30rem;
+}
+
+.name-of-project {
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-size: 4rem;
+}
+
+.description-of-project {
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+.project-techstack {
+    display: flex;
+    margin: 6rem auto;
+    gap: 4rem;
+}
+
+.framework {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.project-framework-icon {
+    height: auto;
+    width: 2.5rem;
+}
