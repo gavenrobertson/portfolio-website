@@ -1,10 +1,25 @@
 .projects-section {
     display: flex;
+    flex-direction: column;
+}
+
+.heading-container {
+    margin: 12rem auto;
+}
+
+.project-title {
+    width: fit-content;
+    color: #19191b;
+    font-size: 3rem;
+    font-family: 'Poppins', sans-serif;
+    border-left:  #0073CF 0.3rem solid;
+    padding-left: 1rem;
+    margin-bottom: 6rem;
 }
 
 .project-container {
     display: flex;
-    margin: 16rem auto;
+    width: fit-content;
     padding: 4rem;
     gap: 10rem;
     background-color: #f7f7f7;
@@ -73,8 +88,8 @@
 
 .name-of-project {
     font-family: 'Poppins', sans-serif;
-    color: black;
-    font-size: 4rem;
+    color: #19191b;
+    font-size: 3rem;
 }
 
 .description-of-project {

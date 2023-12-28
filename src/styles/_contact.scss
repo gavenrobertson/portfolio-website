@@ -1,0 +1,43 @@
+.contact-section {
+    display: flex;
+}
+
+.contact-container {
+    margin: 10rem auto;
+    width: 100rem;
+}
+
+.contact-information-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-header {
+    font-family: "Poppins", sans-serif;
+    color: #19191b;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 4.5rem;
+    border-left:  #0073CF 0.3rem solid;
+    padding-left: 1rem;
+    width: fit-content;
+    margin-bottom: 2rem;
+}
+
+.contact-center {
+    display: flex;
+    gap: 5rem;
+}
+
+.info-header {
+    font-size: 2.5rem;
+    font-family: 'Nunito', sans-serif;
+    color: #19191b;
+    margin-bottom: 0.8rem;
+}
+
+.info-des {
+    font-size: 2rem;
+    font-family: 'Nunito', sans-serif;
+    color: #777777;
+}
