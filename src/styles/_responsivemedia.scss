@@ -1,0 +1,51 @@
+@media screen and (max-width: 1024px){
+
+  .hidden-nav-button {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+  }
+
+  .button-one {
+    background: transparent;
+    border-radius: 1rem;
+    border: 5px solid #ffffff;
+    fill: #ffffff;
+
+    .line {
+      transition: y 300ms ease-in 300ms, rotate 300ms ease-in, opacity 0ms 300ms;
+      transform-origin: center;
+    }
+
+  }
+
+  .button-one:hover {
+    :is(.top, .bottom) {
+      y: 45;
+    }
+
+    .top {
+      rotate: 45deg;
+    }
+
+    .middle {
+      opacity: 0;
+    }
+
+    .bottom {
+      rotate: -45deg;
+    }
+
+    .line {
+      transition: y 300ms ease-in, rotate 300ms ease-in 300ms, opacity 0ms 300ms;
+    }
+
+  }
+
+  .button-one[aria-expanded="true"] {
+
+  }
+
+}
