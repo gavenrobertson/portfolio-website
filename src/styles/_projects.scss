@@ -121,3 +121,24 @@
     height: auto;
     width: 2.5rem;
 }
+
+@media screen and (max-width: 1020px) {
+    .heading-container {
+
+    }
+
+    .project-container {
+        align-items: center;
+        gap: 0;
+        flex-direction: column-reverse;
+    }
+
+    .project-description-container {
+        align-items: center;
+    }
+
+    .project-image {
+        width: 41rem;
+    }
+
+}

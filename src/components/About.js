@@ -18,10 +18,11 @@ export default function About() {
                     <div className="biography">
                         <h2 className="about-heading">About Me</h2>
                         <div className="biography-entry">
-                            <p>loremomaomoagiomomoame foeo easfejsnafjgjnjgaseg <br/>
-                               lroemgasun usn uesg uag nseug n n guaseng geunag <br/>
-                               sigesamngasoegmie asngimseia  igmi ga im ia i ae.
-                               </p>
+                            <p>I am recent Computer Science Graduate and have spent the last four years studying and further my knowledge in Computer Science.
+                                I found Web Development early on in University and became so interested in design and the overall complex problems that could occur.
+                                Since then I have gotten the opportunity to work in several project teams on campus and even had the opportunity to work in Hanoi, Vietnam as a Front-end Engineer Intern.
+                                I beyond excited to start the next steps in my career and contribute to a team equally as passionate!
+                            </p>
                         </div>
                     </div>
                 </div>

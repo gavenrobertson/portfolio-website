@@ -15,6 +15,23 @@ body {
     color: #373737;
 }
 
+
+body::-webkit-scrollbar {
+    width: 1.2rem;
+}
+
+body::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #19191b;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #ffffff;  /* creates padding around scroll thumb */
+}
+
 li {
     list-style: none;
 }

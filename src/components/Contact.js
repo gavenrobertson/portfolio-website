@@ -6,7 +6,7 @@ export default function Contact() {
     <section className="contact-section">
         <div className="contact-container">
             <div className="contact-information-container">
-                <h2 className="contact-header">Contact Me</h2>
+                <h2 className="contact-header">Contact Me🤳</h2>
                     <div className="contact-center">
                         <div className="location-container">
                             <img/>

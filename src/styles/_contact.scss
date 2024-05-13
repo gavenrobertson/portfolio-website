@@ -41,3 +41,10 @@
     font-family: 'Nunito', sans-serif;
     color: #777777;
 }
+
+@media screen and (max-width: 1020px) {
+    .contact-container {
+        width: auto;
+    }
+
+}

@@ -18,3 +18,10 @@ footer {
 .ghub-footlink {
     fill: white;
 }
+
+@media screen and (max-width: 1020px) {
+    .footer-container {
+        justify-content: center;
+        gap: 4rem;
+    }
+}
