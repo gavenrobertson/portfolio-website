@@ -20,8 +20,41 @@ footer {
 }
 
 @media screen and (max-width: 1020px) {
+
     .footer-container {
         justify-content: center;
         gap: 4rem;
     }
+
+}
+
+@media screen and (max-width: 525px) {
+
+    footer h3 {
+        font-size: 1.4rem
+    }
+
+    footer {
+        padding: 4rem 0;
+    }
+
+    .footer-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 380px) {
+
+    footer h3 {
+        font-size: 1.2rem
+    }
+
+    footer {
+        padding: 3rem 0;
+    }
+
+    .contact-svg {
+        font-size: 2rem;
+    }
+
 }

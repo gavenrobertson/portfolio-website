@@ -1,31 +1,31 @@
 import React from "react";
 import '../styles/main.scss';
-import osu_img from "../imgs/osu-img.jpg";
+import tech_svg from "../imgs/technology.jpg";
+import campus_image from "../imgs/campus.jpg";
 
 export default function About() {
     return (
-        <section className="about-section">
+        <section id="about" className="about-section">
             <div className="about-container">
-                <div className="about-content">
-                    <div className="education">
-                        <h2 className="about-heading">Education</h2>
-                        <div className="education-entry">
-                            <img className="osu_img" src={osu_img}/>
-                            <h3>Oregon State University<br/>
-                                B.S. Computer Science</h3>
+                <h2 className="about-title">About Me 🧑🏻</h2>
+                    <div className="about-content">
+                        <div className="img-container">
+                           <img className="programmer-svg" src={campus_image} alt="programmer logo" />
+                        </div>
+                        <div className="biography">
+                            <div className="biography-entry">
+                                <h3 className="biography-h2">Web Developer based in <br/>
+                                    <span className="biography-h2-span">Oregon, USA📍</span>
+                                </h3>
+                                <p className="biography-p">I am a recent Computer Science Graduate from
+                                    Oregon State University. During my time at
+                                    university I found my passion in Web
+                                    Development and since then I have strived to develop
+                                    engaging, responsive, and quality web applications.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div className="biography">
-                        <h2 className="about-heading">About Me</h2>
-                        <div className="biography-entry">
-                            <p>I am recent Computer Science Graduate and have spent the last four years studying and further my knowledge in Computer Science.
-                                I found Web Development early on in University and became so interested in design and the overall complex problems that could occur.
-                                Since then I have gotten the opportunity to work in several project teams on campus and even had the opportunity to work in Hanoi, Vietnam as a Front-end Engineer Intern.
-                                I beyond excited to start the next steps in my career and contribute to a team equally as passionate!
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     )

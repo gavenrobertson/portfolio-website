@@ -7,7 +7,7 @@
 }
 
 .home-container {
-    margin: 0 auto;
+    margin: 0 auto 12rem auto;
     max-width: 107rem;
     padding: 0 4rem;
 }
@@ -15,8 +15,9 @@
 .dev-picture {
     border-radius: 2.5rem;
     height: auto;
-    width: 325px;
+    width: 430px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
 }
 
 .h1-hero-heading {
@@ -28,7 +29,7 @@
 }
 
 .hero-content {
-    margin-top: 20rem;
+    margin-top: 30rem;
     display: flex;
     align-items: center;
     gap: 6rem;
@@ -41,7 +42,7 @@
 }
 
 .p-hero-text {
-    font-size: 1.3em;
+    font-size: 1.28em;
 
 }
 
@@ -109,38 +110,110 @@
 }
 
 @media screen and (max-width: 1020px) {
-    .home {
-        height: auto;
-    }
-
     .hero-content {
         display: flex;
         flex-direction: column-reverse;
+        gap: 3.5rem;
+        margin-top: 18rem;
     }
 
     .hero-text {
         align-items: center;
     }
 
+    .dev-picture {
+        width: 430px;
+    }
+
     .h1-hero-heading {
         text-align: center;
+        font-size: 6rem;
     }
 
     .p-hero-text {
         text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .contact-svg {
+        font-size: 3rem;
     }
 
     .tech-stack {
         text-align: center;
         flex-direction: column;
+        gap: 3rem;
+        margin-top: 8.5rem;
     }
 
     .tech-stack-name {
+        font-size: 2.4rem;
         padding-right: 0;
         border-bottom: #19191b 0.3rem solid;
         border-right: none;
     }
 
+    .tech-stack-item {
+        width: 36px;
+    }
+}
 
+@media screen and (max-width: 525px) {
+
+    .home-container {
+        margin-bottom: 8rem;
+    }
+
+    .hero-content {
+        margin-top: 15rem;
+    }
+
+    .dev-picture {
+        width: 280px;
+    }
+
+    .h1-hero-heading {
+        font-size: 4.2rem;
+    }
+
+    .p-hero-text {
+        font-size: 1.6rem;
+    }
+
+    .contact-svg {
+        font-size: 2.6rem;
+    }
+
+    .tech-stack-item {
+        width: 26px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .dev-picture {
+        width: 240px;
+    }
+
+    .h1-hero-heading {
+        font-size: 3.8rem;
+    }
+
+    .p-hero-text {
+        font-size: 1.4rem;
+    }
+
+    .contact-svg {
+        font-size: 2.4rem;
+    }
+
+    .tech-stack-name {
+        font-size: 2rem;
+    }
+
+    .tech-stack-item {
+        width: 20px;
+    }
 
 }
