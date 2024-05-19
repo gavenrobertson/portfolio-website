@@ -49,12 +49,12 @@ export default function Navbar() {
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link onClick={handleMenuClick} to="about" smooth={true} duration={50}>
+                        <Link onClick={handleMenuClick} to="about" smooth={true} duration={50} offset={-40}>
                             About
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link onClick={handleMenuClick} to="projects" smooth={true} duration={50}>
+                        <Link onClick={handleMenuClick} to="projects" smooth={true} duration={50} offset={-120}>
                             Projects
                         </Link>
                     </li>
