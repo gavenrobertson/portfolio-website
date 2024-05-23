@@ -19,9 +19,9 @@ export default function Projects() {
         stylingsvgicon}) {
 
         return (
-            <section className="projects-section">
+            <section id="projects" className="projects-section">
                 <div className="heading-container">
-                    <h2 id="projects" className="project-title">Projects 💻</h2>
+                    <h2 className="project-title">Projects 💻</h2>
                     <div className="project-container">
                         <div className="project-image-container">
                             <img src={image} alt="project image" className="project-image"/>

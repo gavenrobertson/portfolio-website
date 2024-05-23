@@ -16,22 +16,22 @@ export default function Navbar() {
                 <h3 className="nav-logo-header">gaven robertson</h3>
                 <ul className="nav-list">
                     <li className="nav-menu-item">
-                        <Link to="home" smooth={true} duration={100}>
+                        <Link to="home" smooth={true} duration={50}>
                             Home
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link to="about" smooth={true} duration={100}>
+                        <Link to="about" smooth={true} duration={50}>
                             About
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link to="projects" smooth={true} duration={100}>
+                        <Link to="projects" smooth={true} duration={50}>
                             Projects
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link to="contact" smooth={true} duration={100}>
+                        <Link to="contact" smooth={true} duration={50}>
                             Contact
                         </Link>
                     </li>
@@ -49,12 +49,12 @@ export default function Navbar() {
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link onClick={handleMenuClick} to="about" smooth={true} duration={50} offset={-40}>
+                        <Link onClick={handleMenuClick} to="about" smooth={true} duration={50}>
                             About
                         </Link>
                     </li>
                     <li className="nav-menu-item">
-                        <Link onClick={handleMenuClick} to="projects" smooth={true} duration={50} offset={-120}>
+                        <Link onClick={handleMenuClick} to="projects" smooth={true} duration={50}>
                             Projects
                         </Link>
                     </li>
