@@ -20,12 +20,12 @@
 }
 
 .project-container {
-    margin-bottom: 12rem;
+    margin-bottom: 8rem;
     display: flex;
     flex-direction: row-reverse;
     width: fit-content;
-    padding: 2.5rem;
-    gap: 8rem;
+    padding: 3.5rem;
+    gap: 6rem;
     background-color: #f7f7f7;
     border-radius: 2rem;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
@@ -33,7 +33,7 @@
 
 .project-image {
     height: auto;
-    width: 520px;
+    width: 500px;
     border-radius: 2rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
@@ -42,6 +42,7 @@
     display: flex;
     justify-content: center;
     gap: 5rem;
+    margin-top: 1rem;
 }
 
 .projlinks {
@@ -85,6 +86,7 @@
 
 .project-description-container {
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
     height: auto;
@@ -94,20 +96,20 @@
 .name-of-project {
     font-family: 'Poppins', sans-serif;
     color: #19191b;
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .description-of-project {
     font-family: "Nunito", sans-serif;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-top: 2rem;
 }
 
 .project-techstack {
     display: flex;
-    margin: 6rem auto;
-    gap: 4rem;
+    margin: 3.8rem auto;
+    gap: 3.5rem;
 }
 
 .framework {
@@ -133,7 +135,8 @@
     }
 
     .project-container {
-        margin-bottom: 10rem;
+        padding: 3.6rem 3.4rem;
+        margin-bottom: 8rem;
         align-items: center;
         gap: 0;
         flex-direction: column-reverse;
@@ -153,6 +156,10 @@
         align-items: center;
     }
 
+    .projlinks {
+        font-size: 1.6rem;
+    }
+
 }
 
 @media screen and (max-width: 700px) {
@@ -163,7 +170,7 @@
     }
 
     .name-of-project {
-        font-size: 2.6rem;
+        font-size: 2.4rem;
     }
 
     .description-of-project {
@@ -175,7 +182,7 @@
     }
 
     .project-techstack {
-        margin: 4rem;
+        margin: 3.2rem;
     }
 
     .framework {
@@ -213,19 +220,15 @@
     }
 
     .name-of-project {
-        font-size: 2.6rem;
+        font-size: 2.2rem;
     }
 
     .description-of-project {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     .project-image {
         width: 300px;
-    }
-
-    .project-techstack {
-        margin: 3.2rem;
     }
 
     .framework {
@@ -311,11 +314,11 @@
     }
 
     .project-techstack {
-        margin: 3rem;
+        margin: 2.4rem;
     }
 
     .framework {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .framework-icon {
@@ -330,6 +333,8 @@
         width: 1.4rem;
     }
 
-
+    .project-links {
+        margin-top: 0;
+    }
 
 }

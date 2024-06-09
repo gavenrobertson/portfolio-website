@@ -3,6 +3,7 @@ import '../styles/main.scss';
 import testimage from "../imgs/dice.jpg";
 import react_icon from '../imgs/react-js-icon.svg';
 import sass_icon from '../imgs/sass-icon.svg';
+import twind_icon from '../imgs/tailwind-css-icon.svg';
 
 function ProjectComponent({
                               image,
@@ -60,19 +61,19 @@ export default function Projects() {
             image: testimage,
             ghublink: "https://github.com/yourusername/yourproject1",
             livedemolink: "https://yourprojectdemo1.com",
-            nameoftheproject: "Demo Project 1",
-            descriptionoftheproject: "Description of project 1",
+            nameoftheproject: "COB AI Chatbot",
+            descriptionoftheproject: "This project was funded by the College of Business at Oregon State University. They were in need of a AI Chatbot tailored to help incoming freshman and current students with questions and concerns they had.",
             projectframework: "React JS",
             frameworksvgicon: react_icon,
-            projectstyling: "SASS",
-            stylingsvgicon: sass_icon,
+            projectstyling: "Tailwind",
+            stylingsvgicon: twind_icon,
         },
         {
             image: testimage,
             ghublink: "https://github.com/yourusername/yourproject2",
             livedemolink: "https://yourprojectdemo2.com",
-            nameoftheproject: "Demo Project 2",
-            descriptionoftheproject: "Description of project 2",
+            nameoftheproject: "Classroom Polling App",
+            descriptionoftheproject: "Working close with Evan Thatcher a physics professor at Oregon State University we developed an open source learning catalytic tailored for professors and students. It featured the ability to quickly organize",
             projectframework: "React JS",
             frameworksvgicon: react_icon,
             projectstyling: "SASS",
