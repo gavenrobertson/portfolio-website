@@ -72,7 +72,7 @@ export default function Projects() {
             image: testimage,
             ghublink: "https://github.com/yourusername/yourproject2",
             livedemolink: "https://yourprojectdemo2.com",
-            nameoftheproject: "Classroom Polling App",
+            nameoftheproject: "Student Polling App",
             descriptionoftheproject: "Working close with Evan Thatcher a physics professor at Oregon State University we developed an open source learning catalytic tailored for professors and students. It featured the ability to quickly organize",
             projectframework: "React JS",
             frameworksvgicon: react_icon,
