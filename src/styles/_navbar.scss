@@ -157,32 +157,3 @@
 
 }
 
-@media screen and (max-width: 380px) {
-    .nav {
-        padding: 1.6rem
-    }
-
-    .nav-logo-header {
-        font-size: 1.2rem;
-    }
-
-    .menu-btn__burger {
-        width: 27px;
-        height: 1.6px;
-        background: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(255,101,47,.2);
-        transition: all .5s ease-in-out;
-    }
-    .menu-btn__burger::before,
-    .menu-btn__burger::after {
-        content: '';
-        position: absolute;
-        width: 27px;
-        height: 1.6px;
-        background: #fff;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(255,101,47,.2);
-        transition: all .5s ease-in-out;
-    }
-}
