@@ -35,7 +35,7 @@
     height: 310px;
     width: 500px;
     border-radius: 1.7rem;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .biography-h2 {
@@ -96,11 +96,11 @@
     }
 
     .biography-h2 {
-        padding-bottom: 4rem;
+        padding-bottom: 2.4rem;
     }
 
     .biography-p {
-        width: 38rem;
+        width: 42rem;
     }
 }
 
@@ -122,6 +122,7 @@
 
     .about-title {
         font-size: 2.4rem;
+        margin-bottom: 4rem;
     }
 
    .programmer-svg {
@@ -139,8 +140,8 @@
 @media screen and (max-width: 440px) {
 
     .programmer-svg {
-        height: 170px;
-        width: 300px;
+        height: 190px;
+        width: 320px;
     }
 
 }
@@ -148,20 +149,20 @@
 @media screen and (max-width: 380px) {
 
     .programmer-svg {
-        height: 140px;
-        width: 220px;
+        height: 160px;
+        width: 260px;
     }
 
     .biography-h2 {
-        font-size: 1.6rem;
+        font-size: 1.9rem;
     }
 
     .biography-h2-span {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
 
     .biography-p {
-        font-size: 1.6rem;
+        font-size: 1.46rem;
         width: 23rem;
     }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/main.scss'
-import dev_picture from '../imgs/me.jpg'
+import dev_picture from '../imgs/dev.webp'
 import html5 from '../imgs/html-icon.svg'
 import css5 from '../imgs/css-icon.svg'
 import js_icon from '../imgs/js-icon.svg'

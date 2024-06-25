@@ -35,7 +35,7 @@
     height: auto;
     width: 500px;
     border-radius: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
 .project-links {
@@ -96,7 +96,8 @@
 .name-of-project {
     font-family: 'Poppins', sans-serif;
     color: #19191b;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    text-align: center;
 }
 
 .description-of-project {
@@ -217,6 +218,7 @@
 
     .project-title {
         font-size: 2.4rem;
+        margin-bottom: 4rem;
     }
 
     .name-of-project {
@@ -252,20 +254,20 @@
 @media screen and (max-width: 440px) {
 
     .project-container {
-        padding: 2rem 0rem;
+        width: 25.5rem;
+        padding: 2.5rem 1rem;
     }
 
     .name-of-project {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .description-of-project {
-        width: 25rem;
-        font-size: 1.2rem;
+        font-size: 1.6rem;
     }
 
     .project-image {
-        width: 240px;
+        width: 260px;
     }
 
     .project-techstack {
@@ -273,7 +275,7 @@
     }
 
     .framework {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .framework-icon {
@@ -281,7 +283,7 @@
     }
 
     .projlinks {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .link-svg {
@@ -297,7 +299,7 @@
     }
 
     .name-of-project {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
 
     .project-description-container {
@@ -318,7 +320,7 @@
     }
 
     .framework {
-        font-size: 1rem;
+        font-size: 0.94rem;
     }
 
     .framework-icon {
