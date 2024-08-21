@@ -21,7 +21,9 @@ function ProjectComponent({
     return (
         <div className={`project-container ${direction === "right" ? "right" : "left"}`}>
             <div className="project-image-container">
-                <img src={image} alt="project image" className="project-image" />
+                <div className="image-container">
+                    <img src={image} alt="project image" className="project-image" />
+                </div>
                 <div className="project-links">
                     <div>
                         <a href={ghublink} className="project-ghub-link projlinks">
@@ -59,6 +61,18 @@ function ProjectComponent({
 
 export default function Projects() {
     const projectData = [
+        // {
+        //     image: pollimage,
+        //     ghublink: "https://github.com/yourusername/yourproject2",
+        //     livedemolink: "https://yourprojectdemo2.com",
+        //     nameoftheproject: "EHS Now",
+        //     descriptionoftheproject: "Working close with Evan Thatcher a physics professor at Oregon State University we developed an open source learning catalytic tailored for professors and students. It featured the ability to quickly organize",
+        //     projectframework: "React JS",
+        //     frameworksvgicon: react_icon,
+        //     projectstyling: "SASS",
+        //     stylingsvgicon: sass_icon,
+        //     direction: "left"
+        // },
         {
             image: cobimage,
             ghublink: "https://github.com/yourusername/yourproject1",
@@ -83,7 +97,6 @@ export default function Projects() {
             stylingsvgicon: sass_icon,
             direction: "right"
         },
-
     ];
 
     return (
