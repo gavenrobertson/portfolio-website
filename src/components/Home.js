@@ -11,7 +11,8 @@ import sass_icon from '../imgs/sass-icon.svg'
 
 export default function Home() {
     return (
-        <section id="home" className="home">
+        <section className="home">
+            <a id="home" className="anchor"/>
             <div className="home-container">
                 <div className="home-content">
                     <div className="hero-content">

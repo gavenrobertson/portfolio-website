@@ -13,7 +13,7 @@ export default function Navbar() {
     return (
         <header>
             <nav className="nav">
-                <h3 className="nav-logo-header">gaven robertson</h3>
+                <Link to="home" className="nav-logo-header">gaven robertson</Link>
                 <ul className="nav-list">
                     <li className="nav-menu-item">
                         <Link to="home" smooth={true} duration={50}>

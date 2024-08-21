@@ -16,7 +16,7 @@
     border-radius: 9rem;
     height: auto;
     width: 430px;
-    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 }
 
@@ -29,7 +29,7 @@
 }
 
 .hero-content {
-    margin-top: 30rem;
+    margin-top: 25rem;
     display: flex;
     align-items: center;
     gap: 6rem;
@@ -99,14 +99,55 @@
 }
 
 .tech-stack-item {
+    animation-name: bounceUpandDown;
+    animation-duration: 3.5s;
+    animation-iteration-count: infinite;
     height: auto;
     width: 40px;
     transition: ease-out 0.3s;
 }
 
+.tech-stack-item:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.tech-stack-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.tech-stack-item:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.tech-stack-item:nth-child(4) {
+    animation-delay: 1.5s;
+}
+
+.tech-stack-item:nth-child(5) {
+    animation-delay: 2s;
+}
+
+.tech-stack-item:nth-child(6) {
+    animation-delay: 2.5s;
+}
+
 .tech-stack-item:hover {
     cursor: pointer;
     transition: ease-in 0.3s;
+}
+
+@keyframes bounceUpandDown {
+    0% {
+        transform: translateY(0px)
+    }
+
+    50% {
+        transform: translateY(-8px)
+    }
+
+    100% {
+        transform: translateY(0px)
+    }
 }
 
 @media screen and (max-width: 1020px) {
@@ -156,6 +197,20 @@
     .tech-stack-item {
         width: 36px;
     }
+
+    @keyframes bounceUpandDown {
+        0% {
+            transform: translateY(0px)
+        }
+
+        50% {
+            transform: translateY(-7px)
+        }
+
+        100% {
+            transform: translateY(0px)
+        }
+    }
 }
 
 @media screen and (max-width: 525px) {
@@ -190,6 +245,20 @@
 
     .tech-stack {
         margin-top: 5rem;
+    }
+
+    @keyframes bounceUpandDown {
+        0% {
+            transform: translateY(0px)
+        }
+
+        50% {
+            transform: translateY(-6px)
+        }
+
+        100% {
+            transform: translateY(0px)
+        }
     }
 
 }
@@ -230,4 +299,17 @@
         width: 22px;
     }
 
+    @keyframes bounceUpandDown {
+        0% {
+            transform: translateY(0px)
+        }
+
+        50% {
+            transform: translateY(-5px)
+        }
+
+        100% {
+            transform: translateY(0px)
+        }
+    }
 }

@@ -5,8 +5,9 @@
 }
 
 .heading-container {
-    margin: 15rem auto 0rem auto;
-    width: fit-content;
+    margin: 15rem auto 15rem auto;
+    padding: 0rem 4rem;
+    width: 107rem;
 }
 
 .project-title {
@@ -20,22 +21,42 @@
 }
 
 .project-container {
-    margin-bottom: 8rem;
     display: flex;
     flex-direction: row-reverse;
     width: fit-content;
-    padding: 3.5rem;
+    padding: 4rem;
     gap: 6rem;
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     border-radius: 2rem;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .10);
+    border: 1px solid transparent;
+    transition: border 0.3s ease-in-out;
+}
+
+.project-card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem
+}
+
+.project-container:hover {
+    cursor: pointer;
+    border: 1px solid #0073CF;
+}
+
+.left {
+    flex-direction: row-reverse;
+}
+
+.right {
+    flex-direction: row;
 }
 
 .project-image {
-    height: auto;
-    width: 500px;
-    border-radius: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    height: 260px;
+    width: 480px;
+    border-radius: 1rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .20);
 }
 
 .project-links {
@@ -50,37 +71,38 @@
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
     transition: ease-out 0.1s;
     font-family: "Open Sans", sans-serif;
     margin-top: 2rem;
 }
 
 .projlinks:hover {
-    color: #007acc;
+    color: #0073CF;
     transition: ease-in 0.1s;
+    transform: translateY(-0.1rem);
 
     .livedemo-link-svg {
-        fill: #007acc;
+        fill: #0073CF;
         transition: ease-in 0.1s;
     }
 
     .github-projects-contact-svg {
-        fill: #007acc;
+        fill: #0073CF;
         transition: ease-in 0.1s;
     }
 }
 
 .github-projects-contact-svg {
     fill: #333;
-    font-size: 2.45rem;
+    font-size: 2.25rem;
     transition: ease-out 0.1s;
 }
 
 .livedemo-link-svg {
     fill: #333;
     height: auto;
-    width: 2.2rem;
+    width: 2rem;
     transition: ease-out 0.1s;
 }
 
@@ -121,7 +143,7 @@
     background-color: #ffffff;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .20);
 }
 
 .project-framework-icon {
@@ -148,6 +170,7 @@
     }
 
     .project-image {
+        height: auto;
         width: 410px;
     }
 

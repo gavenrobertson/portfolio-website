@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/main.scss';
-import testimage from "../imgs/dice.jpg";
+import cobimage from "../imgs/cob-screenshot.webp";
+import pollimage from "../imgs/classroom_screenshot.webp";
 import react_icon from '../imgs/react-js-icon.svg';
 import sass_icon from '../imgs/sass-icon.svg';
 import twind_icon from '../imgs/tailwind-css-icon.svg';
@@ -14,10 +15,11 @@ function ProjectComponent({
                               projectframework,
                               frameworksvgicon,
                               projectstyling,
-                              stylingsvgicon
+                              stylingsvgicon,
+                              direction
                           }) {
     return (
-        <div className="project-container">
+        <div className={`project-container ${direction === "right" ? "right" : "left"}`}>
             <div className="project-image-container">
                 <img src={image} alt="project image" className="project-image" />
                 <div className="project-links">
@@ -58,7 +60,7 @@ function ProjectComponent({
 export default function Projects() {
     const projectData = [
         {
-            image: testimage,
+            image: cobimage,
             ghublink: "https://github.com/yourusername/yourproject1",
             livedemolink: "https://yourprojectdemo1.com",
             nameoftheproject: "COB AI Chatbot",
@@ -67,9 +69,10 @@ export default function Projects() {
             frameworksvgicon: react_icon,
             projectstyling: "Tailwind",
             stylingsvgicon: twind_icon,
+            direction: "left"
         },
         {
-            image: testimage,
+            image: pollimage,
             ghublink: "https://github.com/yourusername/yourproject2",
             livedemolink: "https://yourprojectdemo2.com",
             nameoftheproject: "Student Polling App",
@@ -78,28 +81,33 @@ export default function Projects() {
             frameworksvgicon: react_icon,
             projectstyling: "SASS",
             stylingsvgicon: sass_icon,
+            direction: "right"
         },
 
     ];
 
     return (
-        <section id="projects" className="projects-section">
+        <section className="projects-section">
+            <a id="projects" className="anchor"/>
             <div className="heading-container">
                 <h2 className="project-title">Projects 💻</h2>
-                {projectData.map((project, index) => (
-                    <ProjectComponent
-                        key={index}
-                        image={project.image}
-                        ghublink={project.ghublink}
-                        livedemolink={project.livedemolink}
-                        nameoftheproject={project.nameoftheproject}
-                        descriptionoftheproject={project.descriptionoftheproject}
-                        projectframework={project.projectframework}
-                        frameworksvgicon={project.frameworksvgicon}
-                        projectstyling={project.projectstyling}
-                        stylingsvgicon={project.stylingsvgicon}
-                    />
-                ))}
+                <div className="project-card-container">
+                    {projectData.map((project, index) => (
+                        <ProjectComponent
+                            key={index}
+                            image={project.image}
+                            ghublink={project.ghublink}
+                            livedemolink={project.livedemolink}
+                            nameoftheproject={project.nameoftheproject}
+                            descriptionoftheproject={project.descriptionoftheproject}
+                            projectframework={project.projectframework}
+                            frameworksvgicon={project.frameworksvgicon}
+                            projectstyling={project.projectstyling}
+                            stylingsvgicon={project.stylingsvgicon}
+                            direction={project.direction}
+                        />
+                    ))}
+                </div>
             </div>
         </section>
     );

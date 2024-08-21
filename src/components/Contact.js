@@ -2,11 +2,12 @@ import React from "react";
 import '../styles/main.scss';
 
 export default function Contact() {
-    return ( 
-    <section id="contact" className="contact-section">
-        <div className="contact-container">
-            <div className="contact-information-container">
-                <h2 className="contact-header">Contact Me 🤳</h2>
+    return (
+        <section className="contact-section">
+            <a id="contact" className="anchor"/>
+            <div className="contact-container">
+                <div className="contact-information-container">
+                    <h2 className="contact-header">Contact Me 🤳</h2>
                     <div className="contact-center">
                         <div className="location-container">
                             <div className="location-information">
@@ -21,8 +22,8 @@ export default function Contact() {
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
-    </section> 
+        </section>
     )
 }
