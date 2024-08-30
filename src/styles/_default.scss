@@ -7,7 +7,7 @@
 html {
     font-size: 62.5%; /* makes 1rem 10px */
     scroll-behavior: smooth;
-    //overflow-x: hidden;
+    overflow-x: hidden;
 }
 body {
     font-size: 1.6em; /* default font of 16px */
@@ -45,8 +45,4 @@ a {
     position: relative;
     visibility: hidden;
     top: -1rem;
-}
-
-#sections {
-    overflow-x: hidden;
 }
