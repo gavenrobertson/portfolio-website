@@ -1,0 +1,16 @@
+{
+  "short_name": "Gaven's Portfolio",
+  "name": "Gaven Robertson's Development Portfolio",
+  "description": "A portfolio showcasing recent work and projects by Gaven Robertson, a front-end developer.",
+  "icons": [
+    {
+      "src": "computer_favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

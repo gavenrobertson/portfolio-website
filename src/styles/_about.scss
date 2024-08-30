@@ -1,3 +1,58 @@
+.about-title.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-100%);
+    transition: all 1s;
+}
+
+.about-title.show {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.img-container.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.img-container.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 0.3s;
+}
+
+.biography-h2.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100%);
+    transition: all 1s;
+}
+
+.biography-h2.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 0.3s;
+}
+
+.biography-p.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100%);
+    transition: all 1s;
+}
+
+.biography-p.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 0.5s;
+}
+
 .about-section {
     display: flex;
     flex-direction: column;
@@ -147,6 +202,10 @@
 }
 
 @media screen and (max-width: 380px) {
+
+    .about-container {
+        padding: 0;
+    }
 
     .programmer-svg {
         height: 160px;

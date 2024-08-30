@@ -1,3 +1,171 @@
+.h1-hero-heading.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: 1s;
+}
+
+.h1-hero-heading.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+}
+
+.p-hero-text.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: 1s;
+}
+
+.p-hero-text.show {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 0.5s;
+}
+
+.contacts.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(100%);
+    transition: 1s;
+}
+
+.contacts.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+    transition-delay: 1s;
+}
+
+.dev-picture.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100%);
+    transition: 1s;
+}
+
+.dev-picture.show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.tech-stack-name.hidden{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-name.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    transition-delay: 1.4s;
+}
+
+.tech-stack-item.hidden:nth-child(1) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(2) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(3) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(4) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(5) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(6) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+.tech-stack-item.hidden:nth-child(7) {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+
+
+.tech-stack-item.show:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 1.6s;
+}
+
+.tech-stack-item.show:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 1.8s;
+}
+
+.tech-stack-item.show:nth-child(3) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 2s;
+}
+
+.tech-stack-item.show:nth-child(4) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 2.2s;
+}
+
+.tech-stack-item.show:nth-child(5) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 2.4s;
+}
+
+.tech-stack-item.show:nth-child(6) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 2.6s;
+}
+
+.tech-stack-item.show:nth-child(7) {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+    transition-delay: 2.8s;
+}
+
+
 .home {
     height: 100vh;
     display: flex;
@@ -107,27 +275,31 @@
 }
 
 .tech-stack-item:nth-child(1) {
-    animation-delay: 0s;
+    animation-delay: 5s;
 }
 
 .tech-stack-item:nth-child(2) {
-    animation-delay: 0.5s;
+    animation-delay: 5.5s;
 }
 
 .tech-stack-item:nth-child(3) {
-    animation-delay: 1s;
+    animation-delay: 6s;
 }
 
 .tech-stack-item:nth-child(4) {
-    animation-delay: 1.5s;
+    animation-delay: 6.5s;
 }
 
 .tech-stack-item:nth-child(5) {
-    animation-delay: 2s;
+    animation-delay: 7s;
 }
 
 .tech-stack-item:nth-child(6) {
-    animation-delay: 2.5s;
+    animation-delay: 7.5s;
+}
+
+.tech-stack-item:nth-child(7) {
+    animation-delay: 8s;
 }
 
 .tech-stack-item:hover {
@@ -264,22 +436,27 @@
 
 @media screen and (max-width: 380px) {
 
+    .home-container {
+        padding: 0;
+    }
+
     .hero-content {
         margin-top: 12.75rem;
         gap: 2.5rem;
     }
 
     .dev-picture {
-        width: 240px;
+        width: 220px;
     }
 
     .h1-hero-heading {
-        font-size: 3.9rem;
+        font-size: 3.7rem;
         padding-bottom: 1.5rem;
     }
 
     .p-hero-text {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        padding: 0 2rem 0 2rem;
     }
 
     .contact-svg {
