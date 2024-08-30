@@ -8,6 +8,8 @@ import ts_icon from '../imgs/ts-icon.svg'
 import react_icon from '../imgs/react-js-icon.svg'
 import sass_icon from '../imgs/sass-icon.svg'
 import twind_icon from '../imgs/tailwind-css-icon.svg'
+import next_js_icon from '../imgs/next-js.svg'
+import vite_icon from '../imgs/vite.svg'
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 
@@ -47,8 +49,8 @@ export default function Home() {
                             <li ref={(el) => (elementsRef.current[5] = el)} className="tech-stack-item hidden"><img src={html5}/></li>
                             <li ref={(el) => (elementsRef.current[6] = el)} className="tech-stack-item hidden"><img src={css5}/></li>
                             <li ref={(el) => (elementsRef.current[7] = el)} className="tech-stack-item hidden"><img src={js_icon}/></li>
-                            <li ref={(el) => (elementsRef.current[8] = el)} className="tech-stack-item hidden"><img src={ts_icon}/></li>
-                            <li ref={(el) => (elementsRef.current[9] = el)} className="tech-stack-item hidden"><img src={react_icon}/></li>
+                            <li ref={(el) => (elementsRef.current[8] = el)} className="tech-stack-item hidden"><img src={react_icon}/></li>
+                            <li ref={(el) => (elementsRef.current[9] = el)} className="tech-stack-item hidden"><img src={next_js_icon}/></li>
                             <li ref={(el) => (elementsRef.current[10] = el)} className="tech-stack-item hidden"><img src={sass_icon}/></li>
                             <li ref={(el) => (elementsRef.current[11] = el)} className="tech-stack-item hidden"><img src={twind_icon}/></li>
                         </ul>

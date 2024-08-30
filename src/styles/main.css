@@ -460,9 +460,11 @@ a {
   animation-name: bounceUpandDown;
   animation-duration: 3.5s;
   animation-iteration-count: infinite;
-  height: auto;
-  width: 40px;
   transition: ease-out 0.3s;
+}
+
+.tech-stack-item img {
+  width: 40px;
 }
 
 .tech-stack-item:nth-child(1) {
@@ -545,7 +547,8 @@ a {
     border-bottom: #19191b 0.3rem solid;
     border-right: none;
   }
-  .tech-stack-item {
+  .tech-stack-item img {
+    height: auto;
     width: 36px;
   }
   @keyframes bounceUpandDown {
@@ -579,7 +582,7 @@ a {
   .contact-svg {
     font-size: 2.6rem;
   }
-  .tech-stack-item {
+  .tech-stack-item img {
     width: 26px;
   }
   .tech-stack {
@@ -625,7 +628,7 @@ a {
   .tech-stack-name {
     font-size: 1.8rem;
   }
-  .tech-stack-item {
+  .tech-stack-item img {
     width: 22px;
   }
   @keyframes bounceUpandDown {

@@ -270,9 +270,13 @@
     animation-name: bounceUpandDown;
     animation-duration: 3.5s;
     animation-iteration-count: infinite;
-    height: auto;
-    width: 40px;
     transition: ease-out 0.3s;
+}
+
+.tech-stack-item {
+    img {
+        width: 40px;
+    }
 }
 
 .tech-stack-item:nth-child(1) {
@@ -367,7 +371,10 @@
     }
 
     .tech-stack-item {
-        width: 36px;
+        img {
+            height: auto;
+            width: 36px;
+        }
     }
 
     @keyframes bounceUpandDown {
@@ -412,7 +419,9 @@
     }
 
     .tech-stack-item {
-        width: 26px;
+        img {
+            width: 26px;
+        }
     }
 
     .tech-stack {
@@ -473,7 +482,9 @@
     }
 
     .tech-stack-item {
-        width: 22px;
+        img {
+            width: 22px;
+        }
     }
 
     @keyframes bounceUpandDown {
