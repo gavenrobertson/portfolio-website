@@ -858,7 +858,7 @@ a {
 .project-transition.hidden.left {
   opacity: 0;
   filter: blur(5px);
-  transform: translateX(-200px);
+  transform: translateX(-50%);
   transition: all 1s;
 }
 
@@ -871,7 +871,7 @@ a {
 .project-transition.hidden.right {
   opacity: 0;
   filter: blur(5px);
-  transform: translateX(200px);
+  transform: translateX(50%);
   transition: all 1s;
 }
 
