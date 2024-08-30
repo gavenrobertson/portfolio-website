@@ -38,7 +38,7 @@ export default function Projects() {
 
 
         return (
-            <div ref={(el) => (elementsRef.current[count+1] = el)} className={`project-transition hidden ${direction === "right" ? "right" : "left"}`}>
+            <div ref={(el) => (elementsRef.current[count] = el)} className={`project-transition hidden ${direction === "right" ? "right" : "left"}`}>
                 <div className={`project-container ${direction === "right" ? "right" : "left"}`}>
                     <div className="project-image-container">
                         <div className="image-container">
@@ -95,6 +95,7 @@ export default function Projects() {
         //     direction: "left"
         // },
         {
+            count: 1,
             image: cobimage,
             ghublink: "https://github.com/yourusername/yourproject1",
             livedemolink: "https://yourprojectdemo1.com",
@@ -107,6 +108,7 @@ export default function Projects() {
             direction: "left"
         },
         {
+            count: 2,
             image: pollimage,
             ghublink: "https://github.com/yourusername/yourproject2",
             livedemolink: "https://yourprojectdemo2.com",
@@ -128,7 +130,7 @@ export default function Projects() {
                 <div className="project-card-container">
                     {projectData.map((project, index) => (
                         <ProjectComponent
-                            count={index}
+                            count={project.count}
                             key={index}
                             image={project.image}
                             ghublink={project.ghublink}
