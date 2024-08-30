@@ -121,7 +121,7 @@ export default function Projects() {
     ];
 
     return (
-        <section className="projects-section">
+        <section id="sections" className="projects-section">
             <a id="projects" className="anchor"/>
             <div className="heading-container">
                 <h2 ref={(el) => (elementsRef.current[0] = el)} className="project-title hidden">Projects 💻</h2>

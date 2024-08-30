@@ -26,7 +26,7 @@ export default function Home() {
     });
 
     return (
-        <section className="home">
+        <section id="sections" className="home">
             <a id="home" className="anchor"/>
             <div className="home-container">
                 <div className="home-content">

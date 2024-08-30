@@ -22,7 +22,7 @@ export default function About() {
     });
 
     return (
-        <section className="about-section">
+        <section id="sections" className="about-section">
             <a id="about" className="anchor"/>
             <div className="about-container">
                 <h2 ref={(el) => (elementsRef.current[0] = el)} className="about-title hidden">About Me 🧑🏻</h2>

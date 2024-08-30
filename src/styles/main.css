@@ -7,7 +7,6 @@
 html {
   font-size: 62.5%; /* makes 1rem 10px */
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
 body {
@@ -45,6 +44,10 @@ a {
   position: relative;
   visibility: hidden;
   top: -1rem;
+}
+
+#sections {
+  overflow-x: hidden;
 }
 
 .menu-btn {
@@ -1089,7 +1092,7 @@ a {
 @media screen and (max-width: 525px) {
   .heading-container {
     margin-top: 8rem;
-    margin-bottom: 2rem;
+    margin-bottom: 10rem;
   }
   .project-container {
     padding: 2.4rem 3rem;

@@ -17,7 +17,7 @@ export default function Contact() {
     });
 
     return (
-        <section className="contact-section">
+        <section id="sections" className="contact-section">
             <a id="contact" className="anchor"/>
             <div className="contact-container">
                 <div className="contact-information-container">
