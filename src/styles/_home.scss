@@ -64,7 +64,7 @@
     opacity: 1;
     filter: blur(0);
     transform: translateX(0);
-    transition-delay: 1.4s;
+    transition-delay: 0.8s;
 }
 
 .tech-stack-item.hidden:nth-child(1) {
@@ -121,49 +121,49 @@
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 1.6s;
+    transition-delay: 1s;
 }
 
 .tech-stack-item.show:nth-child(2) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 1.8s;
+    transition-delay: 1.2s;
 }
 
 .tech-stack-item.show:nth-child(3) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 2s;
+    transition-delay: 1.4s;
 }
 
 .tech-stack-item.show:nth-child(4) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 2.2s;
+    transition-delay: 1.6s;
 }
 
 .tech-stack-item.show:nth-child(5) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 2.4s;
+    transition-delay: 1.8s;
 }
 
 .tech-stack-item.show:nth-child(6) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 2.6s;
+    transition-delay: 2s;
 }
 
 .tech-stack-item.show:nth-child(7) {
     opacity: 1;
     transform: translateX(0);
     filter: blur(0);
-    transition-delay: 2.8s;
+    transition-delay: 2.2s;
 }
 
 
@@ -280,31 +280,31 @@
 }
 
 .tech-stack-item:nth-child(1) {
-    animation-delay: 5s;
+    animation-delay: 3s;
 }
 
 .tech-stack-item:nth-child(2) {
-    animation-delay: 5.5s;
+    animation-delay: 3.5s;
 }
 
 .tech-stack-item:nth-child(3) {
-    animation-delay: 6s;
+    animation-delay: 4s;
 }
 
 .tech-stack-item:nth-child(4) {
-    animation-delay: 6.5s;
+    animation-delay: 4.5s;
 }
 
 .tech-stack-item:nth-child(5) {
-    animation-delay: 7s;
+    animation-delay: 5s;
 }
 
 .tech-stack-item:nth-child(6) {
-    animation-delay: 7.5s;
+    animation-delay: 5.5s;
 }
 
 .tech-stack-item:nth-child(7) {
-    animation-delay: 8s;
+    animation-delay: 6s;
 }
 
 .tech-stack-item:hover {
