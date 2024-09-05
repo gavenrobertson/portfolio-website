@@ -12,7 +12,7 @@ html {
 
 body {
   font-size: 1.6em; /* default font of 16px */
-  font-family: "Nunito", sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.3;
   color: #373737;
   overflow-x: hidden;
@@ -401,7 +401,8 @@ a {
 }
 
 .p-hero-text {
-  font-size: 1.28em;
+  font-size: 1.24em;
+  font-family: "Poppins", sans-serif;
 }
 
 .contacts {
@@ -444,7 +445,7 @@ a {
 }
 
 .tech-stack-name {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 2.3rem;
   font-weight: 700;
   border-right: #19191b 0.3rem solid;
@@ -752,14 +753,15 @@ a {
 }
 
 .biography-entry {
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 1.8rem;
 }
 
 .biography-p {
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
+  font-weight: 500;
 }
 
 @media screen and (max-height: 1184px) {
@@ -960,7 +962,7 @@ a {
   gap: 0.8rem;
   font-size: 1.6rem;
   transition: ease-out 0.1s;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin-top: 2rem;
 }
 
@@ -993,7 +995,6 @@ a {
 
 .project-description-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
   height: auto;
@@ -1008,19 +1009,22 @@ a {
 }
 
 .description-of-project {
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
   font-size: 1.8rem;
   margin-top: 2rem;
+  font-weight: 500;
 }
 
 .project-techstack {
   display: flex;
   margin: 3.8rem auto;
+  margin-bottom: 0rem;
   gap: 3.5rem;
 }
 
 .framework {
+  font-family: "Poppins", sans-serif;
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -1275,14 +1279,14 @@ a {
 
 .info-header {
   font-size: 2.5rem;
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #19191b;
   margin-bottom: 0.8rem;
 }
 
 .info-des {
   font-size: 2rem;
-  font-family: "Nunito", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #616161;
 }
 

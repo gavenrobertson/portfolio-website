@@ -53,12 +53,12 @@ export default function Projects() {
                                     </svg>
                                 </a>
                             </div>
-                            <a href={livedemolink} className="project-livedemo-link projlinks">
-                                Live Demo
-                                <svg className="livedemo-link-svg link-svg" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                                    <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z" />
-                                </svg>
-                            </a>
+                            {/*<a href={livedemolink} className="project-livedemo-link projlinks">*/}
+                            {/*    Live Demo*/}
+                            {/*    <svg className="livedemo-link-svg link-svg" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">*/}
+                            {/*        <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 32C35.8 32 0 67.8 0 112V432c0 44.2 35.8 80 80 80H400c44.2 0 80-35.8 80-80V320c0-17.7-14.3-32-32-32s-32 14.3-32 32V432c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16H192c17.7 0 32-14.3 32-32s-14.3-32-32-32H80z" />*/}
+                            {/*    </svg>*/}
+                            {/*</a>*/}
                         </div>
                     </div>
                     <div className="project-description-container">
@@ -100,8 +100,8 @@ export default function Projects() {
             ghublink: "https://github.com/yourusername/yourproject1",
             livedemolink: "https://yourprojectdemo1.com",
             nameoftheproject: "COB AI Chatbot",
-            descriptionoftheproject: "This project was funded by the College of Business at Oregon State University. They were in need of a AI Chatbot tailored to help incoming freshman and current students with questions and concerns they had.",
-            projectframework: "React JS",
+            descriptionoftheproject: "This project was funded by the College of Business at Oregon State University. They needed an AI Chatbot tailored to help incoming freshmen and current students with questions and concerns.",
+            projectframework: "React",
             frameworksvgicon: react_icon,
             projectstyling: "Tailwind",
             stylingsvgicon: twind_icon,
@@ -112,9 +112,9 @@ export default function Projects() {
             image: pollimage,
             ghublink: "https://github.com/yourusername/yourproject2",
             livedemolink: "https://yourprojectdemo2.com",
-            nameoftheproject: "Student Polling App",
-            descriptionoftheproject: "Working close with Evan Thatcher a physics professor at Oregon State University we developed an open source learning catalytic tailored for professors and students. It featured the ability to quickly organize",
-            projectframework: "React JS",
+            nameoftheproject: "Polling Application",
+            descriptionoftheproject: "Working closely with Evan Thatcher a physics professor at Oregon State University we developed an open-source learning catalytic tailored for professors and students.",
+            projectframework: "React",
             frameworksvgicon: react_icon,
             projectstyling: "SASS",
             stylingsvgicon: sass_icon,

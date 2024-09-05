@@ -112,7 +112,7 @@
     gap: 0.8rem;
     font-size: 1.6rem;
     transition: ease-out 0.1s;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
     margin-top: 2rem;
 }
 
@@ -147,7 +147,6 @@
 
 .project-description-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
     height: auto;
@@ -162,19 +161,22 @@
 }
 
 .description-of-project {
-    font-family: "Nunito", sans-serif;
+    font-family: "Poppins", sans-serif;
     text-align: center;
     font-size: 1.8rem;
     margin-top: 2rem;
+    font-weight: 500;
 }
 
 .project-techstack {
     display: flex;
     margin: 3.8rem auto;
+    margin-bottom: 0rem;
     gap: 3.5rem;
 }
 
 .framework {
+    font-family: "Poppins", sans-serif;
     width: fit-content;
     display: flex;
     justify-content: center;
