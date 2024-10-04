@@ -97,7 +97,7 @@ export default function Projects() {
         {
             count: 1,
             image: cobimage,
-            ghublink: "https://github.com/yourusername/yourproject1",
+            ghublink: "https://github.com/COBTeam1/ComingSoon",
             livedemolink: "https://yourprojectdemo1.com",
             nameoftheproject: "COB AI Chatbot",
             descriptionoftheproject: "This project was funded by the College of Business at Oregon State University. They needed an AI Chatbot tailored to help incoming freshmen and current students with questions and concerns.",
@@ -110,7 +110,7 @@ export default function Projects() {
         {
             count: 2,
             image: pollimage,
-            ghublink: "https://github.com/yourusername/yourproject2",
+            ghublink: "https://github.com/CS461PollingApplication/my-classroom-fe",
             livedemolink: "https://yourprojectdemo2.com",
             nameoftheproject: "Polling Application",
             descriptionoftheproject: "Working closely with Evan Thatcher a physics professor at Oregon State University we developed an open-source learning catalytic tailored for professors and students.",

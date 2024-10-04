@@ -1,8 +1,6 @@
 import React, {useCallback} from "react";
 import '../styles/main.scss';
 import campus_image from "../imgs/campus.webp";
-import UseIntersectionObserver from "../hooks/useIntersectionObserver";
-import {isVisible} from "@testing-library/user-event/dist/utils";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 
 
@@ -23,7 +21,7 @@ export default function About() {
 
     return (
         <section id="sections" className="about-section">
-            <a id="about" className="anchor"/>
+            <a href="" id="about" className="anchor" aria-label="About Section"/>
             <div className="about-container">
                 <h2 ref={(el) => (elementsRef.current[0] = el)} className="about-title hidden">About Me 🧑🏻</h2>
                 <div className="about-content">

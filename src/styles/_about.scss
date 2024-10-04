@@ -1,7 +1,7 @@
 .about-title.hidden {
     opacity: 0;
     filter: blur(5px);
-    transform: translateY(-90%);
+    transform: translateY(-20%);
     transition: all 1s;
 }
 
@@ -14,7 +14,7 @@
 .img-container.hidden {
     opacity: 0;
     filter: blur(5px);
-    transform: translateX(-90%);
+    transform: translateX(-20%);
     transition: all 1s;
 }
 
@@ -28,7 +28,7 @@
 .biography-h2.hidden {
     opacity: 0;
     filter: blur(5px);
-    transform: translateX(90%);
+    transform: translateX(20%);
     transition: all 1s;
 }
 
@@ -42,7 +42,7 @@
 .biography-p.hidden {
     opacity: 0;
     filter: blur(5px);
-    transform: translateX(90%);
+    transform: translateX(20%);
     transition: all 1s;
 }
 

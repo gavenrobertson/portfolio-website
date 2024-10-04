@@ -1,6 +1,6 @@
 .contact-header.hidden {
     opacity: 0;
-    transform: translateY(-90%);
+    transform: translateY(-20%);
     filter: blur(5px);
     transition: 1s;
 }
@@ -13,7 +13,7 @@
 
 .location-information.hidden {
     opacity: 0;
-    transform: translateX(-90%);
+    transform: translateX(-20%);
     filter: blur(5px);
     transition: 1s;
 }
@@ -26,7 +26,7 @@
 
 .email-container.hidden {
     opacity: 0;
-    transform: translateX(-90%);
+    transform: translateX(-20%);
     filter: blur(5px);
     transition: 1s;
 }
