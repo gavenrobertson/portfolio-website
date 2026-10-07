@@ -42,7 +42,7 @@ export default function Projects() {
                 <div className={`project-container ${direction === "right" ? "right" : "left"}`}>
                     <div className="project-image-container">
                         <div className="image-container">
-                            <img src={image} alt="project image" className="project-image" />
+                            <img src={image} alt={`${nameoftheproject} screenshot`} className="project-image" />
                         </div>
                         <div className="project-links">
                             <div>
@@ -67,11 +67,11 @@ export default function Projects() {
                         <div className="project-techstack">
                             <div className="project framework">
                                 {projectframework}
-                                <img className="project-framework-icon framework-icon" src={frameworksvgicon} />
+                                <img className="project-framework-icon framework-icon" src={frameworksvgicon} alt="" />
                             </div>
                             <div className="styling framework">
                                 {projectstyling}
-                                <img className="project-framework-icon framework-icon" src={stylingsvgicon} />
+                                <img className="project-framework-icon framework-icon" src={stylingsvgicon} alt="" />
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@ export default function Projects() {
 
     return (
         <section id="sections" className="projects-section">
-            <a id="projects" className="anchor"/>
+            <span id="projects" className="anchor"/>
             <div className="heading-container">
                 <h2 ref={(el) => (elementsRef.current[0] = el)} className="project-title hidden">Projects 💻</h2>
                 <div className="project-card-container">

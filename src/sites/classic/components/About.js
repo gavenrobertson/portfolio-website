@@ -21,7 +21,7 @@ export default function About() {
 
     return (
         <section id="sections" className="about-section">
-            <a href="" id="about" className="anchor" aria-label="About Section"/>
+            <span id="about" className="anchor"/>
             <div className="about-container">
                 <h2 ref={(el) => (elementsRef.current[0] = el)} className="about-title hidden">About Me 🧑🏻</h2>
                 <div className="about-content">

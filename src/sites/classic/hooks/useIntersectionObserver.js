@@ -14,14 +14,15 @@ const useIntersectionObserver = (onIntersect, options = {}) => {
             });
         }, options);
 
-        elementsRef.current.forEach(el => {
+        const elements = elementsRef.current;
+        elements.forEach(el => {
             if (el) {
                 observer.observe(el);
             }
         });
 
         return () => {
-            elementsRef.current.forEach(el => {
+            elements.forEach(el => {
                 if (el) {
                     observer.unobserve(el);
                 }

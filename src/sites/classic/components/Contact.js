@@ -18,7 +18,7 @@ export default function Contact() {
 
     return (
         <section id="sections" className="contact-section">
-            <a id="contact" className="anchor"/>
+            <span id="contact" className="anchor"/>
             <div className="contact-container">
                 <div className="contact-information-container">
                     <h2 ref={(el) => (elementsRef.current[0] = el)} className="contact-header hidden">Contact Me 🤳</h2>
