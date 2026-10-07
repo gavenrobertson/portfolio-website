@@ -1,0 +1,13 @@
+// Page-level styles that must exist before a site's own (code-split) styles arrive.
+html[data-site='retro'] body {
+    margin: 0;
+    background: #0B0B0D;
+}
+
+.site-loading {
+    min-height: 100vh;
+}
+
+.site-loading--retro {
+    background: #0B0B0D;
+}

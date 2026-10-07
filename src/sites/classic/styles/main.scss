@@ -1,0 +1,13 @@
+// Classic site styles. Everything is scoped so it only applies while the classic
+// site is showing (see ClassicSite.js) and never leaks into the other designs.
+@use 'sass:meta';
+@use 'default';
+
+.classic-site {
+    @include meta.load-css('navbar');
+    @include meta.load-css('home');
+    @include meta.load-css('about');
+    @include meta.load-css('projects');
+    @include meta.load-css('contact');
+    @include meta.load-css('footer');
+}

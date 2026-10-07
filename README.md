@@ -1,3 +1,22 @@
+# gavenrobertson.dev
+
+## Site versions
+
+Every version of the site lives in `src/sites/` and is code-split, so visitors only download the one they see:
+
+| Key        | What it is                                                        | Folder                 |
+|------------|-------------------------------------------------------------------|------------------------|
+| `gavenos`  | **GavenOS 2000** (live): scroll to build a PC, load projects from CDs | `src/sites/gavenos`   |
+| `gavennet` | **GavenNET Lab**: network-engineer take, rack a lab and patch VLANs | `src/sites/gavennet`  |
+| `classic`  | The original site                                                  | `src/sites/classic`   |
+
+- **Swap the live design** by changing `PRIMARY_SITE` in `src/siteConfig.js`.
+- **Preview any version** with `?site=<key>`, e.g. `/?site=gavennet`.
+- The three.js portal in the bottom-right corner (`src/portal/`) switches between the live design and the classic site; the choice is remembered in `localStorage`.
+- Both retro designs share their UI pieces and styles in `src/sites/retro/` (edit projects in `src/sites/retro/projects.js`). Their Blender models are in `public/models/`.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

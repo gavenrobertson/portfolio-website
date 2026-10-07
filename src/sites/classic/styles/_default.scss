@@ -1,0 +1,59 @@
+//Default Styling
+// html/body rules only apply while the classic site is active (App sets data-site on <html>).
+html[data-site='classic'],
+html[data-site='classic'] body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html[data-site='classic'] {
+    font-size: 62.5%; /* makes 1rem 10px */
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+html[data-site='classic'] body {
+    font-size: 1.6em; /* default font of 16px */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #373737;
+    overflow-x: hidden;
+}
+
+
+html[data-site='classic'] body::-webkit-scrollbar {
+    width: 1.2rem;
+}
+
+html[data-site='classic'] body::-webkit-scrollbar-track {
+    display: none;
+}
+
+html[data-site='classic'] body::-webkit-scrollbar-thumb {
+    background-color: #19191b;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid #ffffff;  /* creates padding around scroll thumb */
+}
+
+.classic-site {
+    &, * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .anchor {
+        display: block;
+        position: relative;
+        visibility: hidden;
+        top: -1rem;
+    }
+}

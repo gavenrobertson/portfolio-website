@@ -1,0 +1,91 @@
+// Uses px (not rem) because the classic site changes the root font size.
+$lime: #B4F25A;
+
+.site-portal {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+    font-family: 'VT323', monospace;
+}
+
+.site-portal__label {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(11, 11, 13, 0.85);
+    border: 1px solid #3C3F47;
+    color: $lime;
+    font-size: 18px;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    opacity: 0.85;
+    transform: translateX(4px);
+    transition: opacity .2s, transform .2s, border-color .2s;
+}
+
+.site-portal:hover .site-portal__label,
+.site-portal:focus-within .site-portal__label {
+    opacity: 1;
+    transform: translateX(0);
+    border-color: $lime;
+}
+
+.site-portal__button {
+    pointer-events: auto;
+    position: relative;
+    width: 104px;
+    height: 104px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    &:focus-visible {
+        outline: 3px solid $lime;
+        outline-offset: -6px;
+    }
+}
+
+.site-portal__canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.site-portal__fallback {
+    position: absolute;
+    inset: 16px;
+    border-radius: 50%;
+    border: 4px solid $lime;
+    background: radial-gradient(circle, #F4FFE0 0 12%, $lime 28%, #2E8BA8 60%, #0B0B0D 100%);
+    box-shadow: 0 0 24px rgba(180, 242, 90, 0.55);
+}
+
+.site-portal__warp {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    clip-path: circle(0px at var(--warp-x, 100%) var(--warp-y, 100%));
+    background:
+        radial-gradient(circle at var(--warp-x, 100%) var(--warp-y, 100%), #F4FFE0 0, $lime 6%, #2E8BA8 22%, #0E2A24 45%, #0B0B0D 75%);
+
+    &[hidden] { display: none; }
+}
+
+@media (max-width: 640px) {
+    .site-portal__label { display: none; }
+    .site-portal__button { width: 84px; height: 84px; }
+}
+
+@media print {
+    .site-portal { display: none; }
+}
