@@ -1,7 +1,7 @@
 import React from "react";
 import baseProjects from "../retro/projects";
 import {
-    useFlatMode, useScrollScene, RetroNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
+    useFlatMode, useTheme, useScrollScene, RetroNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
     RackPlate, SkillSlot, SysInfo, HistoryLog, RetroWindow, ContactSection, RetroFooter,
 } from "../retro/RetroUI";
 import { createScene } from "./scene";
@@ -56,7 +56,8 @@ function lcdText(phase, project, linked) {
 
 export default function GavenNetSite() {
     const [flat, toggle3d, forceFlat] = useFlatMode();
-    const scene = useScrollScene(createScene, { projects, modelsUrl: MODELS_URL, enabled: !flat, onUnavailable: forceFlat });
+    const [theme, toggleTheme] = useTheme();
+    const scene = useScrollScene(createScene, { projects, modelsUrl: MODELS_URL, enabled: !flat, onUnavailable: forceFlat, theme });
     const { selected, loaded, phase } = scene.sceneState;
     const current = projects[loaded >= 0 ? loaded : selected];
 
@@ -68,6 +69,8 @@ export default function GavenNetSite() {
                 projectsId="lab"
                 flat={flat}
                 onToggle3d={toggle3d}
+                theme={theme}
+                onToggleTheme={toggleTheme}
             />
 
             {!flat ? (

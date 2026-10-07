@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import './retro.scss';
 
 // Building blocks shared by the GavenOS 2000 and GavenNET Lab designs.
@@ -44,6 +44,14 @@ export const Icon = {
             <path d="M12 2l9 5v10l-9 5-9-5V7z" /><path d="M12 22V12M21 7l-9 5-9-5" />
         </svg>
     ),
+    Sun: () => (
+        <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+        </svg>
+    ),
+    Moon: () => (
+        <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+    ),
     Mail: () => (
         <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true">
             <rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" />
@@ -75,16 +83,64 @@ export function useFlatMode() {
     return [flat, toggle, forceFlat];
 }
 
+// ---------- light / dark theme
+// Follows the system setting until the visitor picks one. public/index.html sets
+// data-theme before React loads so the page never flashes the wrong theme.
+const THEME_KEY = 'gaven-theme';
+const THEME_COLORS = { dark: '#0B0B0D', light: '#E9E6DD' };
+const darkQuery = typeof window !== 'undefined' && window.matchMedia
+    ? window.matchMedia('(prefers-color-scheme: dark)')
+    : null;
+
+function storedTheme() {
+    try {
+        const v = window.localStorage.getItem(THEME_KEY);
+        if (v === 'light' || v === 'dark') return v;
+    } catch (e) { /* storage unavailable */ }
+    return null;
+}
+
+function systemTheme() {
+    return darkQuery && !darkQuery.matches ? 'light' : 'dark';
+}
+
+export function useTheme() {
+    const [theme, setTheme] = useState(() => storedTheme() || systemTheme());
+
+    useLayoutEffect(() => {
+        document.documentElement.dataset.theme = theme;
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', THEME_COLORS[theme]);
+    }, [theme]);
+
+    useEffect(() => {
+        if (!darkQuery) return undefined;
+        const onChange = () => { if (!storedTheme()) setTheme(systemTheme()); };
+        darkQuery.addEventListener('change', onChange);
+        return () => darkQuery.removeEventListener('change', onChange);
+    }, []);
+
+    const toggle = useCallback(() => {
+        const next = theme === 'dark' ? 'light' : 'dark';
+        try { window.localStorage.setItem(THEME_KEY, next); } catch (e) { /* ignore */ }
+        setTheme(next);
+    }, [theme]);
+
+    return [theme, toggle];
+}
+
 // ---------- scroll-driven three.js scene
 const INITIAL_SCENE_STATE = { step: 0, pct: 0, selected: 0, loaded: -1, phase: 'idle' };
 
-export function useScrollScene(createScene, { projects, modelsUrl, enabled, onUnavailable }) {
+export function useScrollScene(createScene, { projects, modelsUrl, enabled, onUnavailable, theme }) {
     const trackRef = useRef(null);
     const stageRef = useRef(null);
     const canvasRef = useRef(null);
     const bgRef = useRef(null);
     const sceneRef = useRef(null);
     const [sceneState, setSceneState] = useState(INITIAL_SCENE_STATE);
+    const themeRef = useRef(theme);
+    themeRef.current = theme;
 
     useEffect(() => {
         if (!enabled) return undefined;
@@ -103,12 +159,17 @@ export function useScrollScene(createScene, { projects, modelsUrl, enabled, onUn
             return undefined;
         }
         sceneRef.current = scene;
+        scene.setTheme(themeRef.current === 'light');
         return () => {
             scene.dispose();
             sceneRef.current = null;
             setSceneState(INITIAL_SCENE_STATE);
         };
     }, [createScene, projects, modelsUrl, enabled, onUnavailable]);
+
+    useEffect(() => {
+        if (sceneRef.current) sceneRef.current.setTheme(theme === 'light');
+    }, [theme]);
 
     const api = useMemo(() => ({
         select: (i) => sceneRef.current && sceneRef.current.select(i),
@@ -122,7 +183,7 @@ export function useScrollScene(createScene, { projects, modelsUrl, enabled, onUn
 }
 
 // ---------- layout pieces
-export function RetroNav({ subtitle, marquee, projectsId, flat, onToggle3d }) {
+export function RetroNav({ subtitle, marquee, projectsId, flat, onToggle3d, theme, onToggleTheme }) {
     return (
         <header className="r-header">
             <nav aria-label="Primary" className="r-nav">
@@ -140,6 +201,15 @@ export function RetroNav({ subtitle, marquee, projectsId, flat, onToggle3d }) {
                     <button className="glass r-pill r-pill--toggle" type="button" aria-pressed={!flat} onClick={onToggle3d} aria-label="Toggle 3D animations">
                         <span aria-hidden="true" className={`r-toggle-dot${flat ? '' : ' is-on'}`} />
                         {flat ? '3D: OFF' : '3D: ON'}
+                    </button>
+                    <button
+                        className="glass r-pill r-pill--icon"
+                        type="button"
+                        onClick={onToggleTheme}
+                        aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                        title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+                    >
+                        {theme === 'dark' ? <Icon.Sun /> : <Icon.Moon />}
                     </button>
                     <a className="glass r-pill r-nav-link" href={`#${projectsId}`}>Projects</a>
                     <a className="glass r-pill r-nav-link" href="#about">About</a>

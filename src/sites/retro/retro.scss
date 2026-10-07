@@ -1,14 +1,17 @@
 // Shared look for the Y2K "retro" designs (GavenOS 2000 and GavenNET Lab).
 // Everything is scoped to .retro-site so it never leaks into the classic site.
 
-$bg: #0B0B0D;
-$ink: #EDEDEA;
-$muted: #A9AAB0;
-$dim: #8E9097;
+// Theme colors are CSS variables (dark by default, light under html[data-theme='light']).
+// Lime "screens" (marquee, LCD, sysinfo terminal) stay dark in both themes, like real CRTs.
+$bg: var(--bg);
+$ink: var(--ink);
+$muted: var(--muted);
+$dim: var(--dim);
+$accent: var(--accent);
 $lime: #B4F25A;
 $lime-dark: #7FAF3E;
 $amber: #FFB238;
-$line: #2A2C33;
+$line: var(--line);
 $header-h: 72px;
 $gutter: clamp(16px, 3vw, 40px);
 $mono: 'VT323', monospace;
@@ -19,10 +22,102 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
 @keyframes retro-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes retro-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
+// Dark is the default; html[data-theme='light'] switches palettes.
+.retro-site {
+    color-scheme: dark;
+    --bg: #0B0B0D;
+    --ink: #EDEDEA;
+    --ink-strong: #FFFFFF;
+    --muted: #A9AAB0;
+    --dim: #8E9097;
+    --accent: #B4F25A;
+    --accent-glow: rgba(180, 242, 90, 0.6);
+    --line: #2A2C33;
+    --rule: #26282E;
+    --header: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+    --surface: #0E0F12;
+    --surface-raised: #15161A;
+    --well: #08090A;
+    --stage-glow: #15171B;
+    --bgtext: #1F2126;
+    --scanline: rgba(0, 0, 0, 0.18);
+    --highlight: rgba(255, 255, 255, 0.12);
+    --shadow: rgba(0, 0, 0, 0.45);
+    --shadow-strong: rgba(0, 0, 0, 0.7);
+    --press: #000000;
+    --glass: #2A2C33;
+    --glass-border: #3C3F47;
+    --glass-inset: #17181C;
+    --hover-border: #B4F25A;
+    --hover-brightness: 1.12;
+    --selected: #2F3328;
+    --chrome: linear-gradient(180deg, #FFFFFF 0%, #D9DDE2 42%, #6E737B 50%, #C9CED4 62%, #FFFFFF 100%);
+    --plate: linear-gradient(180deg, #30333A 0%, #24262C 48%, #1C1E23 52%, #23252B 100%);
+    --plate-border: #3A3D44;
+    --port: #121317;
+    --port-hover: #171A12;
+    --pending: #C9CBD1;
+    --player: linear-gradient(180deg, #34373E 0%, #1C1D22 50%, #141518 51%, #1E2025 100%);
+    --player-border: #44474F;
+    --player-inset: #0E0F12;
+    --bezel: #1C1D22;
+    --bezel-edge: #33363D;
+    --term-ink: #D6D7DB;
+    --contact-glow: #17200C;
+    --badge: linear-gradient(180deg, #2A2C33, #141518);
+    --badge-lime: linear-gradient(180deg, #1F2A10, #0E1407);
+}
+
+// Light: Y2K "platinum" — warm beige-gray plastics, darker green for readable accents.
+html[data-theme='light'] .retro-site {
+    color-scheme: light;
+    --bg: #E9E6DD;
+    --ink: #17181C;
+    --ink-strong: #000000;
+    --muted: #464850;
+    --dim: #5C5E66;
+    --accent: #3D6A08;
+    --accent-glow: rgba(180, 242, 90, 0);
+    --line: #C3BFB3;
+    --rule: #D3CFC4;
+    --header: linear-gradient(180deg, #F8F6F0 0%, #E4E0D6 100%);
+    --surface: #FBFAF6;
+    --surface-raised: #FBFAF6;
+    --well: #E4E1D8;
+    --stage-glow: #F8F6F0;
+    --bgtext: #D3CFC3;
+    --scanline: rgba(0, 0, 0, 0.05);
+    --highlight: rgba(255, 255, 255, 0.85);
+    --shadow: rgba(60, 55, 40, 0.16);
+    --shadow-strong: rgba(60, 55, 40, 0.26);
+    --press: #A39E90;
+    --glass: #F4F2EC;
+    --glass-border: #B4AFA2;
+    --glass-inset: #D2CEC3;
+    --hover-border: #5E8A22;
+    --hover-brightness: 1.03;
+    --selected: #E3F0CF;
+    --chrome: linear-gradient(180deg, #4A4D55 0%, #2A2C33 42%, #0B0B0D 50%, #3A3D44 62%, #5E626A 100%);
+    --plate: linear-gradient(180deg, #FAF9F5 0%, #ECEAE3 48%, #DFDCD3 52%, #E9E6DE 100%);
+    --plate-border: #BDB9AD;
+    --port: #FFFFFF;
+    --port-hover: #F1F7E6;
+    --pending: #5C5E66;
+    --player: linear-gradient(180deg, #FAF9F5 0%, #E6E3DB 50%, #D9D6CC 51%, #E6E3DB 100%);
+    --player-border: #B4AFA2;
+    --player-inset: #C9C5B9;
+    --bezel: #D6D2C6;
+    --bezel-edge: #B4AFA2;
+    --term-ink: #2A2C33;
+    --contact-glow: #DCEDBF;
+    --badge: linear-gradient(180deg, #FBFAF6, #E2DFD6);
+    --badge-lime: linear-gradient(180deg, #EEF7DE, #D6EAB4);
+}
+
 @mixin plate-surface {
-    background: linear-gradient(180deg, #30333A 0%, #24262C 48%, #1C1E23 52%, #23252B 100%);
-    border: 1px solid #3A3D44;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px rgba(0, 0, 0, 0.45);
+    background: var(--plate);
+    border: 1px solid var(--plate-border);
+    box-shadow: inset 0 1px 0 var(--highlight), 0 18px 40px var(--shadow);
     transition: border-color .2s, transform .2s;
     &:hover { border-color: #5E8A22; }
 }
@@ -34,7 +129,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
 
     a { color: $ink; text-decoration: none; }
-    a:hover { color: #FFFFFF; }
+    a:hover { color: var(--ink-strong); }
     button { font-family: $sans; }
     section[id] { scroll-margin-top: $header-h; }
 
@@ -43,22 +138,22 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         background: $lime;
         border: 1px solid #5E8A22;
         color: #0B1406;
-        box-shadow: inset 0 -5px 0 #7FB536, inset 0 1px 0 rgba(255, 255, 255, .6), 0 3px 0 #000000, 0 0 22px rgba(180, 242, 90, .25);
+        box-shadow: inset 0 -5px 0 #7FB536, inset 0 1px 0 rgba(255, 255, 255, .6), 0 3px 0 var(--press), 0 0 22px rgba(180, 242, 90, .25);
         transition: filter .15s, transform .1s, box-shadow .1s;
         &:hover { filter: brightness(1.06); color: #0B1406; }
         &:active { transform: translateY(3px); box-shadow: inset 0 -2px 0 #7FB536, 0 0 0 #000000, 0 0 22px rgba(180, 242, 90, .25); }
     }
     .glass {
-        background: $line;
-        border: 1px solid #3C3F47;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
         color: $ink;
-        box-shadow: inset 0 -5px 0 #17181C, inset 0 1px 0 rgba(255, 255, 255, .12), 0 3px 0 #000000;
+        box-shadow: inset 0 -5px 0 var(--glass-inset), inset 0 1px 0 var(--highlight), 0 3px 0 var(--press);
         transition: filter .15s, transform .1s, box-shadow .1s, border-color .15s;
-        &:hover { border-color: $lime; filter: brightness(1.12); color: #FFFFFF; }
-        &:active { transform: translateY(3px); box-shadow: inset 0 -2px 0 #17181C, 0 0 0 #000000; }
+        &:hover { border-color: var(--hover-border); filter: brightness(var(--hover-brightness)); color: var(--ink-strong); }
+        &:active { transform: translateY(3px); box-shadow: inset 0 -2px 0 var(--glass-inset), 0 0 0 var(--press); }
     }
     .chrome {
-        background: linear-gradient(180deg, #FFFFFF 0%, #D9DDE2 42%, #6E737B 50%, #C9CED4 62%, #FFFFFF 100%);
+        background: var(--chrome);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -75,9 +170,9 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         z-index: 30;
         height: $header-h;
         box-sizing: border-box;
-        background: linear-gradient(180deg, #1B1C21 0%, #101114 100%);
+        background: var(--header);
         border-bottom: 1px solid $line;
-        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+        box-shadow: 0 1px 0 var(--highlight) inset;
     }
     .r-nav {
         max-width: 1360px;
@@ -103,7 +198,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
     }
     .r-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
     .r-brand-name { font-weight: 700; font-size: 15px; }
-    .r-brand-sub { font-family: $mono; font-size: 16px; color: $lime; }
+    .r-brand-sub { font-family: $mono; font-size: 16px; color: $accent; }
     .r-marquee {
         flex: 1 1 200px;
         max-width: 420px;
@@ -138,11 +233,12 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
     }
     .r-pill--toggle { padding: 0 14px; gap: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
     .r-pill--cta { padding: 0 18px; font-weight: 700; }
+    .r-pill--icon { width: 44px; padding: 0; justify-content: center; cursor: pointer; }
     .r-toggle-dot {
         width: 9px;
         height: 9px;
         border-radius: 50%;
-        background: #5E626A;
+        background: var(--dim);
         &.is-on { background: $lime; box-shadow: 0 0 8px $lime; }
     }
 
@@ -153,7 +249,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         top: $header-h;
         height: clamp(560px, calc(100vh - #{$header-h}), 900px);
         overflow: hidden;
-        background: radial-gradient(ellipse 80% 70% at 50% 40%, #15171B 0%, $bg 70%);
+        background: radial-gradient(ellipse 80% 70% at 50% 40%, var(--stage-glow) 0%, $bg 70%);
     }
     .r-bgtext {
         position: absolute;
@@ -166,7 +262,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         letter-spacing: -0.04em;
         line-height: 1;
         color: transparent;
-        -webkit-text-stroke: 1px #1F2126;
+        -webkit-text-stroke: 1px var(--bgtext);
         pointer-events: none;
         will-change: transform;
     }
@@ -175,7 +271,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         position: absolute;
         inset: 0;
         pointer-events: none;
-        background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0.18) 3px, rgba(0, 0, 0, 0) 4px);
+        background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 2px, var(--scanline) 3px, rgba(0, 0, 0, 0) 4px);
         mix-blend-mode: multiply;
     }
     .r-overlay {
@@ -194,14 +290,14 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         border-radius: 10px 10px 6px 6px;
         overflow: hidden;
         border: 1px solid $line;
-        background: #0E0F12;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        background: var(--surface);
+        box-shadow: 0 18px 40px var(--shadow);
     }
     .r-window--setup {
         pointer-events: auto;
         width: min(400px, 100%);
-        background: #15161A;
-        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
+        background: var(--surface-raised);
+        box-shadow: 0 18px 50px var(--shadow-strong), 0 0 0 1px var(--highlight);
     }
     .r-titlebar {
         height: 34px;
@@ -226,17 +322,17 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         &--close { background: #D9573A; border-color: rgba(0, 0, 0, 0.3); }
     }
     .r-setup-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
-    .r-setup-label { font-family: $mono; font-size: 20px; color: $lime; }
+    .r-setup-label { font-family: $mono; font-size: 20px; color: $accent; }
     .r-setup-title { font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
     .r-setup-text { font-size: 15px; line-height: 1.5; color: $muted; }
     .r-progress {
         height: 22px;
         border-radius: 4px;
         border: 1px solid $line;
-        background: #08090A;
+        background: var(--well);
         padding: 3px;
         box-sizing: border-box;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+        box-shadow: inset 0 1px 3px var(--shadow-strong);
     }
     .r-progress-bar {
         height: 100%;
@@ -254,8 +350,8 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         gap: 6px;
         font-family: $mono;
         font-size: 24px;
-        color: $lime;
-        text-shadow: 0 0 10px rgba(180, 242, 90, 0.6);
+        color: $accent;
+        text-shadow: 0 0 10px var(--accent-glow);
         animation: retro-bob 1.6s ease-in-out infinite;
     }
 
@@ -268,9 +364,9 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         border-radius: 22px;
         padding: 14px;
         box-sizing: border-box;
-        background: linear-gradient(180deg, #34373E 0%, #1C1D22 50%, #141518 51%, #1E2025 100%);
-        border: 1px solid #44474F;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -4px 0 #0E0F12, 0 24px 60px rgba(0, 0, 0, 0.7);
+        background: var(--player);
+        border: 1px solid var(--player-border);
+        box-shadow: inset 0 1px 0 var(--highlight), inset 0 -4px 0 var(--player-inset), 0 24px 60px var(--shadow-strong);
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -283,7 +379,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         letter-spacing: 0.08em;
         color: $dim;
         padding-left: 6px;
-        span { color: $lime; }
+        span { color: $accent; }
     }
     .r-lcd {
         flex: 1 1 260px;
@@ -332,12 +428,12 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         font-size: 13px;
         color: $ink;
         font-weight: 600;
-        background: $line;
-        border: 2px solid #3C3F47;
-        box-shadow: inset 0 -4px 0 #17181C, 0 2px 0 #000000;
+        background: var(--glass);
+        border: 2px solid var(--glass-border);
+        box-shadow: inset 0 -4px 0 var(--glass-inset), 0 2px 0 var(--press);
         transition: background .15s, border-color .15s;
-        &:hover { border-color: $lime; }
-        &.is-selected { background: #2F3328; border-color: $lime; }
+        &:hover { border-color: var(--hover-border); }
+        &.is-selected { background: var(--selected); border-color: var(--hover-border); }
     }
     .r-trackbtn-dot {
         flex: none;
@@ -364,7 +460,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
     .r-section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 12px; }
     .r-heading-stack { display: flex; flex-direction: column; gap: 18px; }
     .r-heading-stack--about { gap: 22px; }
-    .r-prompt { font-family: $mono; font-size: 22px; color: $lime; }
+    .r-prompt { font-family: $mono; font-size: 22px; color: $accent; }
     .r-display {
         margin: 0;
         font-weight: 800;
@@ -402,10 +498,10 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         height: 120px;
         border-radius: 50%;
         background: radial-gradient(circle, $bg 0 11px, #9EA1A9 12px 30px, rgba(0, 0, 0, 0) 31px), conic-gradient(from 200deg, var(--disc-color) 0 28%, #E8E9EE 28% 100%);
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08), 0 10px 24px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 0 3px var(--highlight), 0 10px 24px var(--shadow);
     }
     .r-project-info { flex: 999 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-    .r-project-label { font-family: $mono; font-size: 22px; color: $lime; }
+    .r-project-label { font-family: $mono; font-size: 22px; color: $accent; }
     .r-project-name { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
     .r-project-blurb { font-size: 15px; line-height: 1.5; color: $muted; font-weight: 300; }
     .r-project-stack { font-family: $mono; font-size: 19px; color: $dim; }
@@ -453,9 +549,9 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         justify-content: center;
         gap: 4px;
         padding: 4px 8px;
-        border-right: 1px dashed #3A3D44;
+        border-right: 1px dashed var(--plate-border);
     }
-    .r-slot-id { font-family: $mono; font-size: 22px; color: $lime; }
+    .r-slot-id { font-family: $mono; font-size: 22px; color: $accent; }
     .r-slot-name { font-weight: 800; font-size: 20px; letter-spacing: 0.02em; }
     .r-slot-status { font-family: $mono; font-size: 18px; color: $muted; }
     .r-ports {
@@ -474,10 +570,10 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         padding: 6px 12px;
         box-sizing: border-box;
         border-radius: 6px;
-        background: #121317;
+        background: var(--port);
         border: 1px solid $line;
         transition: border-color .15s, background .15s;
-        &:hover { border-color: $lime; background: #171A12; }
+        &:hover { border-color: var(--hover-border); background: var(--port-hover); }
     }
     .r-port-jack {
         flex: none;
@@ -499,7 +595,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         box-shadow: 0 0 8px $lime;
     }
     .r-port.is-pending {
-        .r-port-name { color: #C9CBD1; }
+        .r-port-name { color: var(--pending); }
         .r-port-led { background: $amber; box-shadow: 0 0 8px $amber; animation: retro-ledflick 1.2s ease-in-out infinite; }
     }
     .r-vlan-label {
@@ -508,10 +604,10 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         flex-direction: column;
         gap: 6px;
         padding: 4px 8px;
-        border-right: 1px dashed #3A3D44;
+        border-right: 1px dashed var(--plate-border);
     }
     .r-vlan-stripe { display: block; width: 40px; height: 6px; border-radius: 3px; background: var(--vlan-color); }
-    .r-vlan-id { font-family: $mono; font-size: 24px; color: $lime; }
+    .r-vlan-id { font-family: $mono; font-size: 24px; color: $accent; }
     .r-vlan-port { display: flex; align-items: center; gap: 8px; font-family: $mono; font-size: 18px; color: $muted; }
     .r-vlan-led { width: 8px; height: 8px; border-radius: 50%; background: var(--vlan-color); box-shadow: 0 0 8px var(--vlan-color); }
     .r-project-info--vlan { flex-basis: 260px; }
@@ -529,7 +625,7 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         padding: 20px 22px;
         background: #050806;
         border: 1px solid #000000;
-        box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 0 4px #1C1D22, 0 0 0 5px #33363D;
+        box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 0 4px var(--bezel), 0 0 0 5px var(--bezel-edge);
         font-family: $mono;
         font-size: 21px;
         line-height: 1.35;
@@ -556,32 +652,32 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
         gap: 6px 24px;
         padding: 16px 24px;
-        & + & { border-top: 1px dashed #26282E; }
+        & + & { border-top: 1px dashed var(--rule); }
     }
-    .r-log-when { font-family: $mono; font-size: 21px; color: $lime; }
+    .r-log-when { font-family: $mono; font-size: 21px; color: $accent; }
     .r-log-detail { grid-column: span 2; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
     .r-log-title { font-weight: 700; font-size: 17px; }
     .r-log-title + .r-log-org + .r-log-title { margin-top: 8px; }
     .r-log-org { font-family: $mono; font-size: 19px; color: $muted; }
     .r-log-text { font-size: 15px; line-height: 1.5; color: $muted; font-weight: 300; }
-    .r-log-prompt { padding: 12px 24px 18px; font-family: $mono; font-size: 22px; color: #D6D7DB; }
+    .r-log-prompt { padding: 12px 24px 18px; font-family: $mono; font-size: 22px; color: var(--term-ink); }
     .r-script {
         padding: 20px 24px;
         font-family: $mono;
         font-size: 22px;
         line-height: 1.4;
-        color: #D6D7DB;
+        color: var(--term-ink);
         display: flex;
         flex-direction: column;
         gap: 2px;
     }
-    .r-script-kw { color: $lime; }
+    .r-script-kw { color: $accent; }
     .r-script-indent { padding-left: 16px; }
 
     // contact + footer
     .r-contact {
         border-top: 1px solid $line;
-        background: radial-gradient(ellipse 60% 80% at 50% 100%, #17200C 0%, $bg 70%);
+        background: radial-gradient(ellipse 60% 80% at 50% 100%, var(--contact-glow) 0%, $bg 70%);
     }
     .r-contact-inner {
         max-width: 1240px;
@@ -624,17 +720,17 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
         width: 88px;
         height: 31px;
         box-sizing: border-box;
-        border: 1px solid #44474F;
-        background: linear-gradient(180deg, $line, #141518);
+        border: 1px solid var(--player-border);
+        background: var(--badge);
         font-family: $mono;
         font-size: 15px;
         line-height: 1;
-        color: #D6D7DB;
+        color: var(--term-ink);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        &--lime { border-color: #5E8A22; background: linear-gradient(180deg, #1F2A10, #0E1407); color: $lime; }
+        &--lime { border-color: #5E8A22; background: var(--badge-lime); color: $accent; }
     }
     .r-footer-copy { font-family: $mono; font-size: 18px; color: $dim; }
 

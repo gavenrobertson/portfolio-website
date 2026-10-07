@@ -470,6 +470,8 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
   return {
     select: select, play: play, eject: eject, open: openLoaded,
     step: function (d) { select(selected + d); },
+    // lighter grid floor on the light theme
+    setTheme: function (light) { grid.material.opacity = light ? 0.3 : 0.55; kick(); },
     dispose: function () {
       alive = false; if (raf) cancelAnimationFrame(raf);
       ro.disconnect(); io2.disconnect();

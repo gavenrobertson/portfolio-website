@@ -11,3 +11,8 @@ html[data-site='retro'] body {
 .site-loading--retro {
     background: #0B0B0D;
 }
+
+html[data-site='retro'][data-theme='light'] body,
+html[data-theme='light'] .site-loading--retro {
+    background: #E9E6DD;
+}
