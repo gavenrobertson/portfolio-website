@@ -1,15 +1,10 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import './retro.scss';
+import { prefersReducedMotion, useFlatMode } from "../shared/motion";
+
+export { prefersReducedMotion, useFlatMode };
 
 // Building blocks shared by the GavenOS 2000 and GavenNET Lab designs.
-
-const reducedMotionQuery = typeof window !== 'undefined' && window.matchMedia
-    ? window.matchMedia('(prefers-reduced-motion: reduce)')
-    : null;
-
-export function prefersReducedMotion() {
-    return reducedMotionQuery ? reducedMotionQuery.matches : false;
-}
 
 // ---------- icons
 const stroke = { fill: 'none', stroke: 'currentColor', strokeLinecap: 'round', strokeLinejoin: 'round' };
@@ -58,30 +53,6 @@ export const Icon = {
         </svg>
     ),
 };
-
-// ---------- 3D on/off preference (shared key, so both designs remember the same choice)
-const PREF_KEY = 'gaven-3d';
-
-function initialFlat() {
-    try {
-        const v = window.localStorage.getItem(PREF_KEY);
-        if (v === 'off') return true;
-        if (v === 'on') return false;
-    } catch (e) { /* storage unavailable */ }
-    return prefersReducedMotion();
-}
-
-export function useFlatMode() {
-    const [flat, setFlat] = useState(initialFlat);
-    const toggle = useCallback(() => {
-        const next = !flat;
-        try { window.localStorage.setItem(PREF_KEY, next ? 'off' : 'on'); } catch (e) { /* ignore */ }
-        setFlat(next);
-    }, [flat]);
-    // Used when WebGL isn't available: fall back without remembering it.
-    const forceFlat = useCallback(() => setFlat(true), []);
-    return [flat, toggle, forceFlat];
-}
 
 // ---------- light / dark theme
 // Follows the system setting until the visitor picks one. public/index.html sets
@@ -427,20 +398,5 @@ export function ContactSection({ heading, text }) {
                 </div>
             </div>
         </section>
-    );
-}
-
-export function RetroFooter({ badges }) {
-    return (
-        <footer className="r-footer">
-            <div className="r-footer-inner">
-                <div aria-label="Badges" className="r-badges">
-                    {badges.map(([a, b, lime]) => (
-                        <span key={a + b} className={`r-badge${lime ? ' r-badge--lime' : ''}`}>{a}<br />{b}</span>
-                    ))}
-                </div>
-                <span className="r-footer-copy">© {new Date().getFullYear()} Gaven Robertson · Thanks for visiting!</span>
-            </div>
-        </footer>
     );
 }

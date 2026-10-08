@@ -16,3 +16,9 @@ html[data-site='retro'][data-theme='light'] body,
 html[data-theme='light'] .site-loading--retro {
     background: #E9E6DD;
 }
+
+html[data-site='toybox'] body,
+.site-loading--toybox {
+    margin: 0;
+    background: #CFEFFF;
+}

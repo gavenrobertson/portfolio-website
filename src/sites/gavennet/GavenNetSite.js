@@ -2,7 +2,7 @@ import React from "react";
 import baseProjects from "../retro/projects";
 import {
     useFlatMode, useTheme, useScrollScene, RetroNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
-    RackPlate, SkillSlot, SysInfo, HistoryLog, RetroWindow, ContactSection, RetroFooter,
+    RackPlate, SkillSlot, SysInfo, HistoryLog, RetroWindow, ContactSection,
 } from "../retro/RetroUI";
 import { createScene } from "./scene";
 
@@ -44,8 +44,6 @@ const HISTORY = [
         ],
     },
 ];
-
-const BADGES = [['802.1Q', 'TAGGED', true], ['Y2K', 'COMPLIANT'], ['BEST VIEWED', '1024×768'], ['THREE.JS', 'POWERED', true]];
 
 function lcdText(phase, project, linked) {
     if (phase === 'load') return 'NEGOTIATING LINK…';
@@ -154,7 +152,6 @@ export default function GavenNetSite() {
             </section>
 
             <ContactSection heading="Let's get connected." text="Hiring for a network or software role, or just want to talk shop? My inbox is open." />
-            <RetroFooter badges={BADGES} />
         </div>
     );
 }

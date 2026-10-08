@@ -2,43 +2,14 @@ import React from "react";
 import projects from "../retro/projects";
 import {
     useFlatMode, useTheme, useScrollScene, RetroNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
-    SkillSlot, SysInfo, HistoryLog, RetroWindow, ContactSection, RetroFooter,
+    SkillSlot, SysInfo, HistoryLog, RetroWindow, ContactSection,
 } from "../retro/RetroUI";
 import { createScene } from "./scene";
+import { STEPS, FRONTEND, ALSO_RUNNING, HISTORY } from "./content";
 
 // GavenOS 2000: scroll to build a beige-box PC, then load projects from CDs.
 
 const MODELS_URL = `${process.env.PUBLIC_URL}/models/gavenos-models.json`;
-
-const STEPS = [
-    { t: 'Welcome to GavenOS 2000', b: 'This portfolio runs on a desktop built from scratch. Scroll to put it together.' },
-    { t: 'Installing processor…', b: 'Logic first. Every project starts by figuring out the real problem.' },
-    { t: 'Mounting cooling fan…', b: 'Keeping things calm under load. Clean code runs cooler.' },
-    { t: 'Adding memory…', b: 'Remembers the details, so you don’t have to.' },
-    { t: 'Installing graphics card…', b: 'For the fun part: interfaces, motion and a little 3D.' },
-    { t: 'Installing CD-ROM drive…', b: 'Sliding it into the 5.25” bay. My projects ship on disc. Old school.' },
-    { t: 'Closing the case…', b: 'Side panel on, monitor and keyboard plugged in. Grab a disc.' },
-    { t: 'Setup complete', b: '' },
-];
-
-const FRONTEND = ['React', 'Vite', 'JavaScript', 'HTML', 'SASS', 'Tailwind', 'three.js', 'SVG'];
-const ALSO_RUNNING = ['C++', 'UX/UI design', 'IT support', 'TS/SCI clearance', 'CJIS certified'];
-
-const HISTORY = [
-    { when: 'FEB 2025 – NOW', items: [{ title: 'Software Developer · AFSOC Special Warfare Operations Integrator', org: 'BESPIN' }] },
-    { when: 'JAN – JUN 2024', items: [{ title: 'Frontend Developer', org: 'Oregon State University', text: 'Built the main chatbot and its design and style architecture with React, Vite and Tailwind, on a team of 11.' }] },
-    { when: 'JUN – AUG 2023', items: [{ title: 'Frontend Developer', org: 'Siten JSC · Hanoi, Vietnam', text: 'Template sites in HTML, SASS and React; moved the company site to React with better UX/UI.' }] },
-    { when: 'OCT 2021 – FEB 2025', items: [{ title: 'Information Technology', org: 'Oregon State University', text: 'Supported 45,000+ students and faculty and trained new staff.' }] },
-    {
-        when: 'EDUCATION',
-        items: [
-            { title: 'M.S. Computer Science · Arizona State University', org: '2026 – 2028 · in progress' },
-            { title: 'B.S. Computer Science · Oregon State University', org: '2019 – 2024' },
-        ],
-    },
-];
-
-const BADGES = [['THREE.JS', 'POWERED', true], ['Y2K', 'COMPLIANT'], ['BEST VIEWED', '1024×768'], ['NO TABLES', 'HARMED', true]];
 
 function lcdText(phase, loaded, selected) {
     if (phase === 'load') return 'READING DISC…';
@@ -140,7 +111,6 @@ export default function GavenOSSite() {
             </section>
 
             <ContactSection heading="Let's build something." text="Got a project, a role, or just want to talk shop? My inbox is open." />
-            <RetroFooter badges={BADGES} />
         </div>
     );
 }

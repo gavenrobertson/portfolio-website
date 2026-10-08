@@ -64,8 +64,6 @@ $sans: 'Geist', 'Trebuchet MS', system-ui, sans-serif;
     --bezel-edge: #33363D;
     --term-ink: #D6D7DB;
     --contact-glow: #17200C;
-    --badge: linear-gradient(180deg, #2A2C33, #141518);
-    --badge-lime: linear-gradient(180deg, #1F2A10, #0E1407);
 }
 
 // Light: Y2K "platinum" — warm beige-gray plastics, darker green for readable accents.
@@ -110,8 +108,6 @@ html[data-theme='light'] .retro-site {
     --bezel-edge: #B4AFA2;
     --term-ink: #2A2C33;
     --contact-glow: #DCEDBF;
-    --badge: linear-gradient(180deg, #FBFAF6, #E2DFD6);
-    --badge-lime: linear-gradient(180deg, #EEF7DE, #D6EAB4);
 }
 
 @mixin plate-surface {
@@ -674,7 +670,7 @@ html[data-theme='light'] .retro-site {
     .r-script-kw { color: $accent; }
     .r-script-indent { padding-left: 16px; }
 
-    // contact + footer
+    // contact
     .r-contact {
         border-top: 1px solid $line;
         background: radial-gradient(ellipse 60% 80% at 50% 100%, var(--contact-glow) 0%, $bg 70%);
@@ -703,36 +699,6 @@ html[data-theme='light'] .retro-site {
         box-sizing: border-box;
     }
     .r-contact-btn--primary { padding: 0 28px; gap: 10px; font-weight: 800; font-size: 16px; }
-    .r-footer { border-top: 1px solid $line; }
-    .r-footer-inner {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 28px $gutter;
-        box-sizing: border-box;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-    }
-    .r-badges { display: flex; flex-wrap: wrap; gap: 6px; }
-    .r-badge {
-        width: 88px;
-        height: 31px;
-        box-sizing: border-box;
-        border: 1px solid var(--player-border);
-        background: var(--badge);
-        font-family: $mono;
-        font-size: 15px;
-        line-height: 1;
-        color: var(--term-ink);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        &--lime { border-color: #5E8A22; background: var(--badge-lime); color: $accent; }
-    }
-    .r-footer-copy { font-family: $mono; font-size: 18px; color: $dim; }
 
     // ---------- small screens: keep the nav on one row and leave room for the site portal
     @media (max-width: 860px) {

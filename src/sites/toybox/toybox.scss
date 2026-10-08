@@ -1,0 +1,523 @@
+// Toybox: chunky cartoon take on the GavenOS 2000 story. Thick navy outlines,
+// candy-colored plastic, rounded panels with hard drop shadows.
+// Everything is scoped to .toybox-site so it never leaks into the other designs.
+
+$navy: #1E2A4A;
+$navy-deep: #0E1630;
+$sky: #CFEFFF;
+$cream: #FFF8EC;
+$ink-soft: #34406A;
+$orange: #FF9F1C;
+$yellow: #FFD23F;
+$blue: #3BA7F0;
+$blue-ink: #2A86C9;
+$green: #4CC36A;
+$red: #F25C54;
+$lime: #B4F25A;
+$screen: #14203A;
+$header-h: 80px;
+$gutter: clamp(14px, 3vw, 36px);
+$display: 'Fredoka', 'Trebuchet MS', sans-serif;
+$body: 'Nunito', 'Trebuchet MS', sans-serif;
+$mono: 'VT323', monospace;
+
+@keyframes tb-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes tb-flick { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@keyframes tb-marq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes tb-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes tb-floatup { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(-60px); opacity: 0; } }
+@keyframes tb-spin { to { transform: rotate(360deg); } }
+@keyframes tb-stripes { from { background-position: 0 0; } to { background-position: 28px 0; } }
+@keyframes tb-wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+
+.toybox-site {
+    background: $sky;
+    color: $navy;
+    font-family: $body;
+    font-weight: 500;
+
+    a { color: $navy; }
+    a:hover { color: $navy-deep; }
+    button { font-family: $display; }
+    section[id] { scroll-margin-top: $header-h; }
+
+    .blink { animation: tb-blink 1s steps(1) infinite; }
+    .flick { animation: tb-flick 1.2s ease-in-out infinite; }
+    .spin { transform-box: fill-box; transform-origin: center; animation: tb-spin 1s linear infinite; }
+
+    // ---------- shared pieces
+    .tb-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 14px;
+        border: 3px solid $navy;
+        background: #FFFFFF;
+        color: $navy;
+        font-family: $display;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 5px 0 $navy;
+        box-sizing: border-box;
+        transition: transform .08s, box-shadow .08s, filter .15s;
+        &:hover { filter: brightness(1.06); color: $navy-deep; }
+        &:active { transform: translateY(4px); box-shadow: 0 1px 0 $navy; }
+        &:focus-visible { outline: 3px solid $orange; outline-offset: 3px; }
+        &--orange { background: $orange; }
+        &--blue { background: $blue; }
+        &--icon { width: 48px; padding: 0; }
+        &--nav { min-height: 42px; padding: 0 14px; font-size: 14px; box-shadow: 0 4px 0 $navy-deep; }
+        &--big { min-height: 52px; padding: 0 24px; font-size: 17px; }
+    }
+    .tb-panel {
+        background: $cream;
+        border: 3px solid $navy;
+        border-radius: 18px;
+        box-shadow: 0 7px 0 $navy;
+        overflow: hidden;
+    }
+    .tb-tbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 8px 10px 8px 14px;
+        background: $blue;
+        border-bottom: 3px solid $navy;
+        font-family: $display;
+        font-weight: 700;
+        font-size: 16px;
+        color: $navy-deep;
+        &--green { background: $green; }
+    }
+    .tb-tbar-title { display: flex; align-items: center; gap: 8px; }
+    .tb-tdots {
+        display: flex;
+        gap: 6px;
+        span { width: 16px; height: 16px; border-radius: 6px; border: 2px solid $navy; background: #FFFFFF; }
+        span:last-child { background: $red; }
+    }
+    .tb-screen {
+        background: $screen;
+        border: 3px solid $navy;
+        border-radius: 14px;
+        box-shadow: inset 0 3px 10px rgba(0, 0, 0, .6);
+        font-family: $mono;
+        color: $lime;
+    }
+    .tb-prompt {
+        align-self: flex-start;
+        padding: 4px 12px;
+        border-radius: 10px;
+        background: $screen;
+        font-family: $mono;
+        font-size: 21px;
+        color: $lime;
+    }
+    .tb-display {
+        margin: 0;
+        font-family: $display;
+        font-weight: 700;
+        font-size: clamp(48px, 6vw, 88px);
+        line-height: 0.95;
+        text-shadow: 4px 4px 0 $yellow;
+    }
+    .tb-lede { margin: 0; max-width: 520px; font-size: 18px; line-height: 1.6; color: $ink-soft; }
+
+    // ---------- nav
+    .tb-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        height: $header-h;
+        box-sizing: border-box;
+        padding: 10px clamp(10px, 2.5vw, 28px);
+        background: $sky;
+    }
+    .tb-nav {
+        max-width: 1360px;
+        height: 100%;
+        margin: 0 auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        background: $navy;
+        border-radius: 20px;
+        box-shadow: 0 5px 0 $navy-deep;
+    }
+    .tb-brand { display: flex; align-items: center; gap: 10px; color: #FFFFFF; text-decoration: none; flex: none; }
+    .tb-brand:hover { color: #FFFFFF; }
+    .tb-brand-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
+        background: $orange;
+        border: 3px solid #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $display;
+        font-weight: 700;
+        font-size: 17px;
+        color: $navy;
+        animation: tb-wiggle 2.6s ease-in-out infinite;
+    }
+    .tb-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .tb-brand-name { font-family: $display; font-weight: 700; font-size: 17px; }
+    .tb-brand-sub { font-family: $mono; font-size: 17px; color: $yellow; }
+    .tb-marquee {
+        flex: 1 1 200px;
+        max-width: 420px;
+        height: 34px;
+        overflow: hidden;
+        border-radius: 10px;
+        background: $screen;
+        border: 2px solid #3B4A75;
+        font-family: $mono;
+        font-size: 21px;
+        color: $lime;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+    .tb-marquee-track { display: inline-flex; gap: 48px; padding-left: 12px; animation: tb-marq 18s linear infinite; }
+    .tb-nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .tb-toggle-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid $navy;
+        background: #C9C2AE;
+        &.is-on { background: $green; }
+    }
+
+    // ---------- scroll-built desk
+    .tb-track { position: relative; height: 4200px; }
+    .tb-stage {
+        position: sticky;
+        top: $header-h;
+        height: clamp(560px, calc(100vh - #{$header-h}), 880px);
+        overflow: hidden;
+        background: radial-gradient(ellipse 75% 65% at 55% 45%, #EAF8FF 0%, $sky 70%);
+    }
+    .tb-bgtext {
+        position: absolute;
+        top: 46%;
+        left: 0;
+        white-space: nowrap;
+        transform: translateY(-50%);
+        font-family: $display;
+        font-weight: 700;
+        font-size: 280px;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.55);
+        -webkit-text-stroke: 3px #A9DDF5;
+        pointer-events: none;
+        will-change: transform;
+    }
+    .tb-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .tb-part { transition: none; }
+    .tb-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: $gutter;
+        box-sizing: border-box;
+    }
+    .tb-setup { pointer-events: auto; width: min(380px, 100%); }
+    .tb-setup-body { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .tb-setup-label { font-family: $mono; font-size: 21px; color: $blue-ink; }
+    .tb-setup-title { font-family: $display; font-weight: 700; font-size: 24px; line-height: 1.1; }
+    .tb-setup-text { font-size: 15px; line-height: 1.5; color: $ink-soft; }
+    .tb-bar {
+        display: block;
+        height: 20px;
+        border-radius: 999px;
+        border: 3px solid $navy;
+        background: #E6E1D3;
+        overflow: hidden;
+    }
+    .tb-bar-fill {
+        display: block;
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, $green 0 10px, #7EDB7A 10px 20px);
+        background-size: 28px 100%;
+        animation: tb-stripes 1s linear infinite;
+    }
+    .tb-setup-pct { font-weight: 800; font-size: 14px; color: $ink-soft; }
+    .tb-bubble-wrap { position: absolute; left: 62%; top: 42%; }
+    .tb-bubble {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: $yellow;
+        border: 3px solid $navy;
+        box-shadow: 0 4px 0 $navy;
+        font-family: $display;
+        font-weight: 700;
+        font-size: 18px;
+        white-space: nowrap;
+        animation: tb-floatup 2.4s ease-out infinite;
+    }
+    .tb-hint {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 18px;
+        border-radius: 16px;
+        background: #FFFFFF;
+        border: 3px solid $navy;
+        box-shadow: 0 5px 0 $navy;
+        font-family: $display;
+        font-weight: 700;
+        font-size: 18px;
+        animation: tb-bob 1.8s ease-in-out infinite;
+    }
+
+    // player
+    .tb-player { pointer-events: auto; align-self: center; margin-top: auto; width: min(780px, 100%); }
+    .tb-player-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .tb-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .tb-row--controls { gap: 8px; }
+    .tb-amp { font-family: $display; font-weight: 700; font-size: 16px; letter-spacing: 0.04em; padding-left: 4px; span { color: $orange; } }
+    .tb-lcd {
+        flex: 1 1 260px;
+        min-width: 0;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        font-size: 22px;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .tb-lcd-track { flex: none; color: $yellow; }
+    .tb-lcd-text { overflow: hidden; text-overflow: ellipsis; }
+    .tb-spacer { flex: 1 1 auto; }
+    .tb-tracks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); gap: 8px; }
+    .tb-trackbtn {
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 10px;
+        border-radius: 12px;
+        cursor: pointer;
+        text-align: left;
+        font-family: $body;
+        font-size: 14px;
+        font-weight: 800;
+        color: $navy;
+        background: #FFFFFF;
+        border: 3px solid $navy;
+        box-shadow: 0 4px 0 $navy;
+        transition: transform .1s, background .1s;
+        &:hover { transform: translateY(-2px); }
+        &.is-selected { background: $yellow; }
+    }
+    .tb-trackdot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: var(--dot); border: 2px solid $navy; }
+    .tb-tracknum { font-family: $mono; font-size: 19px; color: $ink-soft; }
+    .tb-trackname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    // ---------- flat projects (scene off)
+    .tb-section { max-width: 1240px; margin: 0 auto; box-sizing: border-box; display: flex; flex-direction: column; }
+    .tb-section--flat { padding: clamp(48px, 7vw, 96px) $gutter 0; gap: 20px; }
+    .tb-section--about { padding: clamp(72px, 9vw, 128px) $gutter; gap: 26px; }
+    .tb-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px; }
+    .tb-stack { display: flex; flex-direction: column; gap: 12px; }
+    .tb-stack--about { gap: 18px; }
+    .tb-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr)); gap: 20px; }
+    .tb-card { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; padding: 18px; }
+    .tb-disc {
+        flex: none;
+        width: 112px;
+        height: 112px;
+        border-radius: 50%;
+        border: 3px solid $navy;
+        box-shadow: 0 6px 0 $navy;
+        background: radial-gradient(circle, $sky 0 9px, $navy 10px 12px, #C9CCD2 13px 26px, rgba(0, 0, 0, 0) 27px), conic-gradient(from 200deg, var(--disc) 0 30%, #EEF2F8 30% 100%);
+    }
+    .tb-card-info { flex: 999 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+    .tb-card-label { font-family: $mono; font-size: 21px; color: $blue-ink; }
+    .tb-card-name { font-family: $display; font-weight: 700; font-size: 24px; }
+    .tb-card-blurb { font-size: 15px; line-height: 1.5; color: $ink-soft; }
+    .tb-card-stack { font-weight: 800; font-size: 14px; }
+    .tb-card .tb-btn { align-self: flex-start; margin-top: 6px; }
+
+    // ---------- about
+    .tb-intro {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
+        gap: clamp(26px, 5vw, 60px);
+        align-items: end;
+        margin-bottom: 14px;
+    }
+    .tb-sysinfo {
+        padding: 18px 20px;
+        box-shadow: 0 7px 0 $navy, inset 0 3px 10px rgba(0, 0, 0, .6);
+        font-size: 21px;
+        line-height: 1.35;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .tb-sysrow { display: grid; grid-template-columns: minmax(96px, 128px) minmax(0, 1fr); gap: 12px; }
+    .tb-syskey { color: $yellow; }
+    .tb-status { display: flex; align-items: center; gap: 8px; }
+    .tb-status-led { width: 10px; height: 10px; border-radius: 50%; background: $green; }
+    .tb-slot { display: flex; flex-wrap: wrap; align-items: stretch; }
+    .tb-slot-label {
+        flex: 0 0 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        padding: 16px 18px;
+        background: var(--slot);
+        border-right: 3px solid $navy;
+    }
+    .tb-slot-id { font-family: $mono; font-size: 21px; color: $navy-deep; }
+    .tb-slot-name { font-family: $display; font-weight: 700; font-size: 22px; }
+    .tb-slot-status { font-weight: 800; font-size: 13px; }
+    .tb-ports {
+        flex: 999 1 300px;
+        min-width: 0;
+        padding: 16px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+        gap: 10px;
+        align-content: center;
+    }
+    .tb-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 40px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        border-radius: 12px;
+        background: #FFFFFF;
+        border: 2px solid $navy;
+        font-weight: 800;
+        font-size: 14px;
+        transition: transform .12s, background .12s;
+        &:hover { transform: translateY(-2px); background: #F1FAE8; }
+        &.is-pending { color: #5C5E66; }
+    }
+    .tb-led {
+        flex: none;
+        margin-left: auto;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: $green;
+        border: 2px solid $navy;
+    }
+    .tb-chip.is-pending .tb-led { background: #FFB703; animation: tb-flick 1.2s ease-in-out infinite; }
+    .tb-windows {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr));
+        gap: 22px;
+        margin-top: 10px;
+        align-items: start;
+    }
+    .tb-log { padding: 4px 20px 8px; display: flex; flex-direction: column; }
+    .tb-log-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+        gap: 6px 20px;
+        padding: 14px 0;
+        & + & { border-top: 2px dashed #C9C2AE; }
+    }
+    .tb-when {
+        align-self: start;
+        justify-self: start;
+        padding: 3px 10px;
+        border-radius: 10px;
+        background: $navy;
+        color: #FFFFFF;
+        font-family: $mono;
+        font-size: 19px;
+    }
+    .tb-log-detail { grid-column: span 2; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .tb-log-title { font-family: $display; font-weight: 700; font-size: 18px; }
+    .tb-log-title + .tb-log-org + .tb-log-title { margin-top: 8px; }
+    .tb-log-org { font-weight: 800; color: $blue-ink; }
+    .tb-log-text { font-size: 15px; line-height: 1.5; color: $ink-soft; }
+    .tb-log-prompt { padding: 0 20px 16px; font-family: $mono; font-size: 22px; }
+    .tb-script {
+        margin: 16px;
+        padding: 16px 18px;
+        font-size: 22px;
+        line-height: 1.4;
+        color: #EDEDEA;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .tb-script-kw { color: $lime; }
+
+    // ---------- contact
+    .tb-contact { background: $cream; border-top: 3px solid $navy; }
+    .tb-contact-inner {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: clamp(72px, 9vw, 128px) $gutter;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 24px;
+    }
+    .tb-guestbook {
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: $yellow;
+        border: 3px solid $navy;
+        box-shadow: 0 4px 0 $navy;
+        font-family: $display;
+        font-weight: 700;
+        font-size: 17px;
+        animation: tb-bob 1.8s ease-in-out infinite;
+    }
+    .tb-contact-title {
+        margin: 0;
+        font-family: $display;
+        font-weight: 700;
+        font-size: clamp(52px, 8vw, 116px);
+        line-height: 0.92;
+        text-shadow: 5px 5px 0 $blue;
+    }
+    .tb-contact-text { margin: 0; max-width: 480px; font-size: 18px; line-height: 1.55; color: $ink-soft; }
+    .tb-contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    // ---------- small screens: one-row nav, room for the corner buttons
+    @media (max-width: 860px) {
+        .tb-marquee { display: none; }
+    }
+    @media (max-width: 560px) {
+        .tb-brand-text, .tb-nav-link { display: none; }
+        .tb-overlay { padding-bottom: 104px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .blink, .flick, .spin, .tb-marquee-track, .tb-brand-badge, .tb-bubble, .tb-hint,
+        .tb-bar-fill, .tb-guestbook, .tb-chip.is-pending .tb-led { animation: none; }
+    }
+}
