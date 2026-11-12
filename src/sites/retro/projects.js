@@ -1,4 +1,4 @@
-// Project list shared by both retro designs: one disc (GavenOS) or VLAN (GavenNET) per entry.
+// Project list shared by every design: one disc (Workstation, Toybox) or VLAN (GavenNET) per entry.
 // Keep `blurb` to one short line; it is drawn onto the 3D monitor.
 const projects = [
     {

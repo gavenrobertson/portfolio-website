@@ -27,7 +27,7 @@ function Disc({ color, style }) {
     );
 }
 
-export default function DeskScene({ zoom, parts, discs, screen }) {
+export default function DeskScene({ zoom, parts, discs, screen, projects }) {
     return (
         <svg className="tb-scene" viewBox="120 100 760 540" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <defs>
@@ -51,9 +51,8 @@ export default function DeskScene({ zoom, parts, discs, screen }) {
                     <rect x="12" y="20" width="70" height="22" rx="3" fill="#2B3550" stroke={O} strokeWidth="2.5" />
                     <rect x="12" y="52" width="70" height="12" rx="3" fill="#DCD3B8" stroke={O} strokeWidth="2.5" />
                     <rect x="30" y="56" width="34" height="3" rx="1.5" fill={O} />
-                    <text x="47" y="94" textAnchor="middle" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="14" fill={O}>GavenOS</text>
-                    <rect x="31" y="100" width="32" height="13" rx="3" fill="#FFFFFF" stroke={O} strokeWidth="2" />
-                    <text x="47" y="110" textAnchor="middle" fontFamily="Fredoka, sans-serif" fontWeight="600" fontSize="9" fill={O}>2000</text>
+                    <rect x="33" y="82" width="28" height="24" rx="7" fill="#FF9F1C" stroke={O} strokeWidth="2.5" />
+                    <text x="47" y="99" textAnchor="middle" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="11" fill={O}>GR</text>
                     <circle cx="47" cy="140" r="10" fill="#FF9F1C" stroke={O} strokeWidth="2.5" />
                     <circle className="flick" cx="20" cy="140" r="3.5" fill="#4CC36A" stroke={O} strokeWidth="1.5" />
                     <circle cx="74" cy="140" r="3.5" fill="#FFD23F" stroke={O} strokeWidth="1.5" />
@@ -118,15 +117,19 @@ export default function DeskScene({ zoom, parts, discs, screen }) {
                         <rect x="11" y="10" width="119" height="76" rx="9" fill="#14203A" stroke={O} strokeWidth="3" />
                         {screen.mode === 'idle' && (
                             <g>
-                                <text x="20" y="27" fontFamily="VT323, monospace" fontSize="12" fill="#B4F25A">GavenOS 2000 [v1.0]</text>
-                                <text x="20" y="40" fontFamily="VT323, monospace" fontSize="9" fill="#7FAF3E">Memory ....... OK</text>
-                                <text x="20" y="50" fontFamily="VT323, monospace" fontSize="9" fill="#7FAF3E">CD-ROM ....... READY</text>
-                                <text x="20" y="68" fontFamily="VT323, monospace" fontSize="11" fill="#B4F25A">C:\&gt; INSERT DISC<tspan className="blink">_</tspan></text>
+                                <text x="20" y="25" fontFamily="Nunito, sans-serif" fontWeight="800" fontSize="8" fill="#FFD23F">MY PROJECTS</text>
+                                {projects.slice(0, 4).map((pr, i) => (
+                                    <g key={pr.name + i}>
+                                        <circle cx="23" cy={35 + i * 10} r="2.6" fill={pr.color} />
+                                        <text x="30" y={38 + i * 10} fontFamily="Nunito, sans-serif" fontWeight="700" fontSize="7" fill="#FFFFFF">{pr.name}</text>
+                                    </g>
+                                ))}
+                                <text x="20" y="80" fontFamily="Nunito, sans-serif" fontWeight="800" fontSize="7" fill="#B4F25A">Pick a disc ▸<tspan className="blink"> _</tspan></text>
                             </g>
                         )}
                         {screen.mode === 'load' && (
                             <g>
-                                <text x="20" y="38" fontFamily="VT323, monospace" fontSize="13" fill="#B4F25A">READING DISC<tspan className="blink">...</tspan></text>
+                                <text x="20" y="38" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="12" fill="#B4F25A">Loading<tspan className="blink">…</tspan></text>
                                 <rect x="20" y="50" width="100" height="10" rx="5" fill="#2B3A66" stroke="#B4F25A" strokeWidth="1.5" />
                                 <rect x="22" y="52" width="60" height="6" rx="3" fill="#B4F25A" />
                             </g>
@@ -136,11 +139,11 @@ export default function DeskScene({ zoom, parts, discs, screen }) {
                                 <rect x="14" y="13" width="113" height="14" rx="5" fill={screen.project.color} />
                                 <text x="20" y="23.5" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill="#0E1630">{screen.project.name}</text>
                                 <text x="20" y="42" fontFamily="Nunito, sans-serif" fontWeight="800" fontSize="7" fill="#FFFFFF">{screen.project.stack}</text>
-                                <text x="20" y="55" fontFamily="VT323, monospace" fontSize="9" fill="#B4F25A">YEAR: {screen.project.year}</text>
-                                <text x="20" y="76" fontFamily="VT323, monospace" fontSize="10" fill="#FFD23F">&#9658; OPEN PROJECT<tspan className="blink">_</tspan></text>
+                                <text x="20" y="55" fontFamily="Nunito, sans-serif" fontWeight="700" fontSize="7" fill="#B4F25A">{screen.project.year}</text>
+                                <text x="20" y="76" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill="#FFD23F">Open project ↗</text>
                             </g>
                         )}
-                        <text x="70" y="100" textAnchor="middle" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill={O}>GavenOS</text>
+                        <text x="70" y="100" textAnchor="middle" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill={O}>GR</text>
                         <circle cx="122" cy="98" r="3" fill="#4CC36A" stroke={O} strokeWidth="1.5" />
                     </g>
                 </g>

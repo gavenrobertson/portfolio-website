@@ -23,7 +23,7 @@ function drawScreen(g, mode, projects, li, t, bootE) {
     var grd = g.createRadialGradient(W / 2, H / 2, 50, W / 2, H / 2, 620); grd.addColorStop(0, '#0F1A0A'); grd.addColorStop(1, '#030503');
     g.fillStyle = grd; g.fillRect(0, 0, W, H);
     g.fillStyle = '#B4F25A'; g.font = '46px VT323, monospace';
-    g.fillText('GavenOS 2000 \u00b7 Network Edition', 40, 70);
+    g.fillText('GR-RTR1 \u00b7 network lab', 40, 70);
     g.fillStyle = '#7FAF3E'; g.fillText('GR-RTR1 con0 is now available', 40, 116);
     g.fillStyle = '#B4F25A'; g.fillText('GR-RTR1#show vlan brief', 40, 196);
     g.fillStyle = '#7FAF3E'; g.font = '38px VT323, monospace';

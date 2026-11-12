@@ -1,7 +1,14 @@
-// GavenOS 2000 three.js scene: a PC assembles itself as you scroll, then CDs load projects onto the CRT.
+// Workstation three.js scene: a PC assembles itself as you scroll, then CDs load projects onto its monitor.
 // Procedural stand-ins render first and are swapped for the Blender models in public/models once fetched.
 import * as THREE from "three";
 import { buildGltf, fetchModels } from "../retro/gltf";
+
+// Graphite plastics in place of the models' original beige.
+var SHELL = { Beige: 0x3A3D45, BeigeDark: 0x2B2E35, BeigeLight: 0x4B4F58 };
+// Lettering baked into the models that the site no longer uses.
+var HIDDEN_MESHES = ['Tw_Logo', 'Tw_Badge', 'Tw_Badge2', 'Mon_Logo', 'CPU_Text'];
+var MONO = '"Geist Mono", ui-monospace, monospace';
+var SANS = 'Geist, system-ui, sans-serif';
 
 function pcbTexture(T) {
   var c = document.createElement('canvas'); c.width = 1200; c.height = 920;
@@ -20,77 +27,93 @@ function pcbTexture(T) {
     g.fillStyle = '#C9A44A'; g.beginPath(); g.arc(x, y, 6, 0, Math.PI * 2); g.fill();
   }
   g.fillStyle = 'rgba(255,255,255,0.75)'; g.font = 'bold 30px monospace';
-  g.fillText('GAVEN-RB2000  REV 1.0', 60, 880);
+  g.fillText('GR-01  REV A', 60, 880);
   g.fillText('MADE FOR THE WEB', 820, 60);
   g.strokeStyle = 'rgba(255,255,255,0.5)'; g.lineWidth = 2; g.strokeRect(20, 20, 1160, 880);
   var t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 8; return t;
 }
+
+function roundRect(g, x, y, w, h, r) {
+  g.beginPath();
+  if (g.roundRect) g.roundRect(x, y, w, h, r); else g.rect(x, y, w, h);
+}
+
+// Fit text into maxW by shrinking the font size.
+function fitText(g, text, size, maxW, family, weight) {
+  var s = size;
+  g.font = (weight || '') + ' ' + s + 'px ' + family;
+  while (g.measureText(text).width > maxW && s > 12) { s -= 2; g.font = (weight || '') + ' ' + s + 'px ' + family; }
+}
+
 function labelTexture(T, p, i) {
   var c = document.createElement('canvas'); c.width = 512; c.height = 512;
   var g = c.getContext('2d');
   g.clearRect(0, 0, 512, 512);
   var grd = g.createRadialGradient(256, 256, 60, 256, 256, 256);
-  grd.addColorStop(0, '#F4F4F6'); grd.addColorStop(0.7, '#E2E3E8'); grd.addColorStop(1, '#C9CBD2');
+  grd.addColorStop(0, '#F6F6F7'); grd.addColorStop(0.75, '#E6E7EB'); grd.addColorStop(1, '#CDD0D6');
   g.fillStyle = grd; g.beginPath(); g.arc(256, 256, 256, 0, Math.PI * 2); g.fill();
-  g.fillStyle = p.color; g.beginPath(); g.arc(256, 256, 256, Math.PI * 1.08, Math.PI * 1.92); g.arc(256, 256, 170, Math.PI * 1.92, Math.PI * 1.08, true); g.fill();
-  g.fillStyle = '#9EA1A9'; g.beginPath(); g.arc(256, 256, 74, 0, Math.PI * 2); g.fill();
-  g.globalCompositeOperation = 'destination-out'; g.beginPath(); g.arc(256, 256, 30, 0, Math.PI * 2); g.fill();
+  g.fillStyle = p.color; g.beginPath(); g.arc(256, 256, 256, Math.PI * 1.1, Math.PI * 1.9); g.arc(256, 256, 186, Math.PI * 1.9, Math.PI * 1.1, true); g.fill();
+  g.fillStyle = '#A2A5AD'; g.beginPath(); g.arc(256, 256, 70, 0, Math.PI * 2); g.fill();
+  g.globalCompositeOperation = 'destination-out'; g.beginPath(); g.arc(256, 256, 28, 0, Math.PI * 2); g.fill();
   g.globalCompositeOperation = 'source-over';
-  g.fillStyle = '#16203F'; g.textAlign = 'center';
-  g.font = '44px "Permanent Marker", cursive';
-  var words = p.name.split(' ');
-  if (p.name.length > 14 && words.length > 1) {
-    var half = Math.ceil(words.length / 2);
-    g.fillText(words.slice(0, half).join(' '), 256, 380);
-    g.fillText(words.slice(half).join(' '), 256, 428);
-  } else { g.fillText(p.name, 256, 400); }
-  g.font = '30px "Permanent Marker", cursive';
-  g.fillText('TRACK 0' + (i + 1) + '  \u00b7  ' + p.year, 256, 140);
-  g.font = '22px "Permanent Marker", cursive'; g.fillStyle = '#C0392B';
-  g.fillText('DO NOT SCRATCH!!', 256, 470);
+  g.textAlign = 'center';
+  g.fillStyle = '#5A5D66'; g.font = '500 26px ' + MONO;
+  g.fillText(String(i + 1).padStart(2, '0') + '  ·  ' + p.year, 256, 150);
+  g.fillStyle = '#14161A';
+  fitText(g, p.name, 46, 330, SANS, '700');
+  g.fillText(p.name, 256, 392);
+  g.fillStyle = '#5A5D66'; fitText(g, p.stack, 24, 300, MONO, '500');
+  g.fillText(p.stack, 256, 432);
   var t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 8; return t;
 }
-function drawScreen(g, mode, p, t) {
+
+// What the monitor shows: off, idle (project list), boot (loading a disc), play (the project).
+function drawScreen(g, mode, p, t, projects) {
   var W = 1024, H = 768;
-  g.fillStyle = '#050806'; g.fillRect(0, 0, W, H);
+  g.textAlign = 'left';
+  g.fillStyle = '#07080A'; g.fillRect(0, 0, W, H);
   if (mode === 'off') { return; }
-  if (mode === 'boot') {
-    for (var i = 0; i < 40; i++) { g.fillStyle = 'rgba(' + (180 + Math.random() * 75 | 0) + ',255,' + (150 + Math.random() * 100 | 0) + ',' + (Math.random() * 0.5) + ')'; g.fillRect(0, Math.random() * H, W, 2 + Math.random() * 30); }
-    g.fillStyle = '#B4F25A'; g.font = '64px VT323, monospace'; g.fillText('READING DISC' + '...'.slice(0, (t * 4 | 0) % 4), 70, 400);
-  } else if (mode === 'idle') {
-    var grd = g.createRadialGradient(W / 2, H / 2, 50, W / 2, H / 2, 600); grd.addColorStop(0, '#0F1A0A'); grd.addColorStop(1, '#030503');
+  if (mode === 'idle' || mode === 'boot') {
+    var grd = g.createRadialGradient(W / 2, H / 2, 60, W / 2, H / 2, 640); grd.addColorStop(0, '#11161A'); grd.addColorStop(1, '#07080A');
     g.fillStyle = grd; g.fillRect(0, 0, W, H);
-    g.fillStyle = '#B4F25A'; g.font = '56px VT323, monospace';
-    g.fillText('GavenOS 2000  [Version 1.0]', 60, 110);
-    g.font = '40px VT323, monospace'; g.fillStyle = '#7FAF3E';
-    g.fillText('(C) 2026 Gaven Robertson', 60, 160);
-    g.fillText('Memory test ......... OK', 60, 250);
-    g.fillText('Graphics ............ OK', 60, 295);
-    g.fillText('CD-ROM drive ........ READY', 60, 340);
-    g.fillStyle = '#B4F25A'; g.font = '60px VT323, monospace';
-    g.fillText('C:\\> INSERT DISC AND PRESS PLAY' + ((t * 2 | 0) % 2 ? '_' : ' '), 60, 470);
-    g.font = '38px VT323, monospace'; g.fillStyle = '#7FAF3E';
-    g.fillText('Pick a CD below, or use the player.', 60, 530);
-  } else if (mode === 'play' && p) {
-    g.fillStyle = '#D9DCE2'; g.fillRect(0, 0, W, H);
-    var tb = g.createLinearGradient(0, 0, 0, 56); tb.addColorStop(0, '#C9F57F'); tb.addColorStop(0.5, '#86C531'); tb.addColorStop(1, '#6FAE1F');
-    g.fillStyle = tb; g.fillRect(0, 0, W, 56);
-    g.fillStyle = '#0B1406'; g.font = 'bold 28px Geist, sans-serif'; g.fillText(p.name + ' \u2014 Web Browser', 24, 38);
-    g.fillStyle = '#D9573A'; g.fillRect(W - 50, 12, 34, 32);
-    g.fillStyle = '#FFFFFF'; g.fillRect(20, 72, W - 40, 44); g.strokeStyle = '#9EA1A9'; g.lineWidth = 2; g.strokeRect(20, 72, W - 40, 44);
-    g.fillStyle = '#333'; g.font = '30px VT323, monospace'; g.fillText('Address:  ' + p.url, 34, 104);
-    g.fillStyle = '#16171B'; g.fillRect(20, 132, W - 40, 420);
-    g.strokeStyle = 'rgba(255,255,255,0.06)';
-    for (var x = 20; x < W - 20; x += 32) { g.beginPath(); g.moveTo(x, 132); g.lineTo(x, 552); g.stroke(); }
-    for (var y = 132; y < 552; y += 32) { g.beginPath(); g.moveTo(20, y); g.lineTo(W - 20, y); g.stroke(); }
-    g.fillStyle = p.color; g.font = '44px VT323, monospace'; g.textAlign = 'center'; g.fillText('[PROJECT SCREENSHOT]', W / 2, 352); g.textAlign = 'left';
-    g.fillStyle = '#0B0B0D'; g.font = 'bold 50px Geist, sans-serif'; g.fillText(p.name, 24, 616);
-    g.fillStyle = '#44464D'; g.font = '30px Geist, sans-serif'; g.fillText(p.blurb + '  \u00b7  ' + p.stack, 24, 660);
-    if ((t * 1.5 | 0) % 2) { g.fillStyle = '#0B0B0D'; g.fillRect(20, 690, 470, 56); g.fillStyle = '#B4F25A'; g.font = '40px VT323, monospace'; g.fillText('\u25BA CLICK SCREEN TO OPEN', 36, 730); }
+    g.font = '500 30px ' + MONO;
+    g.fillStyle = '#7C7F87'; g.fillText('gaven@workstation', 64, 92);
+    g.fillStyle = '#B4F25A'; g.fillText('~', 360, 92);
   }
-  g.fillStyle = 'rgba(0,0,0,0.22)';
-  for (var s = 0; s < H; s += 4) g.fillRect(0, s, W, 2);
-  var v = g.createRadialGradient(W / 2, H / 2, 300, W / 2, H / 2, 720); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.55)');
+  if (mode === 'idle') {
+    g.font = '500 36px ' + MONO; g.fillStyle = '#EDEDEA'; g.fillText('$ ls projects', 64, 170);
+    (projects || []).forEach(function (pr, i) {
+      var y = 236 + i * 58;
+      g.fillStyle = pr.color; g.beginPath(); g.arc(80, y - 11, 9, 0, Math.PI * 2); g.fill();
+      g.fillStyle = '#C9CBD1'; fitText(g, pr.name, 34, 820, MONO, '500'); g.fillText(pr.name, 110, y);
+    });
+    var by = 236 + (projects || []).length * 58 + 40;
+    g.font = '500 34px ' + MONO; g.fillStyle = '#B4F25A';
+    g.fillText('$ pick a disc, press play' + ((t * 2 | 0) % 2 ? ' █' : ''), 64, by);
+  } else if (mode === 'boot' && p) {
+    g.font = '500 36px ' + MONO; g.fillStyle = '#EDEDEA'; g.fillText('$ open ' + p.name.toLowerCase().replace(/\s+/g, '-'), 64, 170);
+    g.fillStyle = '#7C7F87'; g.font = '500 30px ' + MONO; g.fillText('Loading project…', 64, 240);
+    var k = Math.min(1, (t % 1.6) / 1.4);
+    roundRect(g, 64, 290, W - 128, 18, 9); g.fillStyle = '#1D2026'; g.fill();
+    roundRect(g, 64, 290, Math.max(18, (W - 128) * k), 18, 9); g.fillStyle = p.color; g.fill();
+  } else if (mode === 'play' && p) {
+    g.fillStyle = '#101216'; g.fillRect(0, 0, W, H);
+    // window chrome
+    g.fillStyle = '#181B20'; g.fillRect(0, 0, W, 72);
+    ['#F25C54', '#FFD23F', '#4CC36A'].forEach(function (col, i) { g.fillStyle = col; g.beginPath(); g.arc(40 + i * 30, 36, 9, 0, Math.PI * 2); g.fill(); });
+    roundRect(g, 150, 18, W - 190, 36, 18); g.fillStyle = '#0B0D10'; g.fill();
+    g.fillStyle = '#7C7F87'; fitText(g, p.url.replace(/^https?:\/\//, ''), 22, W - 240, MONO, '500'); g.fillText(p.url.replace(/^https?:\/\//, ''), 172, 43);
+    // content
+    g.fillStyle = p.color; g.fillRect(64, 132, 8, 230);
+    g.fillStyle = '#7C7F87'; g.font = '500 26px ' + MONO; g.fillText('PROJECT · ' + p.year, 96, 160);
+    g.fillStyle = '#FFFFFF'; fitText(g, p.name, 76, W - 170, SANS, '700'); g.fillText(p.name, 96, 250);
+    g.fillStyle = '#A1A3AA'; fitText(g, p.blurb, 32, W - 170, SANS, '400'); g.fillText(p.blurb, 96, 312);
+    g.fillStyle = '#B4F25A'; fitText(g, p.stack, 28, W - 170, MONO, '500'); g.fillText(p.stack, 96, 356);
+    // call to action
+    roundRect(g, 64, 560, 420, 84, 42); g.fillStyle = (t * 2 | 0) % 2 ? '#B4F25A' : '#C6F77E'; g.fill();
+    g.fillStyle = '#0B1406'; g.font = '700 34px ' + SANS; g.fillText('Click to open  ↗', 104, 614);
+  }
+  var v = g.createRadialGradient(W / 2, H / 2, 320, W / 2, H / 2, 740); v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,0.45)');
   g.fillStyle = v; g.fillRect(0, 0, W, H);
 }
 export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onState, isStill }) {
@@ -129,8 +152,8 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
   var mBlack = mat({ color: 0x141518, roughness: 0.6, metalness: 0.2 });
   var mSilver = mat({ color: 0xc9ccd2, roughness: 0.25, metalness: 1 });
   var mRamPcb = mat({ color: 0x1d5c34, roughness: 0.6 });
-  var mBeige = mat({ color: 0xd8d1bd, roughness: 0.7 });
-  var mBeigeDk = mat({ color: 0xc2baa3, roughness: 0.75 });
+  var mBeige = mat({ color: SHELL.Beige, roughness: 0.55, metalness: 0.25 });
+  var mBeigeDk = mat({ color: SHELL.BeigeDark, roughness: 0.6, metalness: 0.25 });
   var mLime = mat({ color: 0xb4f25a, emissive: 0xb4f25a, emissiveIntensity: 2.2 });
   var mFan = mat({ color: 0xb4f25a, emissive: 0x6fae1f, emissiveIntensity: 0.6, transparent: true, opacity: 0.75, roughness: 0.3 });
 
@@ -215,13 +238,20 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
     d.rotation.order = 'XYZ'; d.userData.idx = di; d.visible = false;
     scene.add(d); discs.push({ mesh: d, spin: 0, labelTex: lt, labelMat: top });
   }
-  try { if (document.fonts && document.fonts.load) { Promise.all([document.fonts.load('40px "Permanent Marker"'), document.fonts.load('40px VT323')]).then(function () { if (!alive) return; lastMode = ''; discs.forEach(function (o, i) { var nt = labelTexture(T, projects[i], i); o.labelMat.map = nt; o.labelMat.needsUpdate = true; o.labelTex.dispose(); o.labelTex = nt; disposables.push(nt); }); }); } } catch (e) {}
+  try { if (document.fonts && document.fonts.load) { Promise.all([document.fonts.load('500 40px "Geist Mono"'), document.fonts.load('700 40px Geist')]).then(function () { if (!alive) return; lastMode = ''; discs.forEach(function (o, i) { var nt = labelTexture(T, projects[i], i); o.labelMat.map = nt; o.labelMat.needsUpdate = true; o.labelTex.dispose(); o.labelTex = nt; disposables.push(nt); }); }); } } catch (e) {}
 
   // ---- Blender models (public/models), swapped in over the fallback shapes once fetched
   function clearKids(g) { while (g.children.length) g.remove(g.children[0]); }
   function adopt(group, node) { if (!node) return null; node.removeFromParent(); node.position.set(0, 0, 0); node.quaternion.identity(); clearKids(group); group.add(node); return node; }
   function onModels(R) {
     var N = function (nm) { return R.getObjectByName(nm); };
+    R.traverse(function (o) {
+      if (HIDDEN_MESHES.indexOf(o.name) >= 0) o.visible = false;
+      var m = o.material;
+      if (m && SHELL[m.name] != null && !m.userData.reshelled) {
+        m.color.setHex(SHELL[m.name]); m.roughness = 0.55; m.metalness = 0.25; m.userData.reshelled = true;
+      }
+    });
     var nCPU = N('CPU'), nCool = N('Cooler'), nRam = N('RAM'), nGpu = N('GPU'), nDrive = N('Drive'), nMon = N('Monitor'), nBoard = N('BoardDetail');
     var nTower = N('Tower'), nKb = N('Keyboard'), nMouse = N('Mouse');
     if (nCPU) adopt(cpu, nCPU);
@@ -246,7 +276,7 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
   }
   fetchModels(modelsUrl)
     .then(function (data) { if (alive) { onModels(buildGltf(T, data, keep, mBeige)); kick(); } })
-    .catch(function (err) { console.warn('GavenOS: model load failed, keeping the fallback shapes', err); });
+    .catch(function (err) { console.warn('Workstation: model load failed, keeping the fallback shapes', err); });
 
   // ---- interaction state
   var selected = 0, loaded = -1, seq = null, lastDraw = -1, lastMode = '';
@@ -455,7 +485,7 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
     var tick = wantMode === 'boot' ? Math.floor(t * 20) : Math.floor(t * 2);
     if (wantMode !== lastMode || tick !== lastDraw) {
       lastMode = wantMode; lastDraw = tick;
-      drawScreen(scrCtx, wantMode, loaded >= 0 ? projects[loaded] : null, t);
+      drawScreen(scrCtx, wantMode, loaded >= 0 ? projects[loaded] : seq ? projects[seq.idx] : null, t, projects);
       scrTex.needsUpdate = true;
     }
     scrGlow.intensity = wantMode === 'off' ? 0 : 3;

@@ -3,16 +3,16 @@ import { lazy } from "react";
 // Every version of the site lives under src/sites/. Each one is code-split, so
 // visitors only download the site they are looking at.
 export const SITES = {
-    gavenos: {
-        label: 'GavenOS 2000',
-        blurb: 'Y2K desktop, built in 3D',
+    workstation: {
+        label: 'Workstation',
+        blurb: 'Build a PC in 3D',
         theme: 'retro',
-        swatch: ['#0B0B0D', '#B4F25A', '#E9E2CC'],
-        load: () => import('./sites/gavenos/GavenOSSite'),
+        swatch: ['#0B0B0D', '#B4F25A', '#3A3D45'],
+        load: () => import('./sites/workstation/WorkstationSite'),
     },
     toybox: {
         label: 'Toybox',
-        blurb: 'Chunky cartoon toys',
+        blurb: 'Bright, playful, cartoon',
         theme: 'toybox',
         swatch: ['#CFEFFF', '#FF9F1C', '#1E2A4A'],
         load: () => import('./sites/toybox/ToyboxSite'),
@@ -33,10 +33,10 @@ export const SITES = {
 
 // The design visitors land on the first time.
 // Any site can also be previewed with ?site=<key>, e.g. ?site=gavennet.
-export const PRIMARY_SITE = 'gavenos';
+export const PRIMARY_SITE = 'workstation';
 
 // Designs visitors can swap between with the style button (bottom-left). Add 'gavennet' to offer it too.
-export const SCHEMES = ['gavenos', 'toybox'];
+export const SCHEMES = ['workstation', 'toybox'];
 
 // Where the portal in the bottom-right corner leads from any design.
 export const CLASSIC_SITE = 'classic';

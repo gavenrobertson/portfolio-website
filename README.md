@@ -6,8 +6,8 @@ Every version of the site lives in `src/sites/` and is code-split, so visitors o
 
 | Key        | What it is                                                        | Folder                 |
 |------------|-------------------------------------------------------------------|------------------------|
-| `gavenos`  | **GavenOS 2000** (default): scroll to build a PC, load projects from CDs | `src/sites/gavenos`   |
-| `toybox`   | **Toybox**: the same story drawn as chunky cartoon toys (SVG, no three.js) | `src/sites/toybox`    |
+| `workstation` | **Workstation** (default): scroll to build a PC in 3D, load projects from CDs | `src/sites/workstation` |
+| `toybox`   | **Toybox**: the same story as chunky cartoon toys (SVG, no three.js) | `src/sites/toybox`    |
 | `gavennet` | **GavenNET Lab**: network-engineer take, rack a lab and patch VLANs | `src/sites/gavennet`  |
 | `classic`  | The original site                                                  | `src/sites/classic`   |
 
@@ -15,7 +15,7 @@ Every version of the site lives in `src/sites/` and is code-split, so visitors o
 - **Style button** (bottom-left, `src/switcher/`): visitors swap between the designs listed in `SCHEMES`, behind a loading screen themed for each design. Their pick is remembered.
 - **Preview any version** with `?site=<key>`, e.g. `/?site=gavennet`.
 - The three.js portal in the bottom-right corner (`src/portal/`) switches between the current design and the classic site; the choice is remembered in `localStorage`.
-- Both retro designs share their UI pieces and styles in `src/sites/retro/` (edit projects in `src/sites/retro/projects.js`). Their Blender models are in `public/models/`.
+- Both retro designs share their UI pieces and styles in `src/sites/retro/` (edit projects in `src/sites/retro/projects.js`). Their Blender models are in `public/models/`. Shared copy (build steps, skills, experience) lives in `src/sites/workstation/content.js`.
 
 ---
 

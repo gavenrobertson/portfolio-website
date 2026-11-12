@@ -87,7 +87,7 @@ export default function SitePortal({ destinationLabel, toClassic, preload, onEnt
         }
     };
 
-    const label = toClassic ? 'Visit my old site' : `Back to ${destinationLabel}`;
+    const label = toClassic ? 'Visit my old site' : 'Back to the new site';
 
     return (
         <>
@@ -97,7 +97,7 @@ export default function SitePortal({ destinationLabel, toClassic, preload, onEnt
                     ref={buttonRef}
                     type="button"
                     className="site-portal__button"
-                    aria-label={`Portal: switch to the ${toClassic ? 'classic site' : destinationLabel}`}
+                    aria-label={`Portal: switch to ${toClassic ? 'the classic site' : `the ${destinationLabel} design`}`}
                     title={label}
                     onClick={enter}
                     onPointerEnter={() => setHover(true)}

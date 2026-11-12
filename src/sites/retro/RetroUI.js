@@ -4,21 +4,12 @@ import { prefersReducedMotion, useFlatMode } from "../shared/motion";
 
 export { prefersReducedMotion, useFlatMode };
 
-// Building blocks shared by the GavenOS 2000 and GavenNET Lab designs.
+// Building blocks shared by the 3D designs (Workstation and GavenNET Lab).
 
 // ---------- icons
 const stroke = { fill: 'none', stroke: 'currentColor', strokeLinecap: 'round', strokeLinejoin: 'round' };
 
 export const Icon = {
-    Chip: () => (
-        <svg width="16" height="16" viewBox="0 0 24 24" {...stroke} strokeWidth="2.2" aria-hidden="true">
-            <rect x="4" y="4" width="16" height="16" rx="2" />
-            <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" />
-        </svg>
-    ),
-    ChevronDown: () => (
-        <svg width="22" height="22" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
-    ),
     Prev: () => (
         <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true"><path d="M19 5L9 12l10 7zM5 5v14" /></svg>
     ),
@@ -26,7 +17,7 @@ export const Icon = {
         <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true"><path d="M5 5l10 7-10 7zM19 5v14" /></svg>
     ),
     Play: () => (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z" /></svg>
     ),
     Eject: () => (
         <svg width="16" height="16" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true"><path d="M12 5l7 9H5zM5 19h14" /></svg>
@@ -38,6 +29,9 @@ export const Icon = {
         <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true">
             <path d="M12 2l9 5v10l-9 5-9-5V7z" /><path d="M12 22V12M21 7l-9 5-9-5" />
         </svg>
+    ),
+    Skip: () => (
+        <svg width="14" height="14" viewBox="0 0 24 24" {...stroke} strokeWidth="2.4" aria-hidden="true"><path d="M7 6l5 5 5-5M7 13l5 5 5-5" /></svg>
     ),
     Sun: () => (
         <svg width="18" height="18" viewBox="0 0 24 24" {...stroke} strokeWidth="2" aria-hidden="true">
@@ -52,13 +46,19 @@ export const Icon = {
             <rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" />
         </svg>
     ),
+    GitHub: () => (
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.84c.85 0 1.7.11 2.5.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" /></svg>
+    ),
+    LinkedIn: () => (
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1v6.2h-4v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9v5.6h-4z" /></svg>
+    ),
 };
 
 // ---------- light / dark theme
 // Follows the system setting until the visitor picks one. public/index.html sets
 // data-theme before React loads so the page never flashes the wrong theme.
 const THEME_KEY = 'gaven-theme';
-const THEME_COLORS = { dark: '#0B0B0D', light: '#E9E6DD' };
+const THEME_COLORS = { dark: '#0B0B0D', light: '#F4F3EF' };
 const darkQuery = typeof window !== 'undefined' && window.matchMedia
     ? window.matchMedia('(prefers-color-scheme: dark)')
     : null;
@@ -154,27 +154,49 @@ export function useScrollScene(createScene, { projects, modelsUrl, enabled, onUn
 }
 
 // ---------- layout pieces
-export function RetroNav({ subtitle, marquee, projectsId, flat, onToggle3d, theme, onToggleTheme }) {
+// links: [{ id, label, onClick? }] — onClick overrides the plain #anchor jump.
+export function SiteNav({ subtitle, links, active, flat, onToggle3d, theme, onToggleTheme }) {
+    const go = (link) => (e) => {
+        if (!link.onClick) return;
+        e.preventDefault();
+        link.onClick();
+    };
     return (
         <header className="r-header">
             <nav aria-label="Primary" className="r-nav">
-                <a href="#top" className="r-brand">
-                    <span className="gloss r-brand-badge">GR</span>
+                <a href="#top" className="r-brand" aria-label="Gaven Robertson, back to top">
+                    <span className="r-brand-mark" aria-hidden="true">GR</span>
                     <span className="r-brand-text">
                         <span className="r-brand-name">Gaven Robertson</span>
                         <span className="r-brand-sub">{subtitle}</span>
                     </span>
                 </a>
-                <div aria-hidden="true" className="r-marquee">
-                    <div className="r-marquee-track"><span>{marquee}</span><span>{marquee}</span></div>
+                <div className="r-nav-links">
+                    {links.map((link) => (
+                        <a
+                            key={link.id}
+                            className="r-navlink"
+                            href={`#${link.id}`}
+                            aria-current={active === link.id ? 'true' : undefined}
+                            onClick={go(link)}
+                        >
+                            {link.label}
+                        </a>
+                    ))}
                 </div>
                 <div className="r-nav-actions">
-                    <button className="glass r-pill r-pill--toggle" type="button" aria-pressed={!flat} onClick={onToggle3d} aria-label="Toggle 3D animations">
+                    <button
+                        className="r-btn r-btn--sm r-toggle"
+                        type="button"
+                        aria-pressed={!flat}
+                        onClick={onToggle3d}
+                        title={flat ? 'Turn the 3D scene on' : 'Turn the 3D scene off'}
+                    >
                         <span aria-hidden="true" className={`r-toggle-dot${flat ? '' : ' is-on'}`} />
-                        {flat ? '3D: OFF' : '3D: ON'}
+                        3D
                     </button>
                     <button
-                        className="glass r-pill r-pill--icon"
+                        className="r-btn r-btn--sm r-btn--icon"
                         type="button"
                         onClick={onToggleTheme}
                         aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -182,58 +204,47 @@ export function RetroNav({ subtitle, marquee, projectsId, flat, onToggle3d, them
                     >
                         {theme === 'dark' ? <Icon.Sun /> : <Icon.Moon />}
                     </button>
-                    <a className="glass r-pill r-nav-link" href={`#${projectsId}`}>Projects</a>
-                    <a className="glass r-pill r-nav-link" href="#about">About</a>
-                    <a className="gloss r-pill r-pill--cta" href="#contact">Contact</a>
+                    <a className="r-btn r-btn--sm r-btn--primary" href="#contact" onClick={go(links.find((l) => l.id === 'contact') || {})}>Contact</a>
                 </div>
             </nav>
         </header>
     );
 }
 
-export function RetroWindow({ title, className = '', titleIcon = null, children, ...rest }) {
-    return (
-        <div className={`r-window ${className}`} {...rest}>
-            <div className="r-titlebar">
-                <span className="r-titlebar-title">{titleIcon}{title}</span>
-                <span aria-hidden="true" className="r-titlebar-buttons">
-                    <span className="r-titlebar-btn" />
-                    <span className="r-titlebar-btn r-titlebar-btn--close" />
-                </span>
-            </div>
-            {children}
-        </div>
-    );
-}
-
-// The sticky stage the scroll animation plays in: setup dialog, scroll hint and player overlay.
-export function ScrollStage({ id, scene, bgText, setupTitle, steps, firstStepLabel, hint, children }) {
+// The sticky stage the scroll-driven build plays in: progress card, scroll hint, then the player.
+export function ScrollStage({ id, scene, bgText, steps, onSkip, children }) {
     const { trackRef, stageRef, canvasRef, bgRef, sceneState } = scene;
     const { step, pct } = sceneState;
     const cur = steps[step];
-    const done = step >= steps.length - 1;
+    const last = steps.length - 1;
+    const done = step >= last;
     return (
-        <section id={id} ref={trackRef} className="r-track">
+        <section id={id} ref={trackRef} className="r-track" aria-label="Projects">
             <div ref={stageRef} className="r-stage">
                 <div aria-hidden="true" ref={bgRef} className="r-bgtext">{bgText}</div>
                 <canvas ref={canvasRef} aria-hidden="true" className="r-canvas" />
-                <div aria-hidden="true" className="r-scanlines" />
                 <div className="r-overlay">
                     {!done && (
-                        <RetroWindow title={setupTitle} titleIcon={<Icon.Chip />} className="r-window--setup" role="status" aria-live="polite">
-                            <div className="r-setup-body">
-                                <span className="r-setup-label">{step === 0 ? firstStepLabel : `Step ${step} of ${steps.length - 2}`}</span>
-                                <span className="r-setup-title">{cur.t}</span>
-                                <span className="r-setup-text">{cur.b}</span>
-                                <div className="r-progress"><div className="r-progress-bar" style={{ width: `${pct}%` }} /></div>
-                                <span className="r-setup-pct">{pct}% complete</span>
+                        <div className="r-build" role="status" aria-live="polite">
+                            <div className="r-build-top">
+                                <span className="r-eyebrow">{step === 0 ? 'Projects' : `Building · ${cur.label}`}</span>
+                                {step > 0 && <span className="r-build-count">{String(step).padStart(2, '0')} / {String(last - 1).padStart(2, '0')}</span>}
                             </div>
-                        </RetroWindow>
+                            <h2 className="r-build-title">{cur.t}</h2>
+                            <p className="r-build-text">{cur.b}</p>
+                            <div className="r-progress" aria-hidden="true"><div className="r-progress-bar" style={{ width: `${pct}%` }} /></div>
+                            <div className="r-build-foot">
+                                <span className="r-build-pct">{pct}%</span>
+                                <button className="r-btn r-btn--sm r-btn--ghost" type="button" onClick={onSkip}>
+                                    Skip to projects<Icon.Skip />
+                                </button>
+                            </div>
+                        </div>
                     )}
                     {step === 0 && (
-                        <div className="r-hint">
-                            <span>{hint}<span className="blink">_</span></span>
-                            <Icon.ChevronDown />
+                        <div className="r-hint" aria-hidden="true">
+                            <span className="r-hint-mouse"><span /></span>
+                            Scroll to build
                         </div>
                     )}
                     {done && children}
@@ -243,25 +254,25 @@ export function ScrollStage({ id, scene, bgText, setupTitle, steps, firstStepLab
     );
 }
 
-// Player / patch-bay console shown once the build finishes.
-export function PlayerPanel({ label, brand, lcdTrack, lcdText, labels, tracks, selected, openHref, dotVariant, api }) {
+// Project player shown once the build finishes.
+export function PlayerPanel({ label, eyebrow, screenTag, screenText, labels, tracks, selected, canPlay, canEject, openHref, dotVariant, api }) {
     return (
         <div role="region" aria-label={label} className="r-player">
-            <div className="r-player-row">
-                <span className="r-player-brand">{brand}</span>
+            <div className="r-player-head">
+                <span className="r-eyebrow">{eyebrow}</span>
                 <div aria-live="polite" className="r-lcd">
-                    <span className="r-lcd-track">{lcdTrack}</span>
-                    <span className="r-lcd-text">{lcdText}</span>
+                    <span className="r-lcd-tag">{screenTag}</span>
+                    <span className="r-lcd-text">{screenText}</span>
                 </div>
             </div>
-            <div className="r-player-row r-player-row--controls">
-                <button className="glass r-ctrl r-ctrl--icon" type="button" aria-label={labels.prev} onClick={api.prev}><Icon.Prev /></button>
-                <button className="gloss r-ctrl r-ctrl--play" type="button" onClick={api.play}><Icon.Play />{labels.play}</button>
-                <button className="glass r-ctrl r-ctrl--eject" type="button" onClick={api.eject}><Icon.Eject />{labels.eject}</button>
-                <button className="glass r-ctrl r-ctrl--icon" type="button" aria-label={labels.next} onClick={api.next}><Icon.Next /></button>
+            <div className="r-player-controls">
+                <button className="r-btn r-btn--icon" type="button" aria-label={labels.prev} title={labels.prev} onClick={api.prev}><Icon.Prev /></button>
+                <button className="r-btn r-btn--primary" type="button" onClick={api.play} disabled={!canPlay}><Icon.Play />{labels.play}</button>
+                <button className="r-btn" type="button" onClick={api.eject} disabled={!canEject}><Icon.Eject />{labels.eject}</button>
+                <button className="r-btn r-btn--icon" type="button" aria-label={labels.next} title={labels.next} onClick={api.next}><Icon.Next /></button>
                 <div className="r-spacer" />
                 {openHref && (
-                    <a className="gloss r-ctrl r-ctrl--open" href={openHref} {...externalProps(openHref)}>Open project<Icon.External /></a>
+                    <a className="r-btn r-btn--primary r-btn--pop" href={openHref} {...externalProps(openHref)}>Open project<Icon.External /></a>
                 )}
             </div>
             <div className="r-tracks">
@@ -287,114 +298,107 @@ export function externalProps(href) {
     return /^https?:/.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 }
 
-export function FlatHeader({ prompt, text, onToggle3d }) {
+export function FlatHeader({ eyebrow, title, text, onToggle3d }) {
     return (
-        <div className="r-section-head">
+        <div className="r-section-head" data-reveal>
             <div className="r-heading-stack">
-                <span className="r-prompt">{prompt}</span>
-                <h2 className="chrome r-display">Projects.</h2>
+                <span className="r-eyebrow">{eyebrow}</span>
+                <h2 className="r-display">{title}</h2>
                 <p className="r-lede">{text}</p>
             </div>
-            <button className="glass r-switch3d" type="button" onClick={onToggle3d}><Icon.Cube />Switch to 3D mode</button>
+            <button className="r-btn" type="button" onClick={onToggle3d}><Icon.Cube />View in 3D</button>
         </div>
     );
 }
 
-export function OpenProjectLink({ href, className }) {
+export function OpenProjectLink({ href, className = '' }) {
+    const placeholder = !href || href === '#';
+    if (placeholder) {
+        return <span className={`r-btn r-btn--sm is-disabled ${className}`} aria-disabled="true">Coming soon</span>;
+    }
     return (
-        <a className={`gloss r-open-btn ${className}`} href={href} {...externalProps(href)}>Open project<Icon.External /></a>
+        <a className={`r-btn r-btn--sm r-btn--primary ${className}`} href={href} {...externalProps(href)}>Open project<Icon.External /></a>
     );
 }
 
-export function RackPlate({ children }) {
+// One card per skill group, each skill a chip.
+export function SkillGroups({ groups }) {
     return (
-        <div className="r-rack">
-            <RackEar />
-            {children}
-            <RackEar />
-        </div>
-    );
-}
-
-function RackEar() {
-    return (
-        <div aria-hidden="true" className="r-rack-ear"><span className="r-screw" /><span className="r-screw" /></div>
-    );
-}
-
-// A rack card of "ports": one per skill. Pending ports get an amber, flickering LED.
-export function SkillSlot({ id, name, status, ports }) {
-    return (
-        <RackPlate>
-            <div className="r-rack-body">
-                <div className="r-slot-label">
-                    <span className="r-slot-id">{id}</span>
-                    <span className="r-slot-name">{name}</span>
-                    <span className="r-slot-status">{status}</span>
+        <div className="r-skills">
+            {groups.map((group, i) => (
+                <div key={group.name} className="r-card r-skill-card" data-reveal style={{ '--reveal-delay': `${i * 80}ms` }}>
+                    <div className="r-skill-head">
+                        <h3 className="r-card-title">{group.name}</h3>
+                        <span className="r-card-meta">{String(group.items.length).padStart(2, '0')}</span>
+                    </div>
+                    <ul className="r-chips">
+                        {group.items.map((item) => <li key={item} className="r-chip">{item}</li>)}
+                    </ul>
                 </div>
-                <div className="r-ports">
-                    {ports.map((p) => (
-                        <div key={p.name} className={`r-port${p.pending ? ' is-pending' : ''}`}>
-                            <span aria-hidden="true" className="r-port-jack" />
-                            <span className="r-port-name">{p.name}</span>
-                            <span aria-hidden="true" className="r-port-led" />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </RackPlate>
-    );
-}
-
-export function SysInfo({ rows, status }) {
-    return (
-        <div className="r-sysinfo">
-            {rows.map(([k, v]) => (
-                <div key={k} className="r-sysinfo-row"><span className="r-sysinfo-key">{k}</span><span>{v}</span></div>
             ))}
-            <div className="r-sysinfo-row">
-                <span className="r-sysinfo-key">STATUS</span>
-                <span className="r-status"><span aria-hidden="true" className="ledflick r-status-led" />{status}</span>
-            </div>
         </div>
     );
 }
 
-export function HistoryLog({ title, entries, prompt }) {
+export function FactsCard({ rows }) {
     return (
-        <RetroWindow title={title}>
-            <div className="r-log">
+        <dl className="r-card r-facts" data-reveal>
+            {rows.map(([k, v]) => (
+                <div key={k} className="r-fact">
+                    <dt>{k}</dt>
+                    <dd>{v}</dd>
+                </div>
+            ))}
+        </dl>
+    );
+}
+
+export function Card({ title, meta, className = '', children, ...rest }) {
+    return (
+        <div className={`r-card ${className}`} {...rest}>
+            <div className="r-card-head">
+                <h3 className="r-card-title">{title}</h3>
+                {meta && <span className="r-card-meta">{meta}</span>}
+            </div>
+            {children}
+        </div>
+    );
+}
+
+export function Experience({ entries }) {
+    return (
+        <Card title="Experience" meta={`${entries.length - 1} roles`} data-reveal>
+            <ol className="r-timeline">
                 {entries.map((e) => (
-                    <div key={e.when} className="r-log-row">
-                        <span className="r-log-when">{e.when}</span>
-                        <div className="r-log-detail">
+                    <li key={e.when} className="r-timeline-row">
+                        <span className="r-timeline-when">{e.when}</span>
+                        <div className="r-timeline-detail">
                             {e.items.map((item) => (
                                 <React.Fragment key={item.title}>
-                                    <span className="r-log-title">{item.title}</span>
-                                    {item.org && <span className="r-log-org">{item.org}</span>}
-                                    {item.text && <span className="r-log-text">{item.text}</span>}
+                                    <span className="r-timeline-title">{item.title}</span>
+                                    {item.org && <span className="r-timeline-org">{item.org}</span>}
+                                    {item.text && <span className="r-timeline-text">{item.text}</span>}
                                 </React.Fragment>
                             ))}
                         </div>
-                    </div>
+                    </li>
                 ))}
-                <div className="r-log-prompt">{prompt} <span className="blink">█</span></div>
-            </div>
-        </RetroWindow>
+            </ol>
+        </Card>
     );
 }
 
 export function ContactSection({ heading, text }) {
     return (
         <section id="contact" className="r-contact">
-            <div className="r-contact-inner">
-                <span className="r-prompt">♦ Sign my guestbook ♦</span>
-                <h2 className="chrome r-contact-title">{heading}</h2>
+            <div className="r-contact-inner" data-reveal>
+                <span className="r-eyebrow">Contact</span>
+                <h2 className="r-contact-title">{heading}</h2>
                 <p className="r-contact-text">{text}</p>
                 <div className="r-contact-links">
-                    <a className="gloss r-contact-btn r-contact-btn--primary" href="mailto:gaven.robertson@gmail.com"><Icon.Mail />gaven.robertson@gmail.com</a>
-                    <a className="glass r-contact-btn" href="https://github.com/gavenrobertson" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a className="glass r-contact-btn" href="https://www.linkedin.com/in/gaven-robertson-b20887232" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a className="r-btn r-btn--lg r-btn--primary" href="mailto:gaven.robertson@gmail.com"><Icon.Mail />gaven.robertson@gmail.com</a>
+                    <a className="r-btn r-btn--lg" href="https://github.com/gavenrobertson" target="_blank" rel="noopener noreferrer"><Icon.GitHub />GitHub</a>
+                    <a className="r-btn r-btn--lg" href="https://www.linkedin.com/in/gaven-robertson-b20887232" target="_blank" rel="noopener noreferrer"><Icon.LinkedIn />LinkedIn</a>
                 </div>
             </div>
         </section>

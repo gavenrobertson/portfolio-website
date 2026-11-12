@@ -28,12 +28,13 @@ function LoadingScreen({ siteKey, phase }) {
         );
     }
     return (
-        <div className={`ds-loader ds-loader--crt is-${phase}`} role="status" aria-live="polite">
-            <div className="ds-crt-screen">
-                <span className="ds-crt-line">C:\&gt; BOOT {site.label.toUpperCase()}</span>
-                <span className="ds-crt-line ds-crt-dim">Loading design scheme<span className="ds-crt-cursor">_</span></span>
-                <span className="ds-crt-blocks" aria-hidden="true"><span /></span>
+        <div className={`ds-loader ds-loader--studio is-${phase}`} role="status" aria-live="polite">
+            <div className="ds-studio-mark" aria-hidden="true">
+                <span className="ds-studio-ring" />
+                <span className="ds-studio-logo">GR</span>
             </div>
+            <span className="ds-studio-title">Loading {site.label}</span>
+            <span className="ds-studio-bar" aria-hidden="true"><span /></span>
         </div>
     );
 }
