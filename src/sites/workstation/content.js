@@ -13,38 +13,63 @@ export const STEPS = [
     { label: 'Done', t: 'Build complete', b: '' },
 ];
 
-export const SKILLS = [
-    { name: 'Frontend', items: ['React', 'JavaScript', 'HTML', 'Vite', 'SASS', 'Tailwind'] },
-    { name: '3D & design', items: ['three.js', 'SVG', 'UX/UI design'] },
-    { name: 'Systems & security', items: ['C++', 'IT support', 'TS/SCI clearance', 'CJIS certified'] },
-];
+export const ABOUT = {
+    heading: 'Software engineer, web designer, studio founder.',
+    lede: "Hey, I'm Gaven. I like making things that feel good to use: clean front ends, offline-first desktop apps, and the occasional site that's a little weird on purpose.",
+    bio: [
+        "I'm from Oregon and now live in Montgomery, Alabama. I studied Computer Science at Oregon State, where I found my passion for web development, and I'm now working on my M.S. in Computer Science at Arizona State.",
+        "By day I'm a software engineer at BESPIN, supporting AFSOC as a Special Warfare Operations Integrator. On the side I run Webfoot Software Studio, designing and building websites for churches and organizations.",
+        "Before that I built the front end of Oregon State's College of Business AI chatbot on a team of 11, spent a summer in Hanoi building React sites for Siten JSC, and supported 45,000+ students and faculty on Oregon State's IT team.",
+    ],
+    likes: [
+        { t: 'Clean front ends', b: 'Interfaces that are fast, accessible and feel good to use.' },
+        { t: 'Offline-first desktop apps', b: 'Tools like LineWise: free, open-source and fully offline.' },
+        { t: 'Sites with personality', b: 'The occasional site that is a little weird on purpose, like this one.' },
+    ],
+    now: [
+        'Software engineer at BESPIN, supporting AFSOC.',
+        'Running Webfoot Software Studio.',
+        'M.S. Computer Science at Arizona State.',
+        'Building Dragon Warriors, a guild hub for WoW Forever.',
+    ],
+};
 
 export const FACTS = [
-    ['Role', 'Software Developer @ BESPIN'],
-    ['Supporting', 'AFSOC Special Warfare'],
+    ['Role', 'Software Engineer @ BESPIN'],
+    ['Studio', 'Founder, Webfoot Software Studio'],
     ['Education', 'B.S. CS, Oregon State · M.S. CS, ASU (in progress)'],
-    ['Based in', 'Montgomery, AL'],
+    ['Clearance', 'TS/SCI · CJIS certified'],
+    ['Based in', 'Montgomery, AL · from Oregon'],
 ];
 
-export const ABOUT = {
-    heading: 'Interfaces with personality.',
-    lede: "I'm Gaven, a software developer. I like interfaces with personality, code that stays out of its own way, and the occasional 3D detour.",
-    now: [
-        'Software developer at BESPIN, supporting AFSOC as a Special Warfare Operations Integrator.',
-        'Front-end roots in React, SASS and Tailwind, plus a habit of building things in 3D.',
+export const SKILLS = [
+    { name: 'Languages', items: ['C++', 'C', 'Python', 'TypeScript', 'JavaScript', 'SQL'] },
+    { name: 'Apps & web', items: ['React', 'Next.js', 'Tauri', 'Tailwind', 'SASS', 'three.js', 'Cloudflare'] },
+    { name: 'Systems & tooling', items: ['Linux', 'CMake', 'GDB', 'Git', 'Docker', 'Bash'] },
+    { name: 'Networking', items: ['TCP/IP', 'Socket programming', 'Wireshark'] },
+    { name: 'Design', items: ['UX/UI design', 'SVG', 'Blender'] },
+];
+
+// Live sites built through Webfoot Software Studio.
+export const STUDIO = {
+    name: 'Webfoot Software Studio',
+    blurb: 'My studio. I design and build websites for churches and organizations, from first sketch to launch.',
+    sites: [
+        { name: 'Redemption Church', place: 'Montgomery, AL', text: 'Events, sermons and bulletins, with a Live Now badge on service days.', url: 'https://redemptionchurchfamily.com', color: '#B4F25A' },
+        { name: 'Capital City Church of God', place: 'Salem, OR', text: 'Homepage redesign that puts visitors and service times first.', url: 'https://capitalcitychurchofgod.com', color: '#5FD3FF' },
+        { name: 'EHS Now', place: 'Tri-Cities, WA', text: 'Environmental health and safety consulting, with a custom OSHA safety program builder.', url: 'https://www.ehsnow.net', color: '#FF8A4C' },
     ],
 };
 
 export const HISTORY = [
-    { when: 'Feb 2025 – Now', items: [{ title: 'Software Developer · AFSOC Special Warfare Operations Integrator', org: 'BESPIN' }] },
+    { when: 'Feb 2025 – Now', items: [{ title: 'Software Engineer · AFSOC Special Warfare Operations Integrator', org: 'BESPIN' }] },
+    { when: 'Now', items: [{ title: 'Founder', org: 'Webfoot Software Studio', text: 'Websites for churches and organizations, from design to launch.' }] },
     { when: 'Jan – Jun 2024', items: [{ title: 'Frontend Developer', org: 'Oregon State University', text: 'Built the main chatbot and its design and style architecture with React, Vite and Tailwind, on a team of 11.' }] },
     { when: 'Jun – Aug 2023', items: [{ title: 'Frontend Developer', org: 'Siten JSC · Hanoi, Vietnam', text: 'Template sites in HTML, SASS and React; moved the company site to React with better UX/UI.' }] },
     { when: 'Oct 2021 – Feb 2025', items: [{ title: 'Information Technology', org: 'Oregon State University', text: 'Supported 45,000+ students and faculty and trained new staff.' }] },
-    {
-        when: 'Education',
-        items: [
-            { title: 'M.S. Computer Science · Arizona State University', org: '2026 – 2028 · in progress' },
-            { title: 'B.S. Computer Science · Oregon State University', org: '2019 – 2024' },
-        ],
-    },
+];
+
+export const EDUCATION = [
+    { school: 'Arizona State University', degree: 'M.S. Computer Science', when: '2026 – 2028 · in progress' },
+    { school: 'Oregon State University', degree: 'B.S. Computer Science', when: '2019 – 2024' },
 ];

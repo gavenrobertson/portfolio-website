@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import projects from "../retro/projects";
-import { STEPS, SKILLS, FACTS, ABOUT, HISTORY } from "../workstation/content";
+import { STEPS, SKILLS, FACTS, ABOUT, HISTORY, EDUCATION, STUDIO } from "../workstation/content";
+import portrait from "../shared/assets/gaven.webp";
 import { useFlatMode } from "../shared/motion";
 import { useActiveSection, useReveal, scrollToBuildEnd, scrollToId } from "../shared/ux";
 import DeskScene from "./DeskScene";
@@ -11,7 +12,7 @@ import "./toybox.scss";
 
 const HEADER_H = 80;
 const STEP_BUBBLES = ['', '+ Processor', '+ Cooling', '+ Memory', '+ Graphics', '+ Drive', 'All set!', ''];
-const SLOT_COLORS = ['#3BA7F0', '#FF9F1C', '#4CC36A'];
+const SLOT_COLORS = ['#3BA7F0', '#FF9F1C', '#4CC36A', '#F25C54', '#C9A7FF'];
 const WALLET = [[205, 190], [290, 190], [205, 275], [290, 275]];
 const DRIVE_BAY = [618, 371];
 
@@ -113,7 +114,7 @@ export default function ToyboxSite() {
     const rootRef = useRef(null);
     const [flat, toggleScene] = useFlatMode();
     const { trackRef, stageRef, progress: p } = useScrollProgress(!flat);
-    const active = useActiveSection(['projects', 'about', 'contact'], flat);
+    const active = useActiveSection(['projects', 'about', 'studio', 'contact'], flat);
     useReveal(rootRef, flat);
     const showProjects = useCallback((e) => {
         if (e) e.preventDefault();
@@ -159,6 +160,7 @@ export default function ToyboxSite() {
     const navLinks = [
         { id: 'projects', label: 'Projects', onClick: showProjects },
         { id: 'about', label: 'About' },
+        { id: 'studio', label: 'Studio' },
         { id: 'contact', label: 'Contact' },
     ];
 
@@ -170,7 +172,7 @@ export default function ToyboxSite() {
                         <span className="tb-brand-badge" aria-hidden="true">GR</span>
                         <span className="tb-brand-text">
                             <span className="tb-brand-name">Gaven Robertson</span>
-                            <span className="tb-brand-sub">Software Developer</span>
+                            <span className="tb-brand-sub">Software Engineer</span>
                         </span>
                     </a>
                     <div className="tb-navlinks">
@@ -321,7 +323,7 @@ export default function ToyboxSite() {
                 <div className="tb-intro">
                     <div className="tb-stack tb-stack--about" data-reveal>
                         <span className="tb-tag">About</span>
-                        <h2 className="tb-display">{ABOUT.heading}</h2>
+                        <h2 className="tb-display tb-display--about">{ABOUT.heading}</h2>
                         <p className="tb-lede">{ABOUT.lede}</p>
                     </div>
                     <dl className="tb-screen tb-sysinfo" data-reveal style={{ '--reveal-delay': '80ms' }}>
@@ -331,6 +333,28 @@ export default function ToyboxSite() {
                     </dl>
                 </div>
 
+                <div className="tb-bio">
+                    <figure className="tb-panel tb-portrait" data-reveal>
+                        <div className="tb-tbar"><span>Gaven Robertson</span><span className="tb-tdots" aria-hidden="true"><span /><span /></span></div>
+                        <img src={portrait} alt="Portrait of Gaven Robertson" loading="lazy" width="630" height="638" />
+                    </figure>
+                    <div className="tb-bio-text" data-reveal style={{ '--reveal-delay': '80ms' }}>
+                        {ABOUT.bio.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
+                    </div>
+                </div>
+
+                <h3 className="tb-subhead" data-reveal>What I like building</h3>
+                <div className="tb-likes">
+                    {ABOUT.likes.map((like, i) => (
+                        <div key={like.t} className="tb-panel tb-like" data-reveal style={{ '--reveal-delay': `${i * 80}ms`, '--like': SLOT_COLORS[i % SLOT_COLORS.length] }}>
+                            <span className="tb-like-num" aria-hidden="true">{pad2(i + 1)}</span>
+                            <h4 className="tb-like-title">{like.t}</h4>
+                            <p className="tb-like-text">{like.b}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <h3 className="tb-subhead" data-reveal>Stack</h3>
                 <div className="tb-skills">
                     {SKILLS.map((group, i) => (
                         <div key={group.name} className="tb-panel tb-slot" data-reveal style={{ '--reveal-delay': `${i * 80}ms` }}>
@@ -347,7 +371,7 @@ export default function ToyboxSite() {
 
                 <div className="tb-windows">
                     <div className="tb-panel" data-reveal>
-                        <div className="tb-tbar"><span>Experience</span><span className="tb-count">{pad2(HISTORY.length - 1)} roles</span></div>
+                        <div className="tb-tbar"><span>Experience</span><span className="tb-count">{pad2(HISTORY.length)} roles</span></div>
                         <ol className="tb-log">
                             {HISTORY.map((entry) => (
                                 <li key={entry.when} className="tb-log-row">
@@ -365,12 +389,54 @@ export default function ToyboxSite() {
                             ))}
                         </ol>
                     </div>
-                    <div className="tb-panel" data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        <div className="tb-tbar tb-tbar--green"><span>Right now</span></div>
-                        <div className="tb-now">
-                            {ABOUT.now.map((line) => <p key={line}>{line}</p>)}
+                    <div className="tb-side">
+                        <div className="tb-panel" data-reveal style={{ '--reveal-delay': '80ms' }}>
+                            <div className="tb-tbar tb-tbar--orange"><span>Education</span></div>
+                            <ul className="tb-now tb-edu">
+                                {EDUCATION.map((e) => (
+                                    <li key={e.degree}>
+                                        <span className="tb-log-title">{e.degree}</span>
+                                        <span className="tb-log-org">{e.school}</span>
+                                        <span className="tb-edu-when">{e.when}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="tb-panel" data-reveal style={{ '--reveal-delay': '160ms' }}>
+                            <div className="tb-tbar tb-tbar--green"><span>Right now</span></div>
+                            <ul className="tb-now">
+                                {ABOUT.now.map((line) => <li key={line}>{line}</li>)}
+                            </ul>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section id="studio" className="tb-section tb-section--studio">
+                <div className="tb-stack" data-reveal>
+                    <span className="tb-tag">Studio</span>
+                    <h2 className="tb-display">{STUDIO.name}</h2>
+                    <p className="tb-lede">{STUDIO.blurb}</p>
+                </div>
+                <div className="tb-studio">
+                    {STUDIO.sites.map((site, i) => (
+                        <a
+                            key={site.name}
+                            className="tb-panel tb-site"
+                            href={site.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-reveal
+                            style={{ '--reveal-delay': `${i * 80}ms`, '--site': SLOT_COLORS[i % SLOT_COLORS.length] }}
+                        >
+                            <span className="tb-site-band">{site.place}</span>
+                            <span className="tb-site-body">
+                                <span className="tb-site-name">{site.name}</span>
+                                <span className="tb-site-text">{site.text}</span>
+                                <span className="tb-site-cta">Visit site<ExternalIcon /></span>
+                            </span>
+                        </a>
+                    ))}
                 </div>
             </section>
 

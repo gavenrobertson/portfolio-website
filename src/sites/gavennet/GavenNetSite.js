@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import baseProjects from "../retro/projects";
 import {
     useFlatMode, useTheme, useScrollScene, SiteNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
-    SkillGroups, FactsCard, Experience, Card, ContactSection,
+    SkillGroups, FactsCard, Experience, NowCard, ContactSection,
 } from "../retro/RetroUI";
 import { useActiveSection, useReveal, scrollToBuildEnd, scrollToId } from "../shared/ux";
 import { HISTORY } from "../workstation/content";
@@ -17,7 +17,7 @@ const HEADER_H = 72;
 const projects = baseProjects.map((p, i) => ({ ...p, vlan: (i + 1) * 10 }));
 
 const STEPS = [
-    { label: 'Start', t: 'Scroll to rack up', b: 'Network engineer and software developer. Keep scrolling to build the lab.' },
+    { label: 'Start', t: 'Scroll to rack up', b: 'Network engineer and software engineer. Keep scrolling to build the lab.' },
     { label: 'Patch panel', t: 'Labeled and tidy', b: 'Every connection starts somewhere: labeled, tidy, documented.' },
     { label: 'Switch', t: 'Segmented traffic', b: '24 ports, four VLANs. Segmented traffic is happy traffic.' },
     { label: 'Router', t: 'Inter-VLAN routing', b: 'Routing over an 802.1Q trunk to the switch.' },
@@ -34,8 +34,8 @@ const SKILLS = [
 ];
 
 const FACTS = [
-    ['Role', 'Network Engineer · Software Developer'],
-    ['Now', 'Software Developer @ BESPIN (AFSOC)'],
+    ['Role', 'Network Engineer · Software Engineer'],
+    ['Now', 'Software Engineer @ BESPIN (AFSOC)'],
     ['Looking for', 'Entry & mid-level network roles in Huntsville, AL'],
     ['Based in', 'Montgomery, AL'],
 ];
@@ -67,7 +67,7 @@ export default function GavenNetSite() {
     return (
         <div id="top" ref={rootRef} className="retro-site">
             <SiteNav
-                subtitle="Network Engineer · Software Developer"
+                subtitle="Network Engineer · Software Engineer"
                 links={[
                     { id: 'lab', label: 'Projects', onClick: showProjects },
                     { id: 'about', label: 'About' },
@@ -120,19 +120,15 @@ export default function GavenNetSite() {
                 <div className="r-about-intro">
                     <div className="r-heading-stack" data-reveal>
                         <span className="r-eyebrow">About</span>
-                        <h2 className="r-display">Packets &amp; programs.</h2>
-                        <p className="r-lede">I'm Gaven, a network engineer and software developer. I like networks that are segmented, documented and quietly reliable, and software with a bit of personality.</p>
+                        <h2 className="r-display chrome">Packets &amp; programs.</h2>
+                        <p className="r-lede">I'm Gaven, a network engineer and software engineer. I like networks that are segmented, documented and quietly reliable, and software with a bit of personality.</p>
                     </div>
                     <FactsCard rows={FACTS} />
                 </div>
                 <SkillGroups groups={SKILLS} />
                 <div className="r-columns">
                     <Experience entries={HISTORY} />
-                    <Card title="Right now" data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        <div className="r-now">
-                            <p>Software developer at BESPIN supporting AFSOC, building toward network engineering.</p>
-                        </div>
-                    </Card>
+                    <NowCard items={['Software engineer at BESPIN supporting AFSOC.', 'Building toward network engineering.']} />
                 </div>
             </section>
 

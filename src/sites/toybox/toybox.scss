@@ -470,7 +470,55 @@ html[data-site='toybox'] { scroll-behavior: smooth; }
     .tb-log-title + .tb-log-org + .tb-log-title { margin-top: 8px; }
     .tb-log-org { font-weight: 800; color: $blue-ink; }
     .tb-log-text { font-size: 15px; line-height: 1.5; color: $ink-soft; }
-    .tb-now { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; p { margin: 0; font-size: 16px; line-height: 1.6; color: $ink-soft; } }
+    .tb-now {
+        list-style: none;
+        margin: 0;
+        padding: 16px 20px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        li { display: flex; gap: 10px; font-size: 16px; line-height: 1.5; color: $ink-soft; font-weight: 600; }
+        li::before { content: ''; flex: none; width: 10px; height: 10px; margin-top: 7px; border-radius: 50%; background: $green; border: 2px solid $navy; }
+    }
+    .tb-edu li { flex-direction: column; gap: 2px; &::before { display: none; } }
+    .tb-edu-when { font-size: 14px; color: $ink-soft; }
+    .tb-side { display: flex; flex-direction: column; gap: 22px; }
+    .tb-tbar--orange { background: $orange; }
+    .tb-subhead { margin: 30px 0 0; font-family: $display; font-weight: 700; font-size: 26px; }
+    .tb-display--about { font-size: clamp(40px, 5vw, 72px); }
+
+    // bio
+    .tb-bio { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .tb-portrait { margin: 0; transform: rotate(-2deg); transition: transform .3s; &:hover { transform: rotate(0deg) scale(1.02); } img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; } }
+    .tb-portrait[data-reveal].is-revealed { transform: rotate(-2deg); }
+    .tb-portrait[data-reveal].is-revealed:hover { transform: rotate(0deg) scale(1.02); }
+    .tb-bio-text { display: flex; flex-direction: column; gap: 16px; p { margin: 0; font-size: 17px; line-height: 1.7; color: $ink-soft; } }
+    .tb-likes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px; }
+    .tb-like { padding: 18px; display: flex; flex-direction: column; gap: 8px; border-top: 10px solid var(--like); }
+    .tb-like-num { font-family: $display; font-weight: 700; font-size: 15px; color: $blue-ink; }
+    .tb-like-title { margin: 0; font-family: $display; font-weight: 700; font-size: 20px; }
+    .tb-like-text { margin: 0; font-size: 15px; line-height: 1.55; color: $ink-soft; }
+
+    // studio
+    .tb-section--studio { padding: 0 $gutter clamp(72px, 9vw, 128px); gap: 26px; }
+    .tb-studio { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 20px; }
+    .tb-site {
+        display: flex;
+        flex-direction: column;
+        color: $navy;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform .15s, box-shadow .15s;
+        &:hover { transform: translateY(-3px) rotate(-.5deg); box-shadow: 0 10px 0 $navy; color: $navy; }
+        &:active { transform: translateY(4px); box-shadow: 0 2px 0 $navy; }
+        &:focus-visible { outline: 3px solid $orange; outline-offset: 3px; }
+    }
+    .tb-site[data-reveal].is-revealed:hover { transform: translateY(-3px) rotate(-.5deg); }
+    .tb-site-band { padding: 10px 16px; background: var(--site); border-bottom: 3px solid $navy; font-family: $display; font-weight: 700; font-size: 15px; }
+    .tb-site-body { padding: 18px; display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; }
+    .tb-site-name { font-family: $display; font-weight: 700; font-size: 22px; }
+    .tb-site-text { font-size: 15px; line-height: 1.55; color: $ink-soft; flex: 1 1 auto; }
+    .tb-site-cta { display: inline-flex; align-items: center; gap: 6px; font-family: $display; font-weight: 700; color: $blue-ink; }
 
     // ---------- contact
     .tb-contact { background: $cream; border-top: 3px solid $navy; }
@@ -518,6 +566,8 @@ html[data-site='toybox'] { scroll-behavior: smooth; }
 
     // ---------- small screens: one-row nav, room for the corner buttons
     @media (max-width: 760px) {
+        .tb-bio { grid-template-columns: minmax(0, 1fr); }
+        .tb-portrait { max-width: 300px; }
         .tb-navlinks { display: none; }
         .tb-nav-actions { margin-left: auto; }
     }

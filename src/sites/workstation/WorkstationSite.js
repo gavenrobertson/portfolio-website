@@ -2,11 +2,12 @@ import React, { useCallback, useRef } from "react";
 import projects from "../retro/projects";
 import {
     useFlatMode, useTheme, useScrollScene, SiteNav, ScrollStage, PlayerPanel, FlatHeader, OpenProjectLink,
-    SkillGroups, FactsCard, Experience, Card, ContactSection,
+    SkillGroups, FactsCard, Experience, ContactSection, Bio, Likes, EducationCard, NowCard, StudioSection,
 } from "../retro/RetroUI";
 import { useActiveSection, useReveal, scrollToBuildEnd, scrollToId } from "../shared/ux";
 import { createScene } from "./scene";
-import { STEPS, SKILLS, FACTS, ABOUT, HISTORY } from "./content";
+import { STEPS, SKILLS, FACTS, ABOUT, HISTORY, EDUCATION, STUDIO } from "./content";
+import portrait from "../shared/assets/gaven.webp";
 
 // Workstation: scroll to build a PC in 3D, then load projects onto its monitor from CDs.
 
@@ -26,7 +27,7 @@ export default function WorkstationSite() {
     const [theme, toggleTheme] = useTheme();
     const scene = useScrollScene(createScene, { projects, modelsUrl: MODELS_URL, enabled: !flat, onUnavailable: forceFlat, theme });
     const { selected, loaded, phase } = scene.sceneState;
-    const active = useActiveSection(['projects', 'about', 'contact'], flat);
+    const active = useActiveSection(['projects', 'about', 'studio', 'contact'], flat);
     useReveal(rootRef, flat);
 
     const { trackRef, stageRef } = scene;
@@ -40,10 +41,11 @@ export default function WorkstationSite() {
     return (
         <div id="top" ref={rootRef} className="retro-site">
             <SiteNav
-                subtitle="Software Developer"
+                subtitle="Software Engineer"
                 links={[
                     { id: 'projects', label: 'Projects', onClick: showProjects },
                     { id: 'about', label: 'About' },
+                    { id: 'studio', label: 'Studio' },
                     { id: 'contact', label: 'Contact' },
                 ]}
                 active={active}
@@ -99,21 +101,26 @@ export default function WorkstationSite() {
                 <div className="r-about-intro">
                     <div className="r-heading-stack" data-reveal>
                         <span className="r-eyebrow">About</span>
-                        <h2 className="r-display">{ABOUT.heading}</h2>
+                        <h2 className="r-display chrome">{ABOUT.heading}</h2>
                         <p className="r-lede">{ABOUT.lede}</p>
                     </div>
                     <FactsCard rows={FACTS} />
                 </div>
+                <Bio photo={portrait} name="Gaven Robertson" paragraphs={ABOUT.bio} />
+                <h3 className="r-eyebrow r-subhead" data-reveal>What I like building</h3>
+                <Likes items={ABOUT.likes} />
+                <h3 className="r-eyebrow r-subhead" data-reveal>Stack</h3>
                 <SkillGroups groups={SKILLS} />
                 <div className="r-columns">
                     <Experience entries={HISTORY} />
-                    <Card title="Right now" data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        <div className="r-now">
-                            {ABOUT.now.map((line) => <p key={line}>{line}</p>)}
-                        </div>
-                    </Card>
+                    <div className="r-side">
+                        <EducationCard entries={EDUCATION} />
+                        <NowCard items={ABOUT.now} />
+                    </div>
                 </div>
             </section>
+
+            <StudioSection studio={STUDIO} />
 
             <ContactSection heading="Let's build something." text="Got a project, a role, or just want to talk shop? My inbox is open." />
         </div>

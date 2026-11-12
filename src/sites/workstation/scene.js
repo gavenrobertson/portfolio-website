@@ -3,8 +3,6 @@
 import * as THREE from "three";
 import { buildGltf, fetchModels } from "../retro/gltf";
 
-// Graphite plastics in place of the models' original beige.
-var SHELL = { Beige: 0x3A3D45, BeigeDark: 0x2B2E35, BeigeLight: 0x4B4F58 };
 // Lettering baked into the models that the site no longer uses.
 var HIDDEN_MESHES = ['Tw_Logo', 'Tw_Badge', 'Tw_Badge2', 'Mon_Logo', 'CPU_Text'];
 var MONO = '"Geist Mono", ui-monospace, monospace';
@@ -152,8 +150,8 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
   var mBlack = mat({ color: 0x141518, roughness: 0.6, metalness: 0.2 });
   var mSilver = mat({ color: 0xc9ccd2, roughness: 0.25, metalness: 1 });
   var mRamPcb = mat({ color: 0x1d5c34, roughness: 0.6 });
-  var mBeige = mat({ color: SHELL.Beige, roughness: 0.55, metalness: 0.25 });
-  var mBeigeDk = mat({ color: SHELL.BeigeDark, roughness: 0.6, metalness: 0.25 });
+  var mBeige = mat({ color: 0xd8d1bd, roughness: 0.7 });
+  var mBeigeDk = mat({ color: 0xc2baa3, roughness: 0.75 });
   var mLime = mat({ color: 0xb4f25a, emissive: 0xb4f25a, emissiveIntensity: 2.2 });
   var mFan = mat({ color: 0xb4f25a, emissive: 0x6fae1f, emissiveIntensity: 0.6, transparent: true, opacity: 0.75, roughness: 0.3 });
 
@@ -247,10 +245,6 @@ export function createScene({ canvas, stage, track, bg, projects, modelsUrl, onS
     var N = function (nm) { return R.getObjectByName(nm); };
     R.traverse(function (o) {
       if (HIDDEN_MESHES.indexOf(o.name) >= 0) o.visible = false;
-      var m = o.material;
-      if (m && SHELL[m.name] != null && !m.userData.reshelled) {
-        m.color.setHex(SHELL[m.name]); m.roughness = 0.55; m.metalness = 0.25; m.userData.reshelled = true;
-      }
     });
     var nCPU = N('CPU'), nCool = N('Cooler'), nRam = N('RAM'), nGpu = N('GPU'), nDrive = N('Drive'), nMon = N('Monitor'), nBoard = N('BoardDetail');
     var nTower = N('Tower'), nKb = N('Keyboard'), nMouse = N('Mouse');

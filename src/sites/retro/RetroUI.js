@@ -225,11 +225,13 @@ export function ScrollStage({ id, scene, bgText, steps, onSkip, children }) {
                 <canvas ref={canvasRef} aria-hidden="true" className="r-canvas" />
                 <div className="r-overlay">
                     {!done && (
-                        <div className="r-build" role="status" aria-live="polite">
-                            <div className="r-build-top">
-                                <span className="r-eyebrow">{step === 0 ? 'Projects' : `Building · ${cur.label}`}</span>
-                                {step > 0 && <span className="r-build-count">{String(step).padStart(2, '0')} / {String(last - 1).padStart(2, '0')}</span>}
+                        <div className="r-build r-window" role="status" aria-live="polite">
+                            <div className="r-card-head r-build-bar">
+                                <span className="r-card-title">{step === 0 ? 'Projects' : `Building · ${cur.label}`}</span>
+                                {step > 0 && <span className="r-card-meta">{String(step).padStart(2, '0')} / {String(last - 1).padStart(2, '0')}</span>}
+                                <WindowButtons />
                             </div>
+                            <div className="r-build-body">
                             <h2 className="r-build-title">{cur.t}</h2>
                             <p className="r-build-text">{cur.b}</p>
                             <div className="r-progress" aria-hidden="true"><div className="r-progress-bar" style={{ width: `${pct}%` }} /></div>
@@ -238,6 +240,7 @@ export function ScrollStage({ id, scene, bgText, steps, onSkip, children }) {
                                 <button className="r-btn r-btn--sm r-btn--ghost" type="button" onClick={onSkip}>
                                     Skip to projects<Icon.Skip />
                                 </button>
+                            </div>
                             </div>
                         </div>
                     )}
@@ -303,7 +306,7 @@ export function FlatHeader({ eyebrow, title, text, onToggle3d }) {
         <div className="r-section-head" data-reveal>
             <div className="r-heading-stack">
                 <span className="r-eyebrow">{eyebrow}</span>
-                <h2 className="r-display">{title}</h2>
+                <h2 className="r-display chrome">{title}</h2>
                 <p className="r-lede">{text}</p>
             </div>
             <button className="r-btn" type="button" onClick={onToggle3d}><Icon.Cube />View in 3D</button>
@@ -353,12 +356,20 @@ export function FactsCard({ rows }) {
     );
 }
 
+function WindowButtons() {
+    return (
+        <span className="r-winbtns" aria-hidden="true"><span /><span /><span /></span>
+    );
+}
+
+// A card drawn as a classic desktop window: gel title bar, window buttons, body.
 export function Card({ title, meta, className = '', children, ...rest }) {
     return (
-        <div className={`r-card ${className}`} {...rest}>
+        <div className={`r-card r-window ${className}`} {...rest}>
             <div className="r-card-head">
                 <h3 className="r-card-title">{title}</h3>
                 {meta && <span className="r-card-meta">{meta}</span>}
+                <WindowButtons />
             </div>
             {children}
         </div>
@@ -367,7 +378,7 @@ export function Card({ title, meta, className = '', children, ...rest }) {
 
 export function Experience({ entries }) {
     return (
-        <Card title="Experience" meta={`${entries.length - 1} roles`} data-reveal>
+        <Card title="Experience" meta={`${entries.length} roles`} data-reveal>
             <ol className="r-timeline">
                 {entries.map((e) => (
                     <li key={e.when} className="r-timeline-row">
@@ -388,12 +399,109 @@ export function Experience({ entries }) {
     );
 }
 
+// Portrait in a window frame plus the longer bio.
+export function Bio({ photo, name, paragraphs }) {
+    return (
+        <div className="r-bio">
+            <figure className="r-card r-window r-portrait" data-reveal>
+                <div className="r-card-head">
+                    <span className="r-card-title">{name}</span>
+                    <WindowButtons />
+                </div>
+                <img src={photo} alt={`Portrait of ${name}`} loading="lazy" width="630" height="638" />
+            </figure>
+            <div className="r-bio-text" data-reveal style={{ '--reveal-delay': '80ms' }}>
+                {paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
+            </div>
+        </div>
+    );
+}
+
+export function Likes({ items }) {
+    return (
+        <div className="r-likes">
+            {items.map((item, i) => (
+                <div key={item.t} className="r-card r-like" data-reveal style={{ '--reveal-delay': `${i * 80}ms` }}>
+                    <span className="r-like-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 className="r-like-title">{item.t}</h3>
+                    <p className="r-like-text">{item.b}</p>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export function EducationCard({ entries }) {
+    return (
+        <Card title="Education" meta={`${entries.length} degrees`} data-reveal style={{ '--reveal-delay': '80ms' }}>
+            <ul className="r-edu">
+                {entries.map((e) => (
+                    <li key={e.degree} className="r-edu-row">
+                        <span className="r-timeline-title">{e.degree}</span>
+                        <span className="r-timeline-org">{e.school}</span>
+                        <span className="r-timeline-when">{e.when}</span>
+                    </li>
+                ))}
+            </ul>
+        </Card>
+    );
+}
+
+export function NowCard({ items }) {
+    return (
+        <Card title="Right now" data-reveal style={{ '--reveal-delay': '160ms' }}>
+            <ul className="r-now">
+                {items.map((line) => <li key={line}>{line}</li>)}
+            </ul>
+        </Card>
+    );
+}
+
+// The studio and the live sites built through it.
+export function StudioSection({ studio }) {
+    return (
+        <section id="studio" className="r-section r-section--studio">
+            <div className="r-section-head" data-reveal>
+                <div className="r-heading-stack">
+                    <span className="r-eyebrow">Studio</span>
+                    <h2 className="r-display chrome">{studio.name}</h2>
+                    <p className="r-lede">{studio.blurb}</p>
+                </div>
+            </div>
+            <div className="r-studio-grid">
+                {studio.sites.map((site, i) => (
+                    <a
+                        key={site.name}
+                        className="r-card r-window r-site"
+                        href={site.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-reveal
+                        style={{ '--reveal-delay': `${i * 80}ms`, '--site-color': site.color }}
+                    >
+                        <div className="r-card-head">
+                            <span className="r-card-title">{site.url.replace(/^https?:\/\/(www\.)?/, '')}</span>
+                            <WindowButtons />
+                        </div>
+                        <div className="r-site-body">
+                            <span className="r-site-place">{site.place}</span>
+                            <h3 className="r-site-name">{site.name}</h3>
+                            <p className="r-site-text">{site.text}</p>
+                            <span className="r-site-cta">Visit site<Icon.External /></span>
+                        </div>
+                    </a>
+                ))}
+            </div>
+        </section>
+    );
+}
+
 export function ContactSection({ heading, text }) {
     return (
         <section id="contact" className="r-contact">
             <div className="r-contact-inner" data-reveal>
                 <span className="r-eyebrow">Contact</span>
-                <h2 className="r-contact-title">{heading}</h2>
+                <h2 className="r-contact-title chrome">{heading}</h2>
                 <p className="r-contact-text">{text}</p>
                 <div className="r-contact-links">
                     <a className="r-btn r-btn--lg r-btn--primary" href="mailto:gaven.robertson@gmail.com"><Icon.Mail />gaven.robertson@gmail.com</a>

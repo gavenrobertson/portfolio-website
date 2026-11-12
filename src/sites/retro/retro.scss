@@ -1,4 +1,5 @@
-// Shared look for the 3D designs (Workstation and GavenNET Lab).
+// Shared look for the 3D designs (Workstation and GavenNET Lab): early-2000s desktop
+// styling (gel buttons, chrome type, title-bar windows, CRT screens) on a clean layout.
 // Everything is scoped to .retro-site so it never leaks into the other designs.
 // Colors are CSS variables: dark by default, light under html[data-theme='light'].
 
@@ -37,6 +38,13 @@ $ease: cubic-bezier(.2, .7, .2, 1);
     --bgtext: #1D1F24;
     --screen: #07080A;
     --shadow: rgba(0, 0, 0, 0.45);
+    --highlight: rgba(255, 255, 255, 0.12);
+    --press: #000000;
+    --glass-inset: #17181C;
+    --chrome: linear-gradient(180deg, #FFFFFF 0%, #D9DDE2 42%, #6E737B 50%, #C9CED4 62%, #FFFFFF 100%);
+    --plate: linear-gradient(180deg, #2C2F36 0%, #22242A 48%, #1B1D22 52%, #212329 100%);
+    --player: linear-gradient(180deg, #34373E 0%, #1C1D22 50%, #141518 51%, #1E2025 100%);
+    --window-body: #101114;
 }
 
 html[data-theme='light'] .retro-site {
@@ -58,6 +66,14 @@ html[data-theme='light'] .retro-site {
     --stage-glow: #FFFFFF;
     --bgtext: #E4E1D8;
     --shadow: rgba(40, 36, 24, 0.14);
+    --highlight: rgba(255, 255, 255, 0.85);
+    --press: #A39E90;
+    --glass-inset: #D2CEC3;
+    --chrome: linear-gradient(180deg, #4A4D55 0%, #2A2C33 42%, #0B0B0D 50%, #3A3D44 62%, #5E626A 100%);
+    --plate: linear-gradient(180deg, #FAF9F5 0%, #ECEAE3 48%, #DFDCD3 52%, #E9E6DE 100%);
+    --player: linear-gradient(180deg, #FAF9F5 0%, #E6E3DB 50%, #D9D6CC 51%, #E6E3DB 100%);
+    --window-body: #FBFAF6;
+    --surface-2: #F4F2EC;
 }
 
 html[data-site='retro'] { scroll-behavior: smooth; }
@@ -88,6 +104,7 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         border-radius: 12px;
         border: 1px solid var(--line-strong);
         background: var(--surface-2);
+        box-shadow: inset 0 -4px 0 var(--glass-inset), inset 0 1px 0 var(--highlight), 0 3px 0 var(--press);
         color: var(--ink);
         font-family: $sans;
         font-size: 14px;
@@ -98,21 +115,30 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         user-select: none;
         transition: background .15s, border-color .15s, color .15s, transform .15s $ease, box-shadow .15s, filter .15s;
 
-        &:hover { border-color: var(--dim); color: var(--ink-strong); transform: translateY(-1px); }
-        &:active { transform: translateY(1px); }
-        &:disabled, &.is-disabled { opacity: .45; cursor: not-allowed; transform: none; border-color: var(--line-strong); color: var(--ink); }
+        &:hover { border-color: var(--accent); color: var(--ink-strong); filter: brightness(1.08); transform: translateY(-1px); }
+        &:active { transform: translateY(3px); box-shadow: inset 0 -2px 0 var(--glass-inset), 0 0 0 var(--press); }
+        &:disabled, &.is-disabled { opacity: .45; cursor: not-allowed; transform: none; filter: none; border-color: var(--line-strong); color: var(--ink); }
     }
     .r-btn--sm { min-height: 40px; padding: 0 14px; font-size: 13px; border-radius: 10px; }
     .r-btn--lg { min-height: 52px; padding: 0 24px; font-size: 15px; border-radius: 14px; }
     .r-btn--icon { width: 44px; padding: 0; }
     .r-btn--sm.r-btn--icon { width: 40px; }
-    .r-btn--ghost { background: transparent; border-color: transparent; color: var(--muted); padding: 0 10px; &:hover { border-color: var(--line-strong); background: var(--surface-2); } }
+    .r-btn--ghost { background: transparent; border-color: transparent; box-shadow: none; color: var(--muted); padding: 0 10px; &:hover { border-color: var(--line-strong); background: var(--surface-2); } &:active { box-shadow: none; } }
+    // gel button: bevelled lime with a glossy top highlight
     .r-btn--primary {
-        background: var(--accent);
-        border-color: var(--accent);
+        background: linear-gradient(180deg, #D2FA94 0%, #B4F25A 48%, #9FDF44 52%, #B4F25A 100%);
+        border-color: #5E8A22;
         color: var(--accent-ink);
-        &:hover { color: var(--accent-ink); border-color: var(--accent); filter: brightness(1.05); box-shadow: 0 8px 24px rgba(180, 242, 90, .22); }
-        &:disabled, &.is-disabled { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); box-shadow: none; filter: none; }
+        box-shadow: inset 0 -4px 0 #7FB536, inset 0 1px 0 rgba(255, 255, 255, .6), 0 3px 0 #000000, 0 0 22px rgba(180, 242, 90, .22);
+        &:hover { color: var(--accent-ink); border-color: #5E8A22; filter: brightness(1.06); }
+        &:active { box-shadow: inset 0 -2px 0 #7FB536, 0 0 0 #000000, 0 0 22px rgba(180, 242, 90, .22); }
+        &:disabled, &.is-disabled { background: #B4F25A; border-color: #5E8A22; color: var(--accent-ink); filter: none; }
+    }
+    .chrome {
+        background: var(--chrome);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
     }
     .r-btn--pop { animation: r-pop .3s $ease; }
 
@@ -120,21 +146,21 @@ html[data-site='retro'] { scroll-behavior: smooth; }
     .r-eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 10px;
-        font-family: $mono;
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: .12em;
+        gap: 8px;
+        font-family: $screen-font;
+        font-size: 22px;
+        line-height: 1;
+        letter-spacing: .04em;
         text-transform: uppercase;
         color: var(--accent-text);
-        &::before { content: ''; width: 18px; height: 1px; background: currentColor; opacity: .7; }
+        &::before { content: '\25B8'; font-size: .8em; }
     }
     .r-display {
         margin: 0;
-        font-weight: 700;
+        font-weight: 800;
         font-size: clamp(40px, 5.6vw, 80px);
         line-height: 1;
-        letter-spacing: -0.035em;
+        letter-spacing: -0.04em;
         color: var(--ink-strong);
         text-wrap: balance;
     }
@@ -167,7 +193,9 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         width: 36px;
         height: 36px;
         border-radius: 10px;
-        background: var(--accent);
+        background: linear-gradient(180deg, #D2FA94 0%, #B4F25A 48%, #9FDF44 52%, #B4F25A 100%);
+        border: 1px solid #5E8A22;
+        box-shadow: inset 0 -3px 0 #7FB536, inset 0 1px 0 rgba(255, 255, 255, .6);
         color: var(--accent-ink);
         display: flex;
         align-items: center;
@@ -225,7 +253,16 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         height: clamp(560px, calc(100vh - #{$header-h}), 900px);
         overflow: hidden;
         background: radial-gradient(ellipse 80% 70% at 50% 40%, var(--stage-glow) 0%, var(--bg) 70%);
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0 2px, rgba(0, 0, 0, .14) 3px, rgba(0, 0, 0, 0) 4px);
+            mix-blend-mode: multiply;
+        }
     }
+    html[data-theme='light'] & .r-stage::after { opacity: .35; }
     .r-bgtext {
         position: absolute;
         top: 50%;
@@ -259,24 +296,26 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         pointer-events: auto;
         width: min(360px, 100%);
         box-sizing: border-box;
-        padding: 18px;
-        border-radius: 16px;
+        border-radius: 12px 12px 10px 10px;
+        overflow: hidden;
         background: var(--glass);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--line);
         box-shadow: 0 20px 50px var(--shadow);
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
         animation: r-rise .4s $ease;
     }
-    .r-build-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .r-build-count { font-family: $mono; font-size: 12px; color: var(--dim); }
+    .r-build-body { padding: 16px 18px 14px; display: flex; flex-direction: column; gap: 10px; }
     .r-build-title { margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.015em; color: var(--ink-strong); }
     .r-build-text { margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted); min-height: 2.6em; }
-    .r-progress { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
-    .r-progress-bar { height: 100%; border-radius: inherit; background: var(--accent); transition: width .25s linear; }
+    .r-progress { height: 18px; box-sizing: border-box; padding: 3px; border-radius: 4px; border: 1px solid var(--line-strong); background: var(--screen); box-shadow: inset 0 1px 3px rgba(0, 0, 0, .6); }
+    .r-progress-bar {
+        height: 100%;
+        border-radius: 2px;
+        background: repeating-linear-gradient(90deg, $lime 0 10px, transparent 10px 13px);
+        box-shadow: 0 0 10px rgba(180, 242, 90, .45);
+        transition: width .25s linear;
+    }
     .r-build-foot { display: flex; align-items: center; justify-content: space-between; margin-right: -8px; }
     .r-build-pct { font-family: $mono; font-size: 12px; color: var(--dim); }
 
@@ -315,12 +354,10 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         width: min(780px, 100%);
         box-sizing: border-box;
         padding: 14px;
-        border-radius: 18px;
-        background: var(--glass);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1px solid var(--line);
-        box-shadow: 0 24px 60px var(--shadow);
+        border-radius: 22px;
+        background: var(--player);
+        border: 1px solid var(--line-strong);
+        box-shadow: inset 0 1px 0 var(--highlight), inset 0 -4px 0 var(--glass-inset), 0 24px 60px var(--shadow);
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -335,7 +372,8 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         box-sizing: border-box;
         border-radius: 10px;
         background: var(--screen);
-        border: 1px solid var(--line);
+        border: 1px solid #000;
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, .9);
         display: flex;
         align-items: center;
         gap: 12px;
@@ -343,6 +381,7 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         font-family: $screen-font;
         font-size: 21px;
         color: $lime;
+        text-shadow: 0 0 8px rgba(180, 242, 90, .5);
         overflow: hidden;
         white-space: nowrap;
     }
@@ -358,9 +397,10 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         gap: 10px;
         padding: 0 12px;
         box-sizing: border-box;
-        border-radius: 12px;
-        border: 1px solid var(--line);
+        border-radius: 10px;
+        border: 2px solid var(--line-strong);
         background: var(--surface-2);
+        box-shadow: inset 0 -4px 0 var(--glass-inset), 0 2px 0 var(--press);
         color: var(--ink);
         font-size: 13px;
         font-weight: 600;
@@ -406,9 +446,31 @@ html[data-site='retro'] { scroll-behavior: smooth; }
     .r-card-title { margin: 0; font-size: 15px; font-weight: 700; color: var(--ink-strong); }
     .r-card-meta { font-family: $mono; font-size: 12px; color: var(--dim); }
 
+    // classic window: gel title bar with window buttons
+    .r-window { border-radius: 12px 12px 10px 10px; overflow: hidden; background: var(--window-body); box-shadow: 0 18px 40px var(--shadow); }
+    .r-window > .r-card-head {
+        align-items: center;
+        min-height: 36px;
+        padding: 0 8px 0 14px;
+        background: linear-gradient(180deg, #C9F57F 0%, #9AD845 45%, #6FAE1F 55%, #86C531 100%);
+        border-bottom: 1px solid #4E7A12;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, .45);
+        .r-card-title { font-size: 13px; color: #0B1406; flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .r-card-meta { color: #1D3306; font-family: $screen-font; font-size: 17px; }
+    }
+    .r-winbtns {
+        flex: none;
+        display: flex;
+        gap: 4px;
+        span { width: 16px; height: 16px; border-radius: 4px; background: rgba(255, 255, 255, .45); border: 1px solid rgba(0, 0, 0, .25); }
+        span:last-child { background: #D9573A; border-color: rgba(0, 0, 0, .3); }
+    }
+
     // project cards (3D off)
     .r-project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 18px; }
     .r-project-card {
+        background: var(--plate);
+        box-shadow: inset 0 1px 0 var(--highlight), 0 18px 40px var(--shadow);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -441,28 +503,44 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         align-items: end;
         margin-bottom: 16px;
     }
-    .r-facts { margin: 0; padding: 8px 20px; display: flex; flex-direction: column; }
+    // CRT terminal
+    .r-facts {
+        margin: 0;
+        padding: 16px 22px;
+        display: flex;
+        flex-direction: column;
+        background: var(--screen);
+        border: 1px solid #000;
+        box-shadow: inset 0 2px 12px rgba(0, 0, 0, .9), 0 0 0 4px var(--surface-2), 0 0 0 5px var(--line-strong), 0 18px 40px var(--shadow);
+        font-family: $screen-font;
+        color: $lime;
+        text-shadow: 0 0 8px rgba(180, 242, 90, .4);
+    }
     .r-fact {
         display: grid;
         grid-template-columns: minmax(96px, 120px) minmax(0, 1fr);
         gap: 16px;
-        padding: 14px 0;
-        & + & { border-top: 1px solid var(--line); }
-        dt { font-family: $mono; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--dim); padding-top: 2px; }
-        dd { margin: 0; font-size: 15px; color: var(--ink); }
+        padding: 6px 0;
+        dt { font-size: 20px; text-transform: uppercase; color: #7FAF3E; }
+        dd { margin: 0; font-size: 21px; line-height: 1.2; }
     }
     .r-skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 18px; }
     .r-skill-card { padding: 20px; display: flex; flex-direction: column; gap: 16px; &:hover { border-color: var(--line-strong); } }
     .r-skill-head { display: flex; align-items: baseline; justify-content: space-between; }
     .r-chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
     .r-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         padding: 7px 12px;
-        border-radius: 999px;
+        border-radius: 8px;
         border: 1px solid var(--line-strong);
+        background: var(--surface-2);
         font-size: 13px;
         font-weight: 500;
         color: var(--ink);
         transition: border-color .15s, background .15s, color .15s;
+        &::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: $lime; box-shadow: 0 0 6px $lime; }
         &:hover { border-color: var(--accent); background: var(--accent-soft); }
     }
     .r-columns {
@@ -491,8 +569,56 @@ html[data-site='retro'] { scroll-behavior: smooth; }
     .r-timeline-title + .r-timeline-org + .r-timeline-title { margin-top: 10px; }
     .r-timeline-org { font-size: 14px; color: var(--accent-text); }
     .r-timeline-text { font-size: 14px; line-height: 1.55; color: var(--muted); }
-    .r-now { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
-    .r-now p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+    .r-now { list-style: none; margin: 0; padding: 14px 20px 18px; display: flex; flex-direction: column; gap: 10px; }
+    .r-now li { display: flex; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+    .r-now li::before { content: '\25B8'; color: var(--accent-text); }
+    .r-side { display: flex; flex-direction: column; gap: 18px; }
+    .r-subhead { margin: 28px 0 0; }
+    .r-about-intro .r-display { font-size: clamp(36px, 4.4vw, 62px); }
+    .r-edu { list-style: none; margin: 0; padding: 6px 20px 14px; }
+    .r-edu-row { display: flex; flex-direction: column; gap: 3px; padding: 12px 0; & + & { border-top: 1px dashed var(--line-strong); } }
+
+    // bio with portrait
+    .r-bio {
+        display: grid;
+        grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+        gap: clamp(24px, 4vw, 56px);
+        align-items: center;
+    }
+    .r-portrait {
+        margin: 0;
+        img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+    }
+    .r-bio-text { display: flex; flex-direction: column; gap: 16px; p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--muted); } }
+    .r-likes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; }
+    .r-like {
+        padding: 20px;
+        background: var(--plate);
+        box-shadow: inset 0 1px 0 var(--highlight), 0 18px 40px var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .r-like-num { font-family: $screen-font; font-size: 22px; color: var(--accent-text); }
+    .r-like-title { margin: 0; font-size: 18px; font-weight: 700; color: var(--ink-strong); }
+    .r-like-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); }
+
+    // studio
+    .r-section--studio { padding: 0 $gutter clamp(80px, 10vw, 136px); gap: 28px; }
+    .r-studio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 18px; }
+    .r-site {
+        display: flex;
+        flex-direction: column;
+        color: inherit;
+        cursor: pointer;
+        &:hover { border-color: var(--accent); }
+        &:hover .r-site-cta { gap: 10px; }
+    }
+    .r-site-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; border-top: 4px solid var(--site-color); }
+    .r-site-place { font-family: $screen-font; font-size: 19px; color: var(--dim); }
+    .r-site-name { margin: 0; font-size: 20px; font-weight: 700; color: var(--ink-strong); }
+    .r-site-text { margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted); flex: 1 1 auto; }
+    .r-site-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 14px; font-weight: 600; color: var(--accent-text); transition: gap .2s $ease; }
 
     // contact
     .r-contact {
@@ -527,6 +653,10 @@ html[data-site='retro'] { scroll-behavior: smooth; }
     // ---------- small screens
     @media (max-width: 760px) {
         .r-nav-links { display: none; }
+    }
+    @media (max-width: 760px) {
+        .r-bio { grid-template-columns: minmax(0, 1fr); }
+        .r-portrait { max-width: 320px; }
     }
     @media (max-width: 560px) {
         .r-brand-text { display: none; }
