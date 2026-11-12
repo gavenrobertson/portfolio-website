@@ -12,6 +12,9 @@ const SIDE_TOWER = 'matrix(-0.894 0.447 0 1 758 312)';
 const FRONT_MONITOR = 'matrix(0.894 0.447 0 1 380 241)';
 const TOP_KEYBOARD = 'matrix(0.894 0.447 -0.894 0.447 352 383)';
 
+// Shrink a label's font size (roughly) so it fits maxWidth on the tiny monitor screen.
+const fitSize = (text, size, maxWidth) => Math.min(size, maxWidth / (text.length * 0.52));
+
 function Poly({ points, fill, w = 3 }) {
     return <polygon points={points} fill={fill} strokeWidth={w} {...line} />;
 }
@@ -137,8 +140,8 @@ export default function DeskScene({ zoom, parts, discs, screen, projects }) {
                         {screen.mode === 'play' && screen.project && (
                             <g>
                                 <rect x="14" y="13" width="113" height="14" rx="5" fill={screen.project.color} />
-                                <text x="20" y="23.5" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill="#0E1630">{screen.project.name}</text>
-                                <text x="20" y="42" fontFamily="Nunito, sans-serif" fontWeight="800" fontSize="7" fill="#FFFFFF">{screen.project.stack}</text>
+                                <text x="20" y="23.5" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize={fitSize(screen.project.name, 9, 102)} fill="#0E1630">{screen.project.name}</text>
+                                <text x="20" y="42" fontFamily="Nunito, sans-serif" fontWeight="800" fontSize={fitSize(screen.project.stack, 7, 104)} fill="#FFFFFF">{screen.project.stack}</text>
                                 <text x="20" y="55" fontFamily="Nunito, sans-serif" fontWeight="700" fontSize="7" fill="#B4F25A">{screen.project.year}</text>
                                 <text x="20" y="76" fontFamily="Fredoka, sans-serif" fontWeight="700" fontSize="9" fill="#FFD23F">Open project ↗</text>
                             </g>
