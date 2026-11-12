@@ -488,11 +488,7 @@ html[data-site='toybox'] { scroll-behavior: smooth; }
     .tb-display--about { font-size: clamp(40px, 5vw, 72px); }
 
     // bio
-    .tb-bio { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
-    .tb-portrait { margin: 0; transform: rotate(-2deg); transition: transform .3s; &:hover { transform: rotate(0deg) scale(1.02); } img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; } }
-    .tb-portrait[data-reveal].is-revealed { transform: rotate(-2deg); }
-    .tb-portrait[data-reveal].is-revealed:hover { transform: rotate(0deg) scale(1.02); }
-    .tb-bio-text { display: flex; flex-direction: column; gap: 16px; p { margin: 0; font-size: 17px; line-height: 1.7; color: $ink-soft; } }
+    .tb-bio-text { display: flex; flex-direction: column; gap: 16px; max-width: 780px; p { margin: 0; font-size: 17px; line-height: 1.7; color: $ink-soft; } }
     .tb-likes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px; }
     .tb-like { padding: 18px; display: flex; flex-direction: column; gap: 8px; border-top: 10px solid var(--like); }
     .tb-like-num { font-family: $display; font-weight: 700; font-size: 15px; color: $blue-ink; }
@@ -566,8 +562,6 @@ html[data-site='toybox'] { scroll-behavior: smooth; }
 
     // ---------- small screens: one-row nav, room for the corner buttons
     @media (max-width: 760px) {
-        .tb-bio { grid-template-columns: minmax(0, 1fr); }
-        .tb-portrait { max-width: 300px; }
         .tb-navlinks { display: none; }
         .tb-nav-actions { margin-left: auto; }
     }

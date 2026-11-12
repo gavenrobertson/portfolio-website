@@ -7,7 +7,6 @@ import {
 import { useActiveSection, useReveal, scrollToBuildEnd, scrollToId } from "../shared/ux";
 import { createScene } from "./scene";
 import { STEPS, SKILLS, FACTS, ABOUT, HISTORY, EDUCATION, STUDIO } from "./content";
-import portrait from "../shared/assets/gaven.webp";
 
 // Workstation: scroll to build a PC in 3D, then load projects onto its monitor from CDs.
 
@@ -106,7 +105,7 @@ export default function WorkstationSite() {
                     </div>
                     <FactsCard rows={FACTS} />
                 </div>
-                <Bio photo={portrait} name="Gaven Robertson" paragraphs={ABOUT.bio} />
+                <Bio paragraphs={ABOUT.bio} />
                 <h3 className="r-eyebrow r-subhead" data-reveal>What I like building</h3>
                 <Likes items={ABOUT.likes} />
                 <h3 className="r-eyebrow r-subhead" data-reveal>Stack</h3>

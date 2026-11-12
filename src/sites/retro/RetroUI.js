@@ -399,20 +399,11 @@ export function Experience({ entries }) {
     );
 }
 
-// Portrait in a window frame plus the longer bio.
-export function Bio({ photo, name, paragraphs }) {
+// The longer bio, as a single readable column.
+export function Bio({ paragraphs }) {
     return (
-        <div className="r-bio">
-            <figure className="r-card r-window r-portrait" data-reveal>
-                <div className="r-card-head">
-                    <span className="r-card-title">{name}</span>
-                    <WindowButtons />
-                </div>
-                <img src={photo} alt={`Portrait of ${name}`} loading="lazy" width="630" height="638" />
-            </figure>
-            <div className="r-bio-text" data-reveal style={{ '--reveal-delay': '80ms' }}>
-                {paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
-            </div>
+        <div className="r-bio-text" data-reveal>
+            {paragraphs.map((p) => <p key={p.slice(0, 24)}>{p}</p>)}
         </div>
     );
 }

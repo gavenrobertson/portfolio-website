@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import projects from "../retro/projects";
 import { STEPS, SKILLS, FACTS, ABOUT, HISTORY, EDUCATION, STUDIO } from "../workstation/content";
-import portrait from "../shared/assets/gaven.webp";
 import { useFlatMode } from "../shared/motion";
 import { useActiveSection, useReveal, scrollToBuildEnd, scrollToId } from "../shared/ux";
 import DeskScene from "./DeskScene";
@@ -333,14 +332,8 @@ export default function ToyboxSite() {
                     </dl>
                 </div>
 
-                <div className="tb-bio">
-                    <figure className="tb-panel tb-portrait" data-reveal>
-                        <div className="tb-tbar"><span>Gaven Robertson</span><span className="tb-tdots" aria-hidden="true"><span /><span /></span></div>
-                        <img src={portrait} alt="Portrait of Gaven Robertson" loading="lazy" width="630" height="638" />
-                    </figure>
-                    <div className="tb-bio-text" data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        {ABOUT.bio.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
-                    </div>
+                <div className="tb-bio-text" data-reveal>
+                    {ABOUT.bio.map((para) => <p key={para.slice(0, 24)}>{para}</p>)}
                 </div>
 
                 <h3 className="tb-subhead" data-reveal>What I like building</h3>

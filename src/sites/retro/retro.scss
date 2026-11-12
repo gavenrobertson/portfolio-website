@@ -578,18 +578,8 @@ html[data-site='retro'] { scroll-behavior: smooth; }
     .r-edu { list-style: none; margin: 0; padding: 6px 20px 14px; }
     .r-edu-row { display: flex; flex-direction: column; gap: 3px; padding: 12px 0; & + & { border-top: 1px dashed var(--line-strong); } }
 
-    // bio with portrait
-    .r-bio {
-        display: grid;
-        grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
-        gap: clamp(24px, 4vw, 56px);
-        align-items: center;
-    }
-    .r-portrait {
-        margin: 0;
-        img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
-    }
-    .r-bio-text { display: flex; flex-direction: column; gap: 16px; p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--muted); } }
+    // bio
+    .r-bio-text { display: flex; flex-direction: column; gap: 16px; max-width: 780px; p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--muted); } }
     .r-likes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; }
     .r-like {
         padding: 20px;
@@ -655,8 +645,6 @@ html[data-site='retro'] { scroll-behavior: smooth; }
         .r-nav-links { display: none; }
     }
     @media (max-width: 760px) {
-        .r-bio { grid-template-columns: minmax(0, 1fr); }
-        .r-portrait { max-width: 320px; }
     }
     @media (max-width: 560px) {
         .r-brand-text { display: none; }
